@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Masuk</title>
+    <title>Absen Karyawan</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
@@ -12,10 +12,8 @@
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition  sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
 
         <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
@@ -26,7 +24,7 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
 
             <section class="content-header">
                 <div class="container-fluid">
@@ -66,8 +64,8 @@
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
+                                        <table class="table table-bordered text-center">
+                                            <thead class="bg-gradient-cyan">
                                                 <tr>
                                                     <th>Nomor Induk Pegawai</th>
                                                     <th>Nama Karyawan</th>

@@ -12,10 +12,9 @@
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
+
 
         <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
@@ -26,7 +25,7 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
 
             <section class="content-header">
                 <div class="container-fluid">
@@ -51,23 +50,30 @@
                             </div>
                             <div class="card">
                                 <div class="card-header border-transparent">
-                                    <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 150px;">
-                                            <input type="text" name="table_search" class="form-control float-right"
-                                                placeholder="Search">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <a href="tambah-karyawan.php" class="btn btn-sm btn-success ">Tambah
+                                                Data</a>
+                                        </div>
 
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
+                                        <div class="card-title float-right">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" name="table_search" class="form-control float-right"
+                                                    placeholder="Search">
+
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
+                                        <table class="table table-bordered text-center">
+                                            <thead class="bg-gradient-cyan">
                                                 <tr>
                                                     <th>Nomor Induk Pegawai</th>
                                                     <th>Nama Karayawan</th>
@@ -157,10 +163,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="card-footer clearfix">
-                                    <a href="tambah-karyawan.php" class="btn btn-sm btn-success float-right ">Tambah
-                                        Data</a>
-                                </div>
+
                             </div>
                         </div>
                     </div>

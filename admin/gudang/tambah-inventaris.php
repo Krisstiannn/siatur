@@ -4,34 +4,32 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Keluar</title>
+    <title>Gudang | Inventaris</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "../layouts/loading.php"?>
 
         <!-- Navbar -->
-        <?php include "../layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "../layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper bg-gradient-white">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Barang Keluar</h1>
+                            <h1>Tambah Data Inventaris</h1>
                         </div>
                     </div>
                 </div>
@@ -41,7 +39,7 @@
                 <div class="content-fluid">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Input Barang</h3>
+                            <h3 class="card-title">Input Inventaris</h3>
                         </div>
                         <form>
                             <div class="card-body">
@@ -56,9 +54,9 @@
                                         placeholder="Masukkan Nama Barang">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Penggunaan Barang</label>
+                                    <label for="exampleInputPassword1">Kondisi</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Penggunaan Barang">
+                                        placeholder="Kondisi">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Jumlah</label>
@@ -79,7 +77,8 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -89,21 +88,21 @@
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "../layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
         <!-- End Footer -->
     </div>
 
-    <script src="../plugins/jquery/jquery.min.js"></script>
-    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="../dist/js/adminlte.js"></script>
-    <script src="../plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="../plugins/raphael/raphael.min.js"></script>
-    <script src="../plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="../plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <script src="../plugins/chart.js/Chart.min.js"></script>
-    <script src="../dist/js/demo.js"></script>
-    <script src="../dist/js/pages/dashboard2.js"></script>
+    <script src="/siatur/plugins/jquery/jquery.min.js"></script>
+    <script src="/siatur/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/siatur/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="/siatur/dist/js/adminlte.js"></script>
+    <script src="/siatur/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="/siatur/plugins/raphael/raphael.min.js"></script>
+    <script src="/siatur/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="/siatur/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+    <script src="/siatur/plugins/chart.js/Chart.min.js"></script>
+    <script src="/siatur/dist/js/demo.js"></script>
+    <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

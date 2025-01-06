@@ -4,18 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Masuk</title>
+    <title>Pelanggan</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
 
         <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
@@ -26,12 +25,12 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Barang Masuk</h1>
+                            <h1>Edit Data Pelanggan</h1>
                         </div>
                     </div>
                 </div>
@@ -41,45 +40,54 @@
                 <div class="content-fluid">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Input Barang Masuk</h3>
+                            <h3 class="card-title">Input Pelanggan</h3>
                         </div>
                         <form>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Kode Barang</label>
+                                    <label for="exampleInputPassword1">Nama Pelanggan</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Kode Barang">
+                                        placeholder="Nama Pelanggan">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Nama Barang</label>
+                                    <label for="exampleInputEmail1">Alamat Rumah Atau Titik Kordinat</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Masukkan Nama Barang">
+                                        placeholder="Masukkan Alamat Rumah Atau Titik Kordinat">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Kondisi</label>
+                                    <label for="exampleInputPassword1">Nomor WhatsApp</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Kondisi">
+                                        placeholder="Nomor WhatsApp">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Jumlah</label>
+                                    <label for="exampleInputPassword1">Jenis Layanan Yang Digunakan</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Jumlah">
+                                        placeholder="Jenis Layanan Yang Digunakan">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">Gambar Barang</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
+                                    <label>Status</label>
+                                    <select class="form-control">
+                                        <option>-- Pilih Status --</option>
+                                        <option>Aktif</option>
+                                        <option>Tidak Aktif</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Date:</label>
+                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                        <input type="date" class="form-control datetimepicker-input"
+                                            data-target="#reservationdate" />
+                                        <div class="input-group-append" data-target="#reservationdate"
+                                            data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
                     </div>
@@ -104,6 +112,7 @@
     <script src="/siatur/plugins/chart.js/Chart.min.js"></script>
     <script src="/siatur/dist/js/demo.js"></script>
     <script src="/siatur/dist/js/pages/dashboard2.js"></script>
+    <script src="/siatur/plugins/daterangepicker/daterangepicker.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

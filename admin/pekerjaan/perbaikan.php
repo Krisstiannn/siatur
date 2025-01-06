@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
         <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
 
             <section class="content-header">
                 <div class="container-fluid">
@@ -44,23 +43,30 @@
                             </div>
                             <div class="card">
                                 <div class="card-header border-transparent">
-                                    <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 150px;">
-                                            <input type="text" name="table_search" class="form-control float-right"
-                                                placeholder="Search">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <a href="tambah-perbaikan.php" class="btn btn-sm btn-success ">Tambah
+                                                Data</a>
+                                        </div>
 
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
+                                        <div class="card-title float-right">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" name="table_search" class="form-control float-right"
+                                                    placeholder="Search">
+
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
+                                        <table class="table table-bordered text-center">
+                                            <thead class="bg-gradient-cyan">
                                                 <tr>
                                                     <th>Nama Pelanggan</th>
                                                     <th>NO WA</th>
@@ -308,10 +314,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="card-footer clearfix">
-                                    <a href="tambah-perbaikan.php" class="btn btn-sm btn-success float-right ">Tambah
-                                        Data</a>
-                                </div>
+
                             </div>
                         </div>
                     </div>

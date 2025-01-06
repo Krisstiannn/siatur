@@ -4,35 +4,33 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Masuk</title>
+    <title>Gudang | Material</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "../layouts/loading.php"?>
 
         <!-- Navbar -->
-        <?php include "../layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "../layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper bg-gradient-white">
 
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Data Absen Karyawan</h1>
+                            <h1>Data Material</h1>
                         </div>
                     </div>
                 </div>
@@ -51,26 +49,36 @@
                             </div>
                             <div class="card">
                                 <div class="card-header border-transparent">
-                                    <h3 class="card-title">Latest Orders</h3>
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <a href="tambah-material.php" class="btn btn-sm btn-success ">Tambah
+                                                Data</a>
+                                        </div>
 
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                            <i class="fas fa-times"></i>
-                                        </button>
+                                        <div class="card-title float-right">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" name="table_search" class="form-control float-right"
+                                                    placeholder="Search">
+
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
+                                        <table class="table table-bordered text-center">
+                                            <thead class="bg-gradient-cyan">
                                                 <tr>
-                                                    <th>Nomor Induk Pegawai</th>
-                                                    <th>Nama Karyawan</th>
-                                                    <th>Absen Masuk</th>
-                                                    <th>Absen Pulang</th>
+                                                    <th>Kode Barang</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>Kondisi Barang</th>
+                                                    <th>Jumlah Barang</th>
+                                                    <th>Gambar Barang</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -83,11 +91,12 @@
                                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
                                                             90,80,90,-70,61,-83,63</div>
                                                     </td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-info btn-xs">Edit</button>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-danger btn-xs">Hapus</button>
+                                                        <a href="edit-material.php"
+                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
+                                                        <a href="hapus-material.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -98,11 +107,12 @@
                                                         <div class="sparkbar" data-color="#f39c12" data-height="20">
                                                             90,80,-90,70,61,-83,68</div>
                                                     </td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-info btn-xs">Edit</button>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-danger btn-xs">Hapus</button>
+                                                        <a href="edit-material.php"
+                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
+                                                        <a href="hapus-material.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -113,11 +123,12 @@
                                                         <div class="sparkbar" data-color="#f56954" data-height="20">
                                                             90,-80,90,70,-61,83,63</div>
                                                     </td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-info btn-xs">Edit</button>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-danger btn-xs">Hapus</button>
+                                                        <a href="edit-material.php"
+                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
+                                                        <a href="hapus-material.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -128,11 +139,12 @@
                                                         <div class="sparkbar" data-color="#00c0ef" data-height="20">
                                                             90,80,-90,70,-61,83,63</div>
                                                     </td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-info btn-xs">Edit</button>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-danger btn-xs">Hapus</button>
+                                                        <a href="edit-material.php"
+                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
+                                                        <a href="hapus-material.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -143,11 +155,12 @@
                                                         <div class="sparkbar" data-color="#f39c12" data-height="20">
                                                             90,80,-90,70,61,-83,68</div>
                                                     </td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-info btn-xs">Edit</button>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-danger btn-xs">Hapus</button>
+                                                        <a href="edit-material.php"
+                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
+                                                        <a href="hapus-material.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -158,11 +171,12 @@
                                                         <div class="sparkbar" data-color="#f56954" data-height="20">
                                                             90,-80,90,70,-61,83,63</div>
                                                     </td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-info btn-xs">Edit</button>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-danger btn-xs">Hapus</button>
+                                                        <a href="edit-material.php"
+                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
+                                                        <a href="hapus-material.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -173,21 +187,19 @@
                                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
                                                             90,80,90,-70,61,-83,63</div>
                                                     </td>
+                                                    <td><span class="badge badge-success">Shipped</span></td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-info btn-xs">Edit</button>
-                                                        <button type="button"
-                                                            class="btn btn-block btn-danger btn-xs">Hapus</button>
+                                                        <a href="edit-material.php"
+                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
+                                                        <a href="hapus-material.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <!-- <div class="card-footer clearfix">
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-success float-right ">Tambah
-                                        Data</a>
-                                </div> -->
+
                             </div>
                         </div>
                     </div>
@@ -197,21 +209,21 @@
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "../layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
         <!-- End Footer -->
     </div>
 
-    <script src="../plugins/jquery/jquery.min.js"></script>
-    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="../dist/js/adminlte.js"></script>
-    <script src="../plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="../plugins/raphael/raphael.min.js"></script>
-    <script src="../plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="../plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <script src="../plugins/chart.js/Chart.min.js"></script>
-    <script src="../dist/js/demo.js"></script>
-    <script src="../dist/js/pages/dashboard2.js"></script>
+    <script src="/siatur/plugins/jquery/jquery.min.js"></script>
+    <script src="/siatur/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/siatur/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="/siatur/dist/js/adminlte.js"></script>
+    <script src="/siatur/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="/siatur/plugins/raphael/raphael.min.js"></script>
+    <script src="/siatur/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+    <script src="/siatur/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+    <script src="/siatur/plugins/chart.js/Chart.min.js"></script>
+    <script src="/siatur/dist/js/demo.js"></script>
+    <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

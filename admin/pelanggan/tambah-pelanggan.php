@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Keluar</title>
+    <title>Pelanggan</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
@@ -12,10 +12,9 @@
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
+
 
         <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
@@ -26,12 +25,12 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Barang Keluar</h1>
+                            <h1>Tambah Data Pelanggan</h1>
                         </div>
                     </div>
                 </div>
@@ -41,33 +40,42 @@
                 <div class="content-fluid">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Data Barang</h3>
+                            <h3 class="card-title">Input Pelanggan</h3>
                         </div>
                         <form>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Kode Barang</label>
+                                    <label for="exampleInputPassword1">Nama Pelanggan</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Kode Barang">
+                                        placeholder="Nama Pelanggan">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Nama Barang</label>
+                                    <label for="exampleInputEmail1">Alamat Rumah Atau Titik Kordinat</label>
                                     <input type="text" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Masukkan Nama Barang">
+                                        placeholder="Masukkan Alamat Rumah Atau Titik Kordinat">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Jumlah Barang</label>
+                                    <label for="exampleInputPassword1">Nomor WhatsApp</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Penggunaan Barang">
+                                        placeholder="Nomor WhatsApp">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Digunakan Untuk</label>
+                                    <label for="exampleInputPassword1">Jenis Layanan Yang Digunakan</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Jumlah">
+                                        placeholder="Jenis Layanan Yang Digunakan">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control">
+                                        <option>-- Pilih Status --</option>
+                                        <option>Aktif</option>
+                                        <option>Tidak Aktif</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
                     </div>

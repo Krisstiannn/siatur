@@ -12,10 +12,9 @@
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
+
 
         <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
@@ -26,7 +25,7 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -62,7 +61,8 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
                     </div>

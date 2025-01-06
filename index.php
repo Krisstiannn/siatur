@@ -12,11 +12,8 @@
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-
-        <!-- Preloader -->
-        <?php include "./layouts/loading.php"?>
 
         <!-- Navbar -->
         <?php include "./layouts/header.php"?>
@@ -27,75 +24,93 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class=" content-wrapper bg-lightblue text-light">
+        <div class="content-wrapper bg-gradient-white">
             <div class="content-header">
-                <div class="container-fluid">
+                <div class="container-fluid text-black">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
+                            <h1 class="m-0">Selamat Datang, Admin</h1>
                         </div>
                     </div>
                 </div>
             </div>
             <section class="content">
                 <div class="container-fluid">
-
                     <div class="row">
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div class="info-box">
-                                <a href="/siatur/admin/gudang/barangmasuk.php" class="info-box-icon bg-info"><i
-                                        class="fas fa-folder"></i></a>
-
-                                <div class="info-box-content">
-                                    <a href="/siatur/admin/gudang/barangmasuk.php"
-                                        class="info-box-text text-light">Messages</a>
-                                    <span class="info-box-number">1,410</span>
+                        <div class="col-lg-4">
+                            <a href="/siatur/admin/gudang/inventaris.php">
+                                <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-red text-bold"
+                                            style="font-size: 20px">INVENTARIS</span>
+                                        <span style="font-size: 30px">15</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Bookmarks</span>
-                                    <span class="info-box-number">410</span>
+                        <div class="col-lg-4">
+                            <a href="/siatur/admin/gudang/material.php">
+                                <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-red text-bold"
+                                            style="font-size: 20px">MATERIAL</span>
+                                        <span style="font-size: 30px">10</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Order Pekerjaan</span>
-                                    <span class="info-box-number">13,648</span>
+                        <div class="col-lg-4">
+                            <a href="/siatur/admin/karyawan/datakaryawan.php">
+                                <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-red text-bold"
+                                            style="font-size: 20px">KARYAWAN</span>
+                                        <span style="font-size: 30px">15</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        <div class="col-md-3 col-sm-6 col-12">
-                            <div class="info-box">
-                                <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Likes</span>
-                                    <span class="info-box-number">93,139</span>
+                        <div class="col-lg-4">
+                            <a href="/siatur/admin/pelanggan/pelanggan.php">
+                                <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-red text-bold" style="font-size: 20px">JUMLAH
+                                            PELANGGAN</span>
+                                        <span style="font-size: 30px">15</span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="/siatur/admin/pekerjaan/psb.php">
+                                <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-red text-bold"
+                                            style="font-size: 20px">PEMASANGAN
+                                            BARU</span>
+                                        <span style="font-size: 30px">15</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-4">
+                            <a href="/siatur/admin/pekerjaan/perbaikan.php">
+                                <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
+                                    <div class="info-box-content">
+                                        <span class="info-box-text text-red text-bold"
+                                            style="font-size: 20px">PERBAIKAN</span>
+                                        <span style="font-size: 30px">15</span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6">
-                                </div>
-                                <div class="col-md-6">
-                                </div>
-                            </div>
+                        <div class="col-md-8">
                             <div class="card">
                                 <div class="card-body p-0">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive text-center">
                                         <table class="table m-0">
                                             <thead class="bg-navy">
                                                 <tr>
@@ -105,7 +120,7 @@
                                                     <th>Popularity</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="bg-dark">
                                                 <tr>
                                                     <td><a href="pages/examples/invoice.html">OR9842</a></td>
                                                     <td>Call of Duty IV</td>
@@ -173,7 +188,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="card-footer clearfix">
+                                <div class="card-footer clearfix bg-dark">
                                     <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New
                                         Order</a>
                                     <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
@@ -182,8 +197,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </section>
         </div>

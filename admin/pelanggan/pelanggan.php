@@ -4,18 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Keluar</title>
+    <title>Data Pelanggan</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
 
         <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
@@ -26,13 +27,13 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
 
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Data Barang keluar</h1>
+                            <h1>Data Pelanggan</h1>
                         </div>
                     </div>
                 </div>
@@ -51,28 +52,36 @@
                             </div>
                             <div class="card">
                                 <div class="card-header border-transparent">
-                                    <div class="card-tools">
-                                        <div class="input-group input-group-sm" style="width: 150px;">
-                                            <input type="text" name="table_search" class="form-control float-right"
-                                                placeholder="Search">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <a href="tambah-pelanggan.php" class="btn btn-sm btn-success ">Tambah
+                                                Data</a>
+                                        </div>
 
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-default">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
+                                        <div class="card-title float-right">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" name="table_search" class="form-control float-right"
+                                                    placeholder="Search">
+
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead class="text-center">
+                                        <table class="table table-bordered text-center">
+                                            <thead class="bg-gradient-cyan">
                                                 <tr>
-                                                    <th>Kode Barang</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Jumlah Barang</th>
-                                                    <th>Digunakan Untuk</th>
+                                                    <th>Nama Pelanggan</th>
+                                                    <th>Alamat Rumah/Tikor</th>
+                                                    <th>No WhatsApp</th>
+                                                    <th>Jenis Layanan</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -85,10 +94,11 @@
                                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
                                                             90,80,90,-70,61,-83,63</div>
                                                     </td>
+                                                    <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-keluar.php"
+                                                        <a href="edit-pelanggan.php"
                                                             class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-keluar.php"
+                                                        <a href="hapus-pelanggan.php"
                                                             class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
@@ -100,10 +110,11 @@
                                                         <div class="sparkbar" data-color="#f39c12" data-height="20">
                                                             90,80,-90,70,61,-83,68</div>
                                                     </td>
+                                                    <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-keluar.php"
+                                                        <a href="edit-pelanggan.php"
                                                             class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-keluar.php"
+                                                        <a href="hapus-pelanggan.php"
                                                             class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
@@ -115,10 +126,11 @@
                                                         <div class="sparkbar" data-color="#f56954" data-height="20">
                                                             90,-80,90,70,-61,83,63</div>
                                                     </td>
+                                                    <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-keluar.php"
+                                                        <a href="edit-pelanggan.php"
                                                             class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-keluar.php"
+                                                        <a href="hapus-pelanggan.php"
                                                             class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
@@ -130,10 +142,11 @@
                                                         <div class="sparkbar" data-color="#00c0ef" data-height="20">
                                                             90,80,-90,70,-61,83,63</div>
                                                     </td>
+                                                    <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-keluar.php"
+                                                        <a href="edit-pelanggan.php"
                                                             class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-keluar.php"
+                                                        <a href="hapus-pelanggan.php"
                                                             class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
@@ -145,10 +158,11 @@
                                                         <div class="sparkbar" data-color="#f39c12" data-height="20">
                                                             90,80,-90,70,61,-83,68</div>
                                                     </td>
+                                                    <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-keluar.php"
+                                                        <a href="edit-pelanggan.php"
                                                             class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-keluar.php"
+                                                        <a href="hapus-pelanggan.php"
                                                             class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
@@ -160,11 +174,12 @@
                                                         <div class="sparkbar" data-color="#f56954" data-height="20">
                                                             90,-80,90,70,-61,83,63</div>
                                                     </td>
+                                                    <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-keluar.php"
+                                                        <a href="edit-pelanggan.php"
                                                             class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-keluar.php"
-                                                            class="btn btn-block btn-info btn-xs ">Hapus</a>
+                                                        <a href="hapus-pelanggan.php"
+                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -175,20 +190,17 @@
                                                         <div class="sparkbar" data-color="#00a65a" data-height="20">
                                                             90,80,90,-70,61,-83,63</div>
                                                     </td>
+                                                    <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-keluar.php"
+                                                        <a href="edit-pelanggan.php"
                                                             class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-keluar.php"
+                                                        <a href="hapus-pelanggan.php"
                                                             class="btn btn-block btn-danger btn-xs ">Hapus</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                </div>
-                                <div class="card-footer clearfix">
-                                    <a href="tambah-keluar.php" class="btn btn-sm btn-success float-right ">Tambah
-                                        Data</a>
                                 </div>
                             </div>
                         </div>
@@ -216,6 +228,37 @@
     <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/siatur/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/siatur/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/siatur/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/jszip/jszip.min.js"></script>
+    <script src="/siatur/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/siatur/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+    </script>
 </body>
 
 </html>

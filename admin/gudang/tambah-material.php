@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Masuk</title>
+    <title>Gudang | Material</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
@@ -12,10 +12,8 @@
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <!-- Preloader -->
-        <?php include "/xampp/htdocs/siatur/layouts/loading.php"?>
 
         <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
@@ -26,12 +24,12 @@
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
-        <div class="content-wrapper bg-lightblue">
+        <div class="content-wrapper bg-gradient-white">
             <section class="content-header">
-                <div class="container-fluid">
+                <div class="container-fluid text-dark">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Barang Masuk</h1>
+                            <h1>Tambah Data Material</h1>
                         </div>
                     </div>
                 </div>
@@ -41,7 +39,7 @@
                 <div class="content-fluid">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Barang</h3>
+                            <h3 class="card-title">Input Data Material</h3>
                         </div>
                         <form>
                             <div class="card-body">
@@ -56,30 +54,19 @@
                                         placeholder="Masukkan Nama Barang">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Kondisi</label>
+                                    <label for="exampleInputPassword1">Jumlah Barang</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Kondisi">
+                                        placeholder="Jumlah Barang">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Jumlah</label>
+                                    <label for="exampleInputPassword1">Status Barang</label>
                                     <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Jumlah">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Gambar Barang</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="exampleInputFile">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div>
-                                    </div>
+                                        placeholder="Status Barang">
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-danger">Cancel</button>
                             </div>
                         </form>
                     </div>
