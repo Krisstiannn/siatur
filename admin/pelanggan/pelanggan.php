@@ -96,10 +96,16 @@
                                                     </td>
                                                     <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-pelanggan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-pelanggan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
+                                                        <a class="btn btn-info btn-sm" href="edit-pelanggan.php">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm" href="hapus-pelanggan.php">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -112,90 +118,16 @@
                                                     </td>
                                                     <td>Call of Duty IV</td>
                                                     <td>
-                                                        <a href="edit-pelanggan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-pelanggan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                            90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td>
-                                                        <a href="edit-pelanggan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-pelanggan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-info">Processing</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                                            90,80,-90,70,-61,83,63</div>
-                                                    </td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td>
-                                                        <a href="edit-pelanggan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-pelanggan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                            90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td>
-                                                        <a href="edit-pelanggan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-pelanggan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                            90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td>
-                                                        <a href="edit-pelanggan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-pelanggan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td>
-                                                        <a href="edit-pelanggan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-pelanggan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
+                                                        <a class="btn btn-info btn-sm" href="edit-pelanggan.php">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm" href="hapus-pelanggan.php">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </tbody>

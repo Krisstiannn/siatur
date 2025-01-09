@@ -45,28 +45,27 @@
                         <form>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Nama Pelanggan</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                    <label for="nama">Nama Pelanggan</label>
+                                    <input type="text" class="form-control" id="nama_pelanggan"
                                         placeholder="Nama Pelanggan">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Alamat Rumah Atau Titik Kordinat</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                    <label for="alamat">Alamat Rumah Atau Titik Kordinat</label>
+                                    <input type="text" class="form-control" id="alamat"
                                         placeholder="Masukkan Alamat Rumah Atau Titik Kordinat">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Nomor WhatsApp</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Nomor WhatsApp">
+                                    <label for="whatsapp">Nomor WhatsApp</label>
+                                    <input type="text" class="form-control" id="no_wa" placeholder="Nomor WhatsApp">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Jenis Layanan Yang Digunakan</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                    <label for="layanan">Jenis Layanan Yang Digunakan</label>
+                                    <input type="text" class="form-control" id="jenis_layanan"
                                         placeholder="Jenis Layanan Yang Digunakan">
                                 </div>
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select class="form-control">
+                                    <select class="form-control" id="status">
                                         <option>-- Pilih Status --</option>
                                         <option>Aktif</option>
                                         <option>Tidak Aktif</option>
@@ -74,8 +73,8 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="submit" class="btn btn-danger">Cancel</button>
+                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
+                                <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
                             </div>
                         </form>
                     </div>

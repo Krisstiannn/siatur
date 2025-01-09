@@ -4,12 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>karyawan</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <title>Karayawan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
+    <link rel="icon" href="/siatur/storage/nsp.jpg">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -45,24 +49,29 @@
                         <form>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">NIP</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"
+                                    <label for="nip">NIP</label>
+                                    <input type="text" class="form-control" id="nip_karyawan"
                                         placeholder="Nomor Induk Pegawai">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Nama Karyawan</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                    <label for="nama">Nama Karyawan</label>
+                                    <input type="text" class="form-control" id="nama_karyawan"
                                         placeholder="Nama Karyawan">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Posisi/Jabatan</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Posisi">
+                                    <label id="jabatan">Jabatan Karyawan</label>
+                                    <select class="custom-select" id="jabatan_karyawan">
+                                        <option>-- Pilih --</option>
+                                        <option>Admin</option>
+                                        <option>IT</option>
+                                        <option>Teknisi</option>
+                                        <option>Supervisior</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success">Submit</button>
-                                <button type="submit" class="btn btn-danger">Cancel</button>
+                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
+                                <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
                             </div>
                         </form>
                     </div>

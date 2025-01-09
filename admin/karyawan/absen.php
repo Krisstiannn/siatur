@@ -4,12 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Absen Karyawan</title>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <title>Absen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
+    <link rel="icon" href="/siatur/storage/nsp.jpg">
 </head>
 
 <body class="hold-transition  sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -84,9 +88,16 @@
                                                             90,80,90,-70,61,-83,63</div>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="#.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
+                                                        <a class="btn btn-info btn-sm" href="">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm" href="">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -98,73 +109,16 @@
                                                             90,80,-90,70,61,-83,68</div>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="#" class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                            90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="#" class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-info">Processing</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                                            90,80,-90,70,-61,83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="#" class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                            90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="#" class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                            90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="#" class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="#" class="btn btn-block btn-danger btn-xs ">Hapus</a>
+                                                        <a class="btn btn-info btn-sm" href="">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm" href="">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </tbody>
