@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
+                                <button type="submit" class="btn btn-succes" id="btn_submit">Submit</button>
                                 <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
                             </div>
                         </form>

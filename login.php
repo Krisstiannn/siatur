@@ -1,10 +1,45 @@
+<?php 
+session_start();
+include "./services/koneksi.php";
+
+$login_notifikasi = "";
+if(isset($_POST['btn_login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $query_users = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $result_users = $conn->query($query_users);
+
+    if($result_users->num_rows > 0) {
+        $result = $result_users->fetch_assoc();
+        $_SESSION["peran"] = $result["peran"];
+        
+        if ($username === $result["username"] && $password === $result["password"]) {
+            if ($_SESSION["peran"] === "admin") {
+                header("location: index.php");
+                $login_notifikasi = "ANDA BERHASIL LOGIN";
+            } else if ($_SESSION["peran"] === "user") {
+                // header("location: user.php");
+                $login_notifikasi ="ANDA BERHASIL LOGIN";
+            }
+        } else {
+            $login_notifikasi = "USERNAME ATAU PASSWORD SALAH!!!";
+        }
+    } 
+}
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>SIATUR | Login</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,22 +56,24 @@
     <div class="login-box">
         <div class="card card-outline shadow-lg">
             <div class="card-header text-center">
-                <a href="./index2.html" class="h1">Net Sun Power</a>
+                <i class="h1">Net Sun Power</i>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Silahkan Login Terlebih Dahulu!</p>
 
-                <form action="./index3.html" method="post">
+                <span class="text-center text-red mb-5"><?= $login_notifikasi ?></span>
+
+                <form action="login.php" method="POST">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Nomor Induk Pegawai">
+                        <input type="text" class="form-control" placeholder="Nomor Induk Pegawai" name="username">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" name="password">
                     </div>
                     <div class="row mt-2 mb-3">
-                        <a href="index.php" class="btn btn-block btn-primary">
+                        <button type="submit" class="btn btn-block btn-primary" name="btn_login">
                             <i class="fab mr-2"></i> LOGIN
-                        </a>
+                        </button>
                     </div>
                 </form>
             </div>
