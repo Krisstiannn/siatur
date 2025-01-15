@@ -2,7 +2,7 @@
 session_start();
 include "./services/koneksi.php";
 
-$login_notifikasi = "";
+$notifikasi_login = "";
 if(isset($_POST['btn_login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -11,25 +11,20 @@ if(isset($_POST['btn_login'])) {
     $result_users = $conn->query($query_users);
 
     if($result_users->num_rows > 0) {
-        $result = $result_users->fetch_assoc();
-        $_SESSION["peran"] = $result["peran"];
+        $data = $result_users->fetch_assoc();
+        $_SESSION["peran"] = $data["peran"];
         
-        if ($username === $result["username"] && $password === $result["password"]) {
-            if ($_SESSION["peran"] === "admin") {
-                header("location: index.php");
-                $login_notifikasi = "ANDA BERHASIL LOGIN";
-            } else if ($_SESSION["peran"] === "user") {
-                // header("location: user.php");
-                $login_notifikasi ="ANDA BERHASIL LOGIN";
-            }
-        } else {
-            $login_notifikasi = "USERNAME ATAU PASSWORD SALAH!!!";
-        }
-    } 
+        if ($_SESSION["peran"] === "admin") {
+            // header("location: index.php");
+            $notifikasi_login = "ANDA BERHASIL LOGIN";
+        } else if ($_SESSION["peran"] === "user") {
+            // header("location: user.php");
+            $notifikasi_login ="ANDA BERHASIL LOGIN";
+        }  
+    } else  {
+        $notifikasi_login = "USERNAME ATAU PASSWORD SALAH!!!";
+    }
 }
-
-
-
 
 
 ?>
@@ -61,7 +56,7 @@ if(isset($_POST['btn_login'])) {
             <div class="card-body">
                 <p class="login-box-msg">Silahkan Login Terlebih Dahulu!</p>
 
-                <span class="text-center text-red mb-5"><?= $login_notifikasi ?></span>
+                <span class="text-center text-red mb-5"><?= $notifikasi_login ?></span>
 
                 <form action="login.php" method="POST">
                     <div class="input-group mb-3">
