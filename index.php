@@ -1,3 +1,20 @@
+<?php
+include "./services/koneksi.php";
+date_default_timezone_set("Asia/Makassar");
+// $notifikasi_absen = "";
+// if (isset($_POST['btn_absen'])) {
+//     $notifikasi_absen ="absen telah terisi";
+// } else {
+    
+// }
+$tanggal = date('Y-m-d');
+$jam = date('H:i:s');
+
+$query_jumlahKaryawan ="SELECT COUNT(*) AS jumlah_data FROM karyawan";
+$result_jumlahKaryawan = $conn -> query($query_jumlahKaryawan);
+$jumlah_karyawan = $result_jumlahKaryawan->fetch_assoc();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,6 +53,16 @@
                             <h1 class="m-0">Selamat Datang, Admin</h1>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <i class="m-2" style="font-size: 20px;">Silahkan Absen Terlebih Dahulu</i>
+                        </div>
+                        <form action="index.php" method="POST">
+                            <button type="submit" class="btn btn-sm btn-info text-bold" name="btn_absen">Absen
+                                Sekarang</button>
+                        </form>
+                        <i><?= $tanggal . $jam ?></i>
+                    </div>
                 </div>
             </div>
             <section class="content">
@@ -69,7 +96,7 @@
                                     <div class="info-box-content">
                                         <span class="info-box-text text-red text-bold"
                                             style="font-size: 20px">KARYAWAN</span>
-                                        <span style="font-size: 30px">15</span>
+                                        <span style="font-size: 30px"><?= $jumlah_karyawan['jumlah_data'] ?></span>
                                     </div>
                                 </div>
                             </a>
@@ -202,6 +229,9 @@
                         </div>
                     </div>
                 </div>
+            </section>
+            <section class="content">
+                <img src="./storage/netsun.jpg" alt="No pict" width="1500px">
             </section>
         </div>
         <!-- Enc Main Content -->

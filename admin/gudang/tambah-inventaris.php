@@ -11,6 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
     <link rel="icon" href="/siatur/storage/nsp.jpg">
@@ -49,16 +50,17 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="kode">Kode Barang</label>
-                                    <input type="text" class="form-control" id="kode_barang" placeholder="Kode Barang">
+                                    <input type="text" class="form-control" name="kode_barang"
+                                        placeholder="Kode Barang">
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Barang</label>
-                                    <input type="text" class="form-control" id="nama_barang"
+                                    <input type="text" class="form-control" name="nama_barang"
                                         placeholder="Masukkan Nama Barang">
                                 </div>
                                 <div class="form-group">
-                                    <label id="kondisi">Kondisi Barang</label>
-                                    <select class="custom-select" id="kondisi_barang">
+                                    <label for="kondisi">Kondisi Barang</label>
+                                    <select class="custom-select" name="kondisi_barang">
                                         <option>-- Pilih --</option>
                                         <option>Baru</option>
                                         <option>Bekas</option>
@@ -66,13 +68,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah</label>
-                                    <input type="text" class="form-control" id="jumlah_barang" placeholder="Jumlah">
+                                    <input type="text" class="form-control" name="jumlah_barang" placeholder="Jumlah">
                                 </div>
                                 <div class="form-group">
                                     <label for="gambar">Gambar Barang</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="gambar_barang">
+                                            <input type="file" class="custom-file-input" name="gambar_barang">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                         <div class="input-group-append">
@@ -80,9 +82,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Tanggal Masuk Barang</label>
+                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                        <input type="date" class="form-control datetimepicker-input"
+                                            data-target="#reservationdate" name="tanggal_masuk" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-succes" id="btn_submit">Submit</button>
+                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
                                 <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
                             </div>
                         </form>
@@ -99,7 +108,14 @@
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>
     <script src="/siatur/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-datetimepicker@4.17.47/build/js/bootstrap-datetimepicker.min.js">
+    </script>
+
     <script src="/siatur/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="/siatur/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/siatur/plugins/inputmask/jquery.inputmask.min.js"></script>
     <script src="/siatur/dist/js/adminlte.js"></script>
     <script src="/siatur/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
     <script src="/siatur/plugins/raphael/raphael.min.js"></script>

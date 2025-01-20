@@ -14,18 +14,17 @@ if(isset($_POST['btn_login'])) {
         $result = $result_users->fetch_assoc();
         $_SESSION["peran"] = $result["peran"];
         
-        if ($username === $result["username"] && $password === $result["password"]) {
             if ($_SESSION["peran"] === "admin") {
                 header("location: index.php");
                 $login_notifikasi = "ANDA BERHASIL LOGIN";
-            } else if ($_SESSION["peran"] === "user") {
-                // header("location: user.php");
+            } else {
+                header("location: user.php");
                 $login_notifikasi ="ANDA BERHASIL LOGIN";
             }
-        } else {
-            $login_notifikasi = "USERNAME ATAU PASSWORD SALAH!!!";
-        }
-    } 
+        
+    } else {
+        $login_notifikasi = "USERNAME ATAU PASSWORD SALAH!!!";
+    }
 }
 
 

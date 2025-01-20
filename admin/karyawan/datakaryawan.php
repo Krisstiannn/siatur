@@ -1,3 +1,10 @@
+<?php 
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$query_karyawan = "SELECT * FROM karyawan";
+$result_karyawan = $conn -> query($query_karyawan);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,84 +92,26 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
+                                            <?php foreach ($result_karyawan as $karyawan) {?>
                                             <tbody>
                                                 <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
+                                                    <td><?= $karyawan['nip_karyawan']?></td>
+                                                    <td><?= $karyawan['nama_karyawan']?></td>
+                                                    <td><?= $karyawan['posisi_karyawan']?></td>
                                                     <td>
-                                                        <a href="edit-karyawan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-karyawan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
+                                                        <a class="btn btn-info btn-sm" href="edit-karyawan.php">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm" href="hapus-karyawan.php">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <a href="edit-karyawan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-karyawan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <a href="edit-karyawan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-karyawan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-info">Processing</span></td>
-                                                    <td>
-                                                        <a href="edit-karyawan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-karyawan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <a href="edit-karyawan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-karyawan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <a href="edit-karyawan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-karyawan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <a href="edit-karyawan.php"
-                                                            class="btn btn-block btn-info btn-xs ">Edit</a>
-                                                        <a href="hapus-karyawan.php"
-                                                            class="btn btn-block btn-danger btn-xs ">Hapus</a>
-                                                    </td>
-                                                </tr>
+                                                <?php }?>
                                             </tbody>
                                         </table>
                                     </div>

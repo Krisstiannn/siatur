@@ -1,3 +1,21 @@
+<?php 
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$id = $_GET['id'];
+$query_tampilKaryawan = "SELECT * FROM karyawan WHERE id = '$id'";
+$result_tampilKaryawan = $conn->query($query_tampilKaryawan)->fetch_assoc();
+
+if (isset($_POST['btn_submit'])) {
+    $nip_karyawan = $_POST['nip_karyawan'];
+    $nama_karyawan = $_POST['nama_karyawan'];
+    $jabatan_karyawan = $_POST['jabatan_karyawan'];
+
+    $query_editKaryawan = "UPDATE karyawan SET nama_karyawan = '$nama_karyawan', posisi_karyawan = '$jabatan_karyawan' WHERE id = $id";
+    $result_editKaryawan = $conn->query($query_editKaryawan);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,22 +64,24 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit Data Karayawan</h3>
                         </div>
-                        <form>
+                        <form action="edit-karyawan.php" method="POST">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="nip">NIP</label>
-                                    <input type="text" class="form-control" id="nip_karyawan"
-                                        placeholder="Nomor Induk Pegawai">
+                                    <label for="nip">Nomor Induk Pegawai</label>
+                                    <input type="text" class="form-control" name="nip_karyawan"
+                                        placeholder="Nomor Induk Pegawai"
+                                        value="<?= $result_tampilKaryawan['nip_karyawan']?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Karyawan</label>
-                                    <input type="text" class="form-control" id="nama_karyawan"
-                                        placeholder="Nama Karyawan">
+                                    <input type="text" class="form-control" name="nama_karyawan"
+                                        placeholder="Nama Karyawan"
+                                        value="<?= $result_tampilKaryawan['nama_karyawan']?>">
                                 </div>
                                 <div class="form-group">
-                                    <label id="jabatan">Jabatan Karyawan</label>
-                                    <select class="custom-select" id="jabatan_karyawan">
-                                        <option>-- Pilih --</option>
+                                    <label for="jabatan">Jabatan Karyawan</label>
+                                    <select class="custom-select" name="jabatan_karyawan">
+                                        <option><?= $result_tampilKaryawan['posisi_karyawan']?></option>
                                         <option>Admin</option>
                                         <option>IT</option>
                                         <option>Teknisi</option>
@@ -70,8 +90,8 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
+                                <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
+                                <button type="submit" class="btn btn-danger" name="btn_cancel">Cancel</button>
                             </div>
                         </form>
                     </div>
