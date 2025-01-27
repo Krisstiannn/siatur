@@ -1,9 +1,17 @@
 <?php 
+session_start();
 include "/xampp/htdocs/siatur/services/koneksi.php";
 
-$id = $_GET['id'];
-$query_tampilKaryawan = "SELECT * FROM karyawan WHERE id = '$id'";
+$id = "";
+if (isset($_GET['id']) && $_GET['id'] !== "") {
+    $id = $_GET['id'];
+} else {
+    echo "ID tidak ditemukan";
+}
+$query_tampilKaryawan = "SELECT * FROM karyawan WHERE id = $id";
 $result_tampilKaryawan = $conn->query($query_tampilKaryawan)->fetch_assoc();
+
+
 
 if (isset($_POST['btn_submit'])) {
     $nip_karyawan = $_POST['nip_karyawan'];

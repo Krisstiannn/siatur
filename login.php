@@ -26,11 +26,6 @@ if(isset($_POST['btn_login'])) {
         $login_notifikasi = "USERNAME ATAU PASSWORD SALAH!!!";
     }
 }
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

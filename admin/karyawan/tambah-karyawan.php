@@ -6,8 +6,31 @@ if (isset($_POST['btn_submit'])) {
     $nama_karyawan = $_POST['nama_karyawan'];
     $jabatan_karyawan = $_POST['jabatan_karyawan'];
 
-    $query_tambahKaryawan = "INSERT INTO karyawan (id, nip_karyawan, nama_karyawan, posisi_karyawan) VALUES ('','$nip_karyawan', '$nama_karyawan','$jabatan_karyawan')";
-    $result_tambahKaryawan = $conn->query($query_tambahKaryawan);
+    if (empty($nip_karyawan) || empty($nama_karyawan) || empty($jabatan_karyawan)) {
+        echo "<script type= 'text/javascript'>
+                alert('Tolong isi data dengan benar....!');
+                document.location.href = 'tambah-karyawan.php';
+            </script>";
+    }
+
+    $query_nipKaryawan = "SELECT * FROM karyawan";
+    $result_nipKaryawan = $conn->query($query_nipKaryawan)->fetch_assoc();
+    
+    if($result_nipKaryawan['nip_karyawan'] === $nip_karyawan) {
+        echo "<script type= 'text/javascript'>
+            alert('NIP Karyawan Sudah Ada!');
+            document.location.href = 'tambah-karyawan.php';
+        </script>";
+    } else {
+        $query_tambahKaryawan = "INSERT INTO karyawan (id, nip_karyawan, nama_karyawan, posisi_karyawan) VALUES ('','$nip_karyawan', '$nama_karyawan','$jabatan_karyawan')";
+        $result_tambahKaryawan = $conn->query($query_tambahKaryawan);
+        
+        echo "<script type= 'text/javascript'>
+                alert('Data Berhasil Disimpan....!');
+                document.location.href = 'datakaryawan.php';
+            </script>";
+    }
+
 }
 ?>
 
@@ -17,7 +40,7 @@ if (isset($_POST['btn_submit'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Karayawan</title>
+    <title>Karyawan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
