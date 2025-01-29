@@ -10,9 +10,11 @@ date_default_timezone_set("Asia/Makassar");
 $tanggal = date('Y-m-d');
 $jam = date('H:i:s');
 
-$query_jumlahKaryawan ="SELECT COUNT(*) AS jumlah_data FROM karyawan";
-$result_jumlahKaryawan = $conn -> query($query_jumlahKaryawan);
-$jumlah_karyawan = $result_jumlahKaryawan->fetch_assoc();
+$query_jumlahData ="SELECT 
+                            (SELECT COUNT(*) FROM karyawan) AS jumlah_dataKaryawan, 
+                            (SELECT COUNT(*) FROM pelanggan) AS jumlah_dataPelanggan";
+$result_jumlahData = $conn -> query($query_jumlahData);
+$jumlah_data = $result_jumlahData->fetch_assoc();
 
 ?>
 <!DOCTYPE html>
@@ -96,7 +98,7 @@ $jumlah_karyawan = $result_jumlahKaryawan->fetch_assoc();
                                     <div class="info-box-content">
                                         <span class="info-box-text text-red text-bold"
                                             style="font-size: 20px">KARYAWAN</span>
-                                        <span style="font-size: 30px"><?= $jumlah_karyawan['jumlah_data'] ?></span>
+                                        <span style="font-size: 30px"><?= $jumlah_data['jumlah_dataKaryawan'] ?></span>
                                     </div>
                                 </div>
                             </a>
@@ -107,7 +109,7 @@ $jumlah_karyawan = $result_jumlahKaryawan->fetch_assoc();
                                     <div class="info-box-content">
                                         <span class="info-box-text text-red text-bold" style="font-size: 20px">JUMLAH
                                             PELANGGAN</span>
-                                        <span style="font-size: 30px">15</span>
+                                        <span style="font-size: 30px"><?= $jumlah_data['jumlah_dataPelanggan'] ?></span>
                                     </div>
                                 </div>
                             </a>

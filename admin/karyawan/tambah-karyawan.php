@@ -11,6 +11,7 @@ if (isset($_POST['btn_submit'])) {
                 alert('Tolong isi data dengan benar....!');
                 document.location.href = 'tambah-karyawan.php';
             </script>";
+        die();
     }
 
     $query_nipKaryawan = "SELECT * FROM karyawan";
@@ -21,6 +22,7 @@ if (isset($_POST['btn_submit'])) {
             alert('NIP Karyawan Sudah Ada!');
             document.location.href = 'tambah-karyawan.php';
         </script>";
+        die();
     } else {
         $query_tambahKaryawan = "INSERT INTO karyawan (id, nip_karyawan, nama_karyawan, posisi_karyawan) VALUES ('','$nip_karyawan', '$nama_karyawan','$jabatan_karyawan')";
         $result_tambahKaryawan = $conn->query($query_tambahKaryawan);
@@ -70,7 +72,7 @@ if (isset($_POST['btn_submit'])) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Karayawan</h1>
+                            <h1>Karyawan</h1>
                         </div>
                     </div>
                 </div>
@@ -107,7 +109,8 @@ if (isset($_POST['btn_submit'])) {
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" name="btn_cancel">Cancel</button>
+                                <a href="datakaryawan.php" type="submit" class="btn btn-danger"
+                                    name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>
