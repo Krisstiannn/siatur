@@ -99,12 +99,12 @@ $result_karyawan = $conn -> query($query_karyawan);
                                                     <td><?= $karyawan['nama_karyawan']?></td>
                                                     <td><?= $karyawan['posisi_karyawan']?></td>
                                                     <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-karyawan.php">
+                                                        <a class="btn btn-info btn-sm" href="edit-karyawan.php?id=<?=$karyawan["id"]?>">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-karyawan.php">
+                                                        <a class="btn btn-danger btn-sm" href="hapus-karyawan.php?id=<?=$karyawan["id"]?>" onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini..?');">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete

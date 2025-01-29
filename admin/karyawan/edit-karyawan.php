@@ -1,27 +1,29 @@
 <?php 
-session_start();
 include "/xampp/htdocs/siatur/services/koneksi.php";
 
-$id = "";
-if (isset($_GET['id']) && $_GET['id'] !== "") {
-    $id = $_GET['id'];
-} else {
-    echo "ID tidak ditemukan";
-}
-$query_tampilKaryawan = "SELECT * FROM karyawan WHERE id = $id";
+$id = $_GET['id'];
+$query_tampilKaryawan = "SELECT * FROM karyawan WHERE id = '$id'";
 $result_tampilKaryawan = $conn->query($query_tampilKaryawan)->fetch_assoc();
 
-
-
 if (isset($_POST['btn_submit'])) {
-    $nip_karyawan = $_POST['nip_karyawan'];
     $nama_karyawan = $_POST['nama_karyawan'];
-    $jabatan_karyawan = $_POST['jabatan_karyawan'];
+    $posisi_karyawan = $_POST['jabatan_karyawan'];
 
-    $query_editKaryawan = "UPDATE karyawan SET nama_karyawan = '$nama_karyawan', posisi_karyawan = '$jabatan_karyawan' WHERE id = $id";
+    $query_editKaryawan = "UPDATE karyawan SET nama_karyawan = '$nama_karyawan' , posisi_karyawan = '$posisi_karyawan' WHERE id = '$id'";
     $result_editKaryawan = $conn->query($query_editKaryawan);
+    
+    if ($result_editKaryawan) {
+        echo "<script type= 'text/javascript'>
+                alert('Data Berhasil Disimpan....!');
+                document.location.href = 'datakaryawan.php';
+            </script>";
+    } else {
+        echo "<script type= 'text/javascript'>
+                alert('Data Gagal Disimpan....!');
+                document.location.href = 'edit-karyawan.php?id=$id';
+            </script>" ;
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +32,7 @@ if (isset($_POST['btn_submit'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Karyawan</title>
+    <title>Edit Karyawan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -60,7 +62,7 @@ if (isset($_POST['btn_submit'])) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Karayawan</h1>
+                            <h1>Karyawan</h1>
                         </div>
                     </div>
                 </div>
@@ -72,7 +74,7 @@ if (isset($_POST['btn_submit'])) {
                         <div class="card-header">
                             <h3 class="card-title">Edit Data Karayawan</h3>
                         </div>
-                        <form action="edit-karyawan.php" method="POST">
+                        <form action="edit-karyawan.php?id=<?= $result_tampilKaryawan['id']?>" method="POST">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nip">Nomor Induk Pegawai</label>
@@ -99,7 +101,7 @@ if (isset($_POST['btn_submit'])) {
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" name="btn_cancel">Cancel</button>
+                                <a href="datakaryawan.php" type="submit" class="btn btn-danger" name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>
