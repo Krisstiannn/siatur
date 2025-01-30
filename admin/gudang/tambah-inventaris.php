@@ -1,3 +1,32 @@
+<?php 
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+if (isset($_POST['btn_submit'])) {
+    $kode_barang = $_POST['kode_barang'];
+    $nama_barang = $_POST['nama_barang'];
+    $kondisi_barang = $_POST['kondisi_barang'];
+    $jumlah_barang = $_POST['jumlah_barang'];
+    $gambar_barang = $_FILES['gambar_barang']['name'];
+    $tanggal_masuk = $_POST['tanggal_masuk'];
+
+    $dir_foto = "/xampp/htdocs/siatur/storage/img/";
+    $tmp_file = $_FILES['gambar_barang']['tmp_name'];
+    move_uploaded_file($tmp_file, $dir_foto.$gambar_barang);
+
+    if (empty($kode_barang) || empty($nama_barang) || empty($kondisi_barang) || empty($jumlah_barang) || empty($gambar_barang) || empty($tanggal_masuk)) {
+        echo "<script type= 'text/javascript'>
+                alert('Tolong isi data dengan benar!');
+                document.location.href = 'tambah-pelanggan.php';
+            </script>";
+        die();
+    } else {
+        $query_tambahData = "INSERT INTO inventaris (id, kode_barang, nama_barang, kondisi_barang, jumlah_barang, gambar_barang, tanggal_masuk) VALUES ('', '$kode_barang', '$nama_barang', '$kondisi_barang','$jumlah_barang', '$gambar_barang', '$tanggal_masuk')";
+        $result_tambahData = $conn->query($query_tambahData);
+    }
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +75,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Input Inventaris</h3>
                         </div>
-                        <form>
+                        <form method="POST" action="tambah-inventaris.php" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="kode">Kode Barang</label>
@@ -74,12 +103,13 @@
                                     <label for="gambar">Gambar Barang</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="gambar_barang">
+                                            <input type="file" class="custom-file-input" name="gambar_barang"
+                                                accept="image/*">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
-                                        <div class="input-group-append">
+                                        <!-- <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -91,8 +121,8 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
+                                <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
+                                <button type="submit" class="btn btn-danger" name="btn_cancel">Cancel</button>
                             </div>
                         </form>
                     </div>

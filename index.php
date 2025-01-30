@@ -12,7 +12,8 @@ $jam = date('H:i:s');
 
 $query_jumlahData ="SELECT 
                             (SELECT COUNT(*) FROM karyawan) AS jumlah_dataKaryawan, 
-                            (SELECT COUNT(*) FROM pelanggan) AS jumlah_dataPelanggan";
+                            (SELECT COUNT(*) FROM pelanggan) AS jumlah_dataPelanggan,
+                            (SELECT COUNT(*) FROM inventaris) AS jumlah_dataInventaris";
 $result_jumlahData = $conn -> query($query_jumlahData);
 $jumlah_data = $result_jumlahData->fetch_assoc();
 
@@ -76,7 +77,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                     <div class="info-box-content">
                                         <span class="info-box-text text-red text-bold"
                                             style="font-size: 20px">INVENTARIS</span>
-                                        <span style="font-size: 30px">15</span>
+                                        <span style="font-size: 30px"><?= $jumlah_data['jumlah_dataInventaris']?></span>
                                     </div>
                                 </div>
                             </a>

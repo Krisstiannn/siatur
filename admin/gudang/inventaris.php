@@ -1,3 +1,9 @@
+<?php 
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$query_tampilData = "SELECT * FROM inventaris";
+$result_tampilData = $conn->query($query_tampilData);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,51 +92,23 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
+                                            <?php foreach ($result_tampilData as $inventaris) {?>
                                             <tbody>
                                                 <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
+                                                    <td><?= $inventaris['kode_barang']?></td>
+                                                    <td><?= $inventaris['nama_barang']?></td>
+                                                    <td><?= $inventaris['kondisi_barang']?></td>
+                                                    <td><?= $inventaris['jumlah_barang']?></td>
+                                                    <td style="width:150px;"><?= $inventaris['gambar_barang']?></td>
                                                     <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-inventaris.php">
+                                                        <a class="btn btn-info btn-sm"
+                                                            href="edit-inventaris.php?id=<?= $inventaris['id']?>">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-inventaris.php">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                            90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-inventaris.php">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-inventaris.php">
+                                                        <a class="btn btn-danger btn-sm"
+                                                            href="hapus-inventaris.php?id=<?= $inventaris['id']?>">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete
@@ -138,6 +116,7 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                            <?php }?>
                                         </table>
                                     </div>
                                 </div>
