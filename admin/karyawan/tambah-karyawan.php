@@ -8,7 +8,7 @@ if (isset($_POST['btn_submit'])) {
 
     if (empty($nip_karyawan) || empty($nama_karyawan) || empty($jabatan_karyawan)) {
         echo "<script type= 'text/javascript'>
-                alert('Tolong isi data dengan benar....!');
+                alert('Tolong isi data dengan benar!');
                 document.location.href = 'tambah-karyawan.php';
             </script>";
         die();
@@ -28,7 +28,7 @@ if (isset($_POST['btn_submit'])) {
         $result_tambahKaryawan = $conn->query($query_tambahKaryawan);
         
         echo "<script type= 'text/javascript'>
-                alert('Data Berhasil Disimpan....!');
+                alert('Data Berhasil Disimpan!');
                 document.location.href = 'datakaryawan.php';
             </script>";
     }

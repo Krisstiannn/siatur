@@ -104,15 +104,15 @@ $result_karyawan = $conn -> query($query_karyawan);
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-karyawan.php?id=<?=$karyawan["id"]?>" onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini..?');">
+                                                        <a class="btn btn-danger btn-sm" href="hapus-karyawan.php?id=<?=$karyawan["id"]?>" onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini?');">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                <?php }?>
                                             </tbody>
+                                            <?php }?>
                                         </table>
                                     </div>
                                 </div>

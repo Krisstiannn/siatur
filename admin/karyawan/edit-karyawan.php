@@ -14,12 +14,12 @@ if (isset($_POST['btn_submit'])) {
     
     if ($result_editKaryawan) {
         echo "<script type= 'text/javascript'>
-                alert('Data Berhasil Disimpan....!');
+                alert('Data Berhasil Disimpan!');
                 document.location.href = 'datakaryawan.php';
             </script>";
     } else {
         echo "<script type= 'text/javascript'>
-                alert('Data Gagal Disimpan....!');
+                alert('Data Gagal Disimpan!');
                 document.location.href = 'edit-karyawan.php?id=$id';
             </script>" ;
     }

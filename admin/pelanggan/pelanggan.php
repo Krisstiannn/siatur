@@ -1,3 +1,16 @@
+<?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$query_dataPelanggan = "SELECT * FROM pelanggan";
+$result_dataPelanggan = $conn->query($query_dataPelanggan);
+
+if(isset($_POST['cari'])) {
+    $cari = $_POST['cari'];
+
+    $query_cari = "SELECT * FROM pelanggan WHERE ";
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +73,7 @@
 
                                         <div class="card-title float-right">
                                             <div class="input-group input-group-sm" style="width: 150px;">
-                                                <input type="text" name="table_search" class="form-control float-right"
+                                                <input type="text" name="cari" class="form-control float-right"
                                                     placeholder="Search">
 
                                                 <div class="input-group-append">
@@ -85,20 +98,21 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
+                                            <?php foreach($result_dataPelanggan as $pelanggan) {?>
                                             <tbody>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><?= $pelanggan['nama_pelanggan']?></td>
+                                                    <td><?= $pelanggan['alamat_pelanggan']?></td>
+                                                    <td><?= $pelanggan['wa_pelanggan']?></td>
+                                                    <td><?= $pelanggan['jenis_layanan']?></td>
+                                                    <td><?= $pelanggan['status_pelanggan']?></td>
                                                     <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-pelanggan.php">
+                                                        <a class="btn btn-info btn-sm" href="edit-pelanggan.php?id=<?= $pelanggan['id']?>">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-pelanggan.php">
+                                                        <a class="btn btn-danger btn-sm" href="hapus-pelanggan.php?id=<?= $pelanggan['id']?>" onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini?');">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete
@@ -106,6 +120,7 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                            <?php }?>
                                         </table>
                                     </div>
                                 </div>

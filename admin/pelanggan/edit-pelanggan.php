@@ -1,3 +1,33 @@
+<?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$id = $_GET['id'];
+$query_tampilData = "SELECT * FROM pelanggan WHERE id = '$id'";
+$result_tampilData = $conn->query($query_tampilData)->fetch_assoc();
+
+if (isset($_POST['btn_submit'])) {
+    $nama_pelanggan = $_POST['nama_pelanggan'];
+    $alamat_pelanggan = $_POST['alamat'];
+    $wa_pelanggan = $_POST['no_wa'];
+    $jenis_layanan = $_POST['jenis_layanan'];
+    $status_pelanggan = $_POST['status'];
+
+    $query_editData = "UPDATE pelanggan SET nama_pelanggan = '$nama_pelanggan', alamat_pelanggan = '$alamat_pelanggan', wa_pelanggan = '$wa_pelanggan', jenis_layanan = '$jenis_layanan', status_pelanggan = '$status_pelanggan' WHERE id = '$id'";
+    $result_editData = $conn->query($query_editData);
+
+    if ($result_editData) {
+        echo "<script type= 'text/javascript'>
+                alert('Data Berhasil Disimpan!');
+                document.location.href = 'pelanggan.php';
+            </script>";
+    } else {
+        echo "<script type= 'text/javascript'>
+                alert('Data Gagal Disimpan!');
+                document.location.href = 'edit-pelanggan.php?id=$id';
+            </script>" ;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,39 +72,39 @@
                         <div class="card-header">
                             <h3 class="card-title">Input Pelanggan</h3>
                         </div>
-                        <form>
+                        <form method="POST" action="edit-pelanggan.php?id=<?= $result_tampilData['id']?>">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nama">Nama Pelanggan</label>
-                                    <input type="text" class="form-control" id="nama_pelanggan"
-                                        placeholder="Nama Pelanggan">
+                                    <input type="text" class="form-control" name="nama_pelanggan"
+                                        placeholder="Nama Pelanggan" value="<?= $result_tampilData['nama_pelanggan']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat Rumah Atau Titik Kordinat</label>
-                                    <input type="text" class="form-control" id="alamat"
-                                        placeholder="Masukkan Alamat Rumah Atau Titik Kordinat">
+                                    <input type="text" class="form-control" name="alamat"
+                                        placeholder="Masukkan Alamat Rumah Atau Titik Kordinat" value="<?= $result_tampilData['alamat_pelanggan']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="whatsapp">Nomor WhatsApp</label>
-                                    <input type="text" class="form-control" id="no_wa" placeholder="Nomor WhatsApp">
+                                    <input type="text" class="form-control" name="no_wa" placeholder="Nomor WhatsApp" value="<?= $result_tampilData['wa_pelanggan']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="layanan">Jenis Layanan Yang Digunakan</label>
-                                    <input type="text" class="form-control" id="jenis_layanan"
-                                        placeholder="Jenis Layanan Yang Digunakan">
+                                    <input type="text" class="form-control" name="jenis_layanan"
+                                        placeholder="Jenis Layanan Yang Digunakan" value="<?= $result_tampilData['jenis_layanan']?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Status</label>
-                                    <select class="form-control" id="status">
-                                        <option>-- Pilih Status --</option>
-                                        <option>Aktif</option>
-                                        <option>Tidak Aktif</option>
+                                    <select class="form-control" name="status">
+                                        <option><?= $result_tampilData['status_pelanggan']?></option>
+                                        <option>AKTIF</option>
+                                        <option>TIDAK AKTIF</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
+                                <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
+                                <a href="pelanggan.php" type="submit" class="btn btn-danger" name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>
