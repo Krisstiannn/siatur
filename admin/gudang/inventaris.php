@@ -89,6 +89,7 @@ $result_tampilData = $conn->query($query_tampilData);
                                                     <th>Kondisi Barang</th>
                                                     <th>Jumlah Barang</th>
                                                     <th>Gambar Barang</th>
+                                                    <th>Tanggal Masuk Barang</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -99,7 +100,10 @@ $result_tampilData = $conn->query($query_tampilData);
                                                     <td><?= $inventaris['nama_barang']?></td>
                                                     <td><?= $inventaris['kondisi_barang']?></td>
                                                     <td><?= $inventaris['jumlah_barang']?></td>
-                                                    <td style="width:150px;"><?= $inventaris['gambar_barang']?></td>
+                                                    <td>
+                                                        <img src="/siatur/storage/img/<?= $inventaris['gambar_barang']?>" alt="<?= $inventaris['gambar_barang']?>" style="width: 100px;">
+                                                    </td>
+                                                    <td><?= $inventaris['tanggal_masuk']?></td>
                                                     <td>
                                                         <a class="btn btn-info btn-sm"
                                                             href="edit-inventaris.php?id=<?= $inventaris['id']?>">

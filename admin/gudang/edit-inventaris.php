@@ -1,3 +1,32 @@
+<?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$id = $_GET['id'];
+$query_tampilData = "SELECT * FROM inventaris WHERE id = '$id'";
+$result_tampiData = $conn->query($query_tampilData)->fetch_assoc();
+
+if (isset($_POST['btn_submit'])) {
+    $kode_barang = $_POST['kode_barang'];
+    $nama_barang = $_POST['nama_barang'];
+    $kondisi_barang = $_POST['kondisi_barang'];
+    $jumlah_barang = $_POST['jumlah_barang'];
+    $gambar_barang =$_FILES['gambar_barang']['name'];
+    $tanggal_masuk = $_POST['tanggal_masuk'];
+
+    $dir_foto = "/xampp/htdocs/siatur/storage/img/";
+    $tmp_file = $_FILES['gambar_barang']['tmp_name'];
+    move_uploaded_file($tmp_file, $dir_foto.$gambar_barang);
+
+    $query_editData = "UPDATE inventaris SET kode_barang = '$kode_barang', nama_barang = '$nama_barang', kondisi_barang = '$kondisi_barang', jumlah_barang = '$jumlah_barang',
+    gambar_barang = '$gambar_barang', tanggal_masuk = '$tanggal_masuk' WHERE id = $id";
+    $result_editData = $conn->query($query_editData);
+
+    echo "<script type= 'text/javascript'>
+                alert('Data Berhasil dirubah!');
+                document.location.href = 'inventaris.php';
+            </script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,45 +74,52 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit Barang</h3>
                         </div>
-                        <form>
+                        <form method="POST" action="edit-inventaris.php?id=<?= $result_tampiData['id']?>" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="kode">Kode Barang</label>
-                                    <input type="text" class="form-control" id="kode_barang" placeholder="Kode Barang">
+                                    <input type="text" class="form-control" name="kode_barang" placeholder="Kode Barang" value="<?= $result_tampiData['kode_barang']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Barang</label>
-                                    <input type="text" class="form-control" id="nama_barang"
-                                        placeholder="Masukkan Nama Barang">
+                                    <input type="text" class="form-control" name="nama_barang"
+                                        placeholder="Masukkan Nama Barang" value="<?= $result_tampiData['nama_barang']?>">
                                 </div>
                                 <div class="form-group">
-                                    <label id="kondisi">Kondisi Barang</label>
-                                    <select class="custom-select" id="kondisi_barang">
-                                        <option>-- Pilih --</option>
+                                    <label for="kondisi">Kondisi Barang</label>
+                                    <select class="custom-select" name="kondisi_barang">
+                                        <option><?= $result_tampiData['kondisi_barang']?></option>
                                         <option>Baru</option>
                                         <option>Bekas</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah</label>
-                                    <input type="text" class="form-control" id="jumlah_barang" placeholder="Jumlah">
+                                    <input type="text" class="form-control" name="jumlah_barang" placeholder="Jumlah" value="<?= $result_tampiData['jumlah_barang']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="gambar">Gambar Barang</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="gambar_barang">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                            <input type="file" class="custom-file-input" name="gambar_barang" value="<?= $result_tampiData['gambar_barang']?>" accept="image/*">
+                                            <label class="custom-file-label" for="exampleInputFile"><?= $result_tampiData['gambar_barang']?></label>
                                         </div>
-                                        <div class="input-group-append">
+                                        <!-- <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
-                                        </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tanggal Masuk Barang</label>
+                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                        <input type="date" class="form-control datetimepicker-input"
+                                            data-target="#reservationdate" name="tanggal_masuk" value="<?= $result_tampiData['tanggal_masuk']?>"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
+                                <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
+                                <a href="inventaris.php" type="submit" class="btn btn-danger" name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>

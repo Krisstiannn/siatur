@@ -16,12 +16,17 @@ if (isset($_POST['btn_submit'])) {
     if (empty($kode_barang) || empty($nama_barang) || empty($kondisi_barang) || empty($jumlah_barang) || empty($gambar_barang) || empty($tanggal_masuk)) {
         echo "<script type= 'text/javascript'>
                 alert('Tolong isi data dengan benar!');
-                document.location.href = 'tambah-pelanggan.php';
+                document.location.href = 'tambah-inventaris.php';
             </script>";
         die();
     } else {
         $query_tambahData = "INSERT INTO inventaris (id, kode_barang, nama_barang, kondisi_barang, jumlah_barang, gambar_barang, tanggal_masuk) VALUES ('', '$kode_barang', '$nama_barang', '$kondisi_barang','$jumlah_barang', '$gambar_barang', '$tanggal_masuk')";
         $result_tambahData = $conn->query($query_tambahData);
+
+        echo "<script type= 'text/javascript'>
+                alert('Data Berhasil disimpan!');
+                document.location.href = 'inventaris.php';
+            </script>";
     }
 
 }
