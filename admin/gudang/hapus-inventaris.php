@@ -5,7 +5,7 @@ $id = $_GET['id'];
 $query_gambar = "SELECT * FROM inventaris WHERE id = '$id'";
 $result_gambar = $conn->query($query_gambar)->fetch_assoc();
 
-unlink("xampp/htdocs/siatur/storage/img/" . $result_gambar['gambar_barang']);
+unlink("/xampp/htdocs/siatur/storage/img/" . $result_gambar['gambar_barang']);
 
 $query_hapusData = "DELETE FROM inventaris WHERE id = '$id'";
 $result_hapusData = $conn->query($query_hapusData);
