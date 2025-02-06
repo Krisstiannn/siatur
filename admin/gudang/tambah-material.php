@@ -1,3 +1,37 @@
+<?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+if (isset($_POST['btn_submit'])) {
+    $kode_barang = $_POST['kode_barang'];
+    $gambar_barang = $_FILES['gambar_barang']['name'];
+    $nama_barang = $_POST['nama_barang'];
+    $jumlah_awal = $_POST['jumlah_awal'];
+    $jumlah_sisa = $_POST['jumlah_sisa'];
+    $tanggal_masuk = $_POST['tanggal_masuk'];
+    $tanggal_habis = $_POST['tanggal_habis'];
+
+    $dir_foto = "/xampp/htdocs/siatur/storage/img/";
+    $tmp_file = $_FILES['gambar_barang']['tmp_name'];
+    move_uploaded_file($tmp_file,$dir_foto.$gambar_barang);
+
+    if (empty($kode_barang) || empty($gambar_barang) || empty($nama_barang)) {
+        echo "<script type= 'text/javascript'>
+                alert('Tolong isi data dengan benar!');
+                document.location.href = 'tambah-material.php';
+            </script>";
+        die();
+    } else {
+        $query_tambahData = "INSERT INTO material (id, kode_barang, gambar_barang, nama_barang, jumlah_awal, jumlah_sisa, tanggal_masuk, tanggal_habis) 
+        VALUES ('','$kode_barang', '$gambar_barang', '$nama_barang', '$jumlah_awal', '$jumlah_sisa', '$tanggal_masuk', '$tanggal_habis')";
+        $result_tambahData = $conn->query($query_tambahData);
+
+        echo "<script type= 'text/javascript'>
+                alert('Data Berhasil disimpan!');
+                document.location.href = 'material.php';
+            </script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,31 +79,60 @@
                         <div class="card-header">
                             <h3 class="card-title">Input Data Material</h3>
                         </div>
-                        <form>
+                        <form method="POST" action="" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="kode">Kode Barang</label>
-                                    <input type="text" class="form-control" id="kode_barang" placeholder="Kode Barang">
+                                    <input type="text" class="form-control" name="kode_barang" placeholder="Kode Barang">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gambar">Gambar Barang</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="gambar_barang"
+                                                accept="image/*">
+                                            <label class="custom-file-label" for="foto"></label>
+                                        </div>
+                                        <!-- <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div> -->
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Barang</label>
-                                    <input type="text" class="form-control" id="nama_barang"
+                                    <input type="text" class="form-control" name="nama_barang"
                                         placeholder="Masukkan Nama Barang">
                                 </div>
                                 <div class="form-group">
-                                    <label for="jumlah">Jumlah Barang</label>
-                                    <input type="text" class="form-control" id="jumlah_barang"
-                                        placeholder="Jumlah Barang">
+                                    <label for="jumlah">Jumlah Awal Barang</label>
+                                    <input type="text" class="form-control" name="jumlah_awal"
+                                        placeholder="Jumlah Awal Barang">
+                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan barang</i>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Status Barang</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1"
-                                        placeholder="Status Barang">
+                                    <label for="jumlah">Jumlah Sisa Barang</label>
+                                    <input type="text" class="form-control" name="jumlah_sisa"
+                                        placeholder="Jumlah Sisa Barang">
+                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan barang</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tanggal Masuk Barang</label>
+                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                        <input type="date" class="form-control datetimepicker-input"
+                                            data-target="#reservationdate" name="tanggal_masuk" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tanggal Habis Barang</label>
+                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                                        <input type="date" class="form-control datetimepicker-input"
+                                            data-target="#reservationdate" name="tanggal_habis" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" id="btn_cancel">Cancel</button>
+                                <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
+                                <a href="material.php" type="submit" class="btn btn-danger" name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -96,6 +159,12 @@
     <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script>
+    $(function () {
+        bsCustomFileInput.init();
+    });
+    </script>
 </body>
 
 </html>

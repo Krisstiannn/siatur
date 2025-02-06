@@ -24,7 +24,8 @@ if (isset($_POST['btn_submit'])) {
         </script>";
         die();
     } else {
-        $query_tambahKaryawan = "INSERT INTO karyawan (id, nip_karyawan, nama_karyawan, posisi_karyawan) VALUES ('','$nip_karyawan', '$nama_karyawan','$jabatan_karyawan')";
+        $query_tambahKaryawan = "INSERT INTO karyawan (id, nip_karyawan, nama_karyawan, posisi_karyawan) 
+        VALUES ('','$nip_karyawan', '$nama_karyawan','$jabatan_karyawan')";
         $result_tambahKaryawan = $conn->query($query_tambahKaryawan);
         
         echo "<script type= 'text/javascript'>
@@ -32,7 +33,6 @@ if (isset($_POST['btn_submit'])) {
                 document.location.href = 'datakaryawan.php';
             </script>";
     }
-
 }
 ?>
 

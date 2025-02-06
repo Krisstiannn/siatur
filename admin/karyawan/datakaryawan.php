@@ -3,7 +3,6 @@ include "/xampp/htdocs/siatur/services/koneksi.php";
 
 $query_karyawan = "SELECT * FROM karyawan";
 $result_karyawan = $conn -> query($query_karyawan);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

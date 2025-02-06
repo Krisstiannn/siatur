@@ -20,7 +20,8 @@ if (isset($_POST['btn_submit'])) {
             </script>";
         die();
     } else {
-        $query_tambahData = "INSERT INTO inventaris (id, kode_barang, nama_barang, kondisi_barang, jumlah_barang, gambar_barang, tanggal_masuk) VALUES ('', '$kode_barang', '$nama_barang', '$kondisi_barang','$jumlah_barang', '$gambar_barang', '$tanggal_masuk')";
+        $query_tambahData = "INSERT INTO inventaris (id, kode_barang, nama_barang, kondisi_barang, jumlah_barang, gambar_barang, tanggal_masuk) 
+        VALUES ('', '$kode_barang', '$nama_barang', '$kondisi_barang','$jumlah_barang', '$gambar_barang', '$tanggal_masuk')";
         $result_tambahData = $conn->query($query_tambahData);
 
         echo "<script type= 'text/javascript'>
@@ -110,7 +111,7 @@ if (isset($_POST['btn_submit'])) {
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" name="gambar_barang"
                                                 accept="image/*">
-                                            <label class="custom-file-label" for="exampleInputFile"></label>
+                                            <label class="custom-file-label" for="foto"></label>
                                         </div>
                                         <!-- <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
@@ -153,6 +154,7 @@ if (isset($_POST['btn_submit'])) {
     <script src="/siatur/plugins/inputmask/jquery.inputmask.min.js"></script>
     <script src="/siatur/dist/js/adminlte.js"></script>
     <script src="/siatur/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="/siatur/plugins/raphael/raphael.min.js"></script>
     <script src="/siatur/plugins/jquery-mapael/jquery.mapael.min.js"></script>
     <script src="/siatur/plugins/jquery-mapael/maps/usa_states.min.js"></script>
@@ -161,6 +163,11 @@ if (isset($_POST['btn_submit'])) {
     <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+    $(function () {
+        bsCustomFileInput.init();
+    });
+    </script>
 </body>
 
 </html>

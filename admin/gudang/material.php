@@ -1,3 +1,9 @@
+<?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$query_tampilData = "SELECT * FROM material";
+$result_tampilData = $conn->query($query_tampilData);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,52 +85,32 @@
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
                                                     <th>Kode Barang</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Kondisi Barang</th>
-                                                    <th>Jumlah Barang</th>
                                                     <th>Gambar Barang</th>
+                                                    <th>Nama Barang</th>
+                                                    <th>Jumlah Awal Barang</th>
+                                                    <th>Jumlah Sisa Barang</th>
+                                                    <th>Tanggal Masuk Barang</th>
+                                                    <th>Tanggal Habis Barang</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
+                                            <?php foreach ($result_tampilData as $material) {?>
                                             <tbody>
                                                 <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
+                                                    <td><?= $material['kode_barang']?></td>
+                                                    <td><img src="/siatur/storage/img/<?= $material['gambar_barang']?>" alt="<?= $material['gambar_barang']?>" style="width: 150px;"></td>
+                                                    <td><?= $material['nama_barang']?></td>
+                                                    <td><?= $material['jumlah_awal']?></td>
+                                                    <td><?= $material['jumlah_sisa']?></td>
+                                                    <td><?= $material['tanggal_masuk']?></td>
+                                                    <td><?= $material['tanggal_habis']?></td>
                                                     <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-material.php">
+                                                        <a class="btn btn-info btn-xs" href="edit-material.php?id=<?= $material['id']?>">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-material.php">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                            90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-material.php">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-material.php">
+                                                        <a class="btn btn-danger btn-xs" href="hapus-material.php?id=<?= $material['id']?>">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete
@@ -132,6 +118,7 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
+                                            <?php }?>
                                         </table>
                                     </div>
                                 </div>
