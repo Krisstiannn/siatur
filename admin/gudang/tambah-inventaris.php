@@ -24,10 +24,17 @@ if (isset($_POST['btn_submit'])) {
         VALUES ('', '$kode_barang', '$nama_barang', '$kondisi_barang','$jumlah_barang', '$gambar_barang', '$tanggal_masuk')";
         $result_tambahData = $conn->query($query_tambahData);
 
-        echo "<script type= 'text/javascript'>
+        if ($result_tambahData) {
+            echo "<script type= 'text/javascript'>
                 alert('Data Berhasil disimpan!');
                 document.location.href = 'inventaris.php';
             </script>";
+        } else {
+            echo "<script type= 'text/javascript'>
+                alert('Data Gagal disimpan!');
+                document.location.href = 'tambah-inventaris.php';
+            </script>";
+        }
     }
 
 }
@@ -89,6 +96,19 @@ if (isset($_POST['btn_submit'])) {
                                         placeholder="Kode Barang">
                                 </div>
                                 <div class="form-group">
+                                    <label for="gambar">Gambar Barang</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="gambar_barang"
+                                                accept="image/*">
+                                            <label class="custom-file-label" for="foto"></label>
+                                        </div>
+                                        <!-- <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="nama">Nama Barang</label>
                                     <input type="text" class="form-control" name="nama_barang"
                                         placeholder="Masukkan Nama Barang">
@@ -104,19 +124,6 @@ if (isset($_POST['btn_submit'])) {
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah</label>
                                     <input type="text" class="form-control" name="jumlah_barang" placeholder="Jumlah">
-                                </div>
-                                <div class="form-group">
-                                    <label for="gambar">Gambar Barang</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="gambar_barang"
-                                                accept="image/*">
-                                            <label class="custom-file-label" for="foto"></label>
-                                        </div>
-                                        <!-- <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div> -->
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Masuk Barang</label>

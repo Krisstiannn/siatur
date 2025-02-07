@@ -10,21 +10,35 @@ if (isset($_POST['btn_submit'])) {
     $nama_barang = $_POST['nama_barang'];
     $kondisi_barang = $_POST['kondisi_barang'];
     $jumlah_barang = $_POST['jumlah_barang'];
-    $gambar_barang =$_FILES['gambar_barang']['name'];
     $tanggal_masuk = $_POST['tanggal_masuk'];
 
-    $dir_foto = "/xampp/htdocs/siatur/storage/img/";
-    $tmp_file = $_FILES['gambar_barang']['tmp_name'];
-    move_uploaded_file($tmp_file, $dir_foto.$gambar_barang);
+    if ($_FILES['gambar_barang']['name'] == "") {
+        $gambar_barang = $result_tampilData['gambar_barang'];
+    } else {
+        $gambar_barang = $_FILES['gambar_barang'] ['name'];
+        unlink("/xampp/htdocs/siatur/storage/img/" . $result_gambar['gambar_barang']);
+        move_uploaded_file($_FILES['gambar_barang']['tmp_name'], "/xampp/htdocs/siatur/storage/img/".$_FILES['gambar_barang']['name']);
+    }
+
+    // $dir_foto = "/xampp/htdocs/siatur/storage/img/";
+    // $tmp_file = $_FILES['gambar_barang']['tmp_name'];
+    // move_uploaded_file($tmp_file, $dir_foto.$gambar_barang);
 
     $query_editData = "UPDATE inventaris SET kode_barang = '$kode_barang', nama_barang = '$nama_barang', kondisi_barang = '$kondisi_barang', jumlah_barang = '$jumlah_barang',
     gambar_barang = '$gambar_barang', tanggal_masuk = '$tanggal_masuk' WHERE id = $id";
     $result_editData = $conn->query($query_editData);
 
-    echo "<script type= 'text/javascript'>
+    if ($result_editData) {
+        echo "<script type= 'text/javascript'>
                 alert('Data Berhasil dirubah!');
                 document.location.href = 'inventaris.php';
             </script>";
+    } else {
+        echo "<script type= 'text/javascript'>
+                alert('Data Berhasil dirubah!');
+                document.location.href = 'edit-inventaris.php?id=$id';
+            </script>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -81,6 +95,18 @@ if (isset($_POST['btn_submit'])) {
                                     <input type="text" class="form-control" name="kode_barang" placeholder="Kode Barang" value="<?= $result_tampiData['kode_barang']?>">
                                 </div>
                                 <div class="form-group">
+                                    <label for="gambar">Gambar Barang</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="gambar_barang" value="<?= $result_tampiData['gambar_barang']?>" accept="image/*">
+                                            <label class="custom-file-label" for="exampleInputFile"><?= $result_tampiData['gambar_barang']?></label>
+                                        </div>
+                                        <!-- <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="nama">Nama Barang</label>
                                     <input type="text" class="form-control" name="nama_barang"
                                         placeholder="Masukkan Nama Barang" value="<?= $result_tampiData['nama_barang']?>">
@@ -96,18 +122,6 @@ if (isset($_POST['btn_submit'])) {
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah</label>
                                     <input type="text" class="form-control" name="jumlah_barang" placeholder="Jumlah" value="<?= $result_tampiData['jumlah_barang']?>">
-                                </div>
-                                <div class="form-group">
-                                    <label for="gambar">Gambar Barang</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="gambar_barang" value="<?= $result_tampiData['gambar_barang']?>" accept="image/*">
-                                            <label class="custom-file-label" for="exampleInputFile"><?= $result_tampiData['gambar_barang']?></label>
-                                        </div>
-                                        <!-- <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div> -->
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Masuk Barang</label>

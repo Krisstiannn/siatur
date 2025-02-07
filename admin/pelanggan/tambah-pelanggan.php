@@ -17,10 +17,17 @@ if (isset($_POST['btn_submit'])) {
     } else {
         $query_tambahPelanggan = "INSERT INTO pelanggan (id, nama_pelanggan, alamat_pelanggan, wa_pelanggan, jenis_layanan, status_pelanggan) VALUES ('','$nama_pelanggan','$alamat_pelanggan', '$wa_pelanggan', '$jenis_layanan', '$status_pelanggan')";
         $result_tambahPelanggan = $conn -> query($query_tambahPelanggan);
-        echo "<script type= 'text/javascript'>
+        if ($result_tambahPelanggan) {
+            echo "<script type= 'text/javascript'>
                 alert('Data Berhasil Disimpan!');
                 document.location.href = 'pelanggan.php';
             </script>";
+        } else {
+            echo "<script type= 'text/javascript'>
+                alert('Data Gagal Disimpan!');
+                document.location.href = 'tambah-pelanggan.php';
+            </script>";
+        }
     }
 }
 

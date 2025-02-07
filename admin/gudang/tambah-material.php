@@ -25,10 +25,17 @@ if (isset($_POST['btn_submit'])) {
         VALUES ('','$kode_barang', '$gambar_barang', '$nama_barang', '$jumlah_awal', '$jumlah_sisa', '$tanggal_masuk', '$tanggal_habis')";
         $result_tambahData = $conn->query($query_tambahData);
 
-        echo "<script type= 'text/javascript'>
+        if ($result_tambahData) {
+            echo "<script type= 'text/javascript'>
                 alert('Data Berhasil disimpan!');
                 document.location.href = 'material.php';
             </script>";
+        } else {
+            echo "<script type= 'text/javascript'>
+                alert('Data Gagal disimpan!');
+                document.location.href = 'tambah-material.php';
+            </script>";
+        }
     }
 }
 ?>

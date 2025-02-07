@@ -85,10 +85,10 @@ $result_tampilData = $conn->query($query_tampilData);
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
                                                     <th>Kode Barang</th>
+                                                    <th>Gambar Barang</th>
                                                     <th>Nama Barang</th>
                                                     <th>Kondisi Barang</th>
                                                     <th>Jumlah Barang</th>
-                                                    <th>Gambar Barang</th>
                                                     <th>Tanggal Masuk Barang</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -97,12 +97,12 @@ $result_tampilData = $conn->query($query_tampilData);
                                             <tbody>
                                                 <tr>
                                                     <td><?= $inventaris['kode_barang']?></td>
-                                                    <td><?= $inventaris['nama_barang']?></td>
-                                                    <td><?= $inventaris['kondisi_barang']?></td>
-                                                    <td><?= $inventaris['jumlah_barang']?></td>
                                                     <td>
                                                         <img src="/siatur/storage/img/<?= $inventaris['gambar_barang']?>" alt="<?= $inventaris['gambar_barang']?>" style="width: 100px;">
                                                     </td>
+                                                    <td><?= $inventaris['nama_barang']?></td>
+                                                    <td><?= $inventaris['kondisi_barang']?></td>
+                                                    <td><?= $inventaris['jumlah_barang']?></td>
                                                     <td><?= $inventaris['tanggal_masuk']?></td>
                                                     <td>
                                                         <a class="btn btn-info btn-sm"

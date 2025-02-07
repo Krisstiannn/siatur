@@ -28,10 +28,17 @@ if (isset($_POST['btn_submit'])) {
         VALUES ('','$nip_karyawan', '$nama_karyawan','$jabatan_karyawan')";
         $result_tambahKaryawan = $conn->query($query_tambahKaryawan);
         
-        echo "<script type= 'text/javascript'>
+        if ($result_tambahKaryawan) {
+            echo "<script type= 'text/javascript'>
                 alert('Data Berhasil Disimpan!');
                 document.location.href = 'datakaryawan.php';
             </script>";
+        } else {
+            echo "<script type= 'text/javascript'>
+                alert('Data Gagal Disimpan!');
+                document.location.href = 'tambah-karyawan.php';
+            </script>";
+        }
     }
 }
 ?>
