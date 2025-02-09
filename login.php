@@ -12,27 +12,18 @@ if(isset($_POST['btn_login'])) {
 
     if($result_users->num_rows > 0) {
         $data = $result_users->fetch_assoc();
+        $_SESSION['username'] = $data['nip_karyawan'];
         $_SESSION["peran"] = $data["peran"];
             if ($_SESSION["peran"] === "admin") {
                 header("location: index.php");
                 $login_notifikasi = "ANDA BERHASIL LOGIN";
             } else {
-                header("location: user.php");
+                header("location: ./user/index.php");
                 $login_notifikasi ="ANDA BERHASIL LOGIN";
             }
         
     } else {
         $login_notifikasi = "USERNAME ATAU PASSWORD SALAH!!!";
-    }
-
-        if ($_SESSION["peran"] === "admin") {
-            // header("location: index.php");
-            $notifikasi_login = "ANDA BERHASIL LOGIN";
-        } else if ($_SESSION["peran"] === "user") {
-            // header("location: user.php");
-            $notifikasi_login ="ANDA BERHASIL LOGIN";
-        }  else  {
-        $notifikasi_login = "USERNAME ATAU PASSWORD SALAH!!!";
     }
 }
 ?>

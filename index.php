@@ -12,7 +12,6 @@ $jam = date('H:i:s');
 
 $query_jumlahData ="SELECT 
                             (SELECT COUNT(*) FROM karyawan) AS jumlah_dataKaryawan, 
-                            (SELECT COUNT(*) FROM pelanggan) AS jumlah_dataPelanggan,
                             (SELECT COUNT(*) FROM inventaris) AS jumlah_dataInventaris,
                             (SELECT COUNT(*) FROM material) AS jumlah_dataMaterial";
 $result_jumlahData = $conn -> query($query_jumlahData);
@@ -61,11 +60,11 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                         <div class="col-sm-4">
                             <i class="m-2" style="font-size: 20px;">Silahkan Absen Terlebih Dahulu</i>
                         </div>
-                        <form action="index.php" method="POST">
+                        <form action="./admin/karyawan/absen.php" method="POST">
                             <button type="submit" class="btn btn-sm btn-info text-bold" name="btn_absen">Absen
                                 Sekarang</button>
                         </form>
-                        <i><?= $tanggal . $jam ?></i>
+
                     </div>
                 </div>
             </div>

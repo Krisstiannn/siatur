@@ -1,11 +1,10 @@
 <?php 
-include "/xampp/htdocs/siatur/services/koneksi.php";
-session_start();
-
-$nama_karyawan = $_SESSION['nama_karyawan'];
-echo $nama_karyawan;
-
-die();
+if (isset($_POST['btn_absen'])) {
+    echo "<script type= 'text/javascript'>
+                alert('Data Berhasil Disimpan!');
+                document.location.href = '/siatur/index.php';
+        </script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,10 +79,10 @@ die();
                                         <table class="table table-bordered text-center">
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
-                                                    <th>Nomor Induk Pegawai</th>
-                                                    <th>Nama Karyawan</th>
-                                                    <th>Absen Masuk</th>
-                                                    <th>Absen Pulang</th>
+                                                    <th>Nomor Working Order</th>
+                                                    <th>Nama Pelanggan</th>
+                                                    <th>Alamat Rumah/Tikor</th>
+                                                    <th>Jenis Pekerjaan</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -97,36 +96,10 @@ die();
                                                             90,80,90,-70,61,-83,63</div>
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-info btn-sm" href="">
+                                                        <a class="btn btn-warning btn-sm" href="report-wo.php">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                            90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
+                                                            Laporkan
                                                         </a>
                                                     </td>
                                                 </tr>
