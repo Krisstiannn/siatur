@@ -68,7 +68,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item ">
+                <!-- <li class="nav-item ">
                     <a href="/siatur/admin/pelanggan/pelanggan.php" class="nav-link">
                         <ion-icon name="people-circle-outline" class="far nav-icon"></ion-icon>
                         <p class="text-light">
@@ -76,7 +76,7 @@
                             <i class="right fas"></i>
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <ion-icon name="code-working-outline" class="far nav-icon"></ion-icon>
@@ -92,12 +92,12 @@
                                 <p class="text-light">Pemasangan Baru</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="/siatur/admin/pekerjaan/perbaikan.php" class="nav-link">
                                 <i class="far nav-icon"></i>
                                 <p class="text-light">Perbaikan</p>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="nav-item">

@@ -72,7 +72,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <a href="/siatur/admin/gudang/inventaris.php">
                                 <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
                                     <div class="info-box-content">
@@ -83,7 +83,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <a href="/siatur/admin/gudang/material.php">
                                 <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
                                     <div class="info-box-content">
@@ -94,7 +94,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <a href="/siatur/admin/karyawan/datakaryawan.php">
                                 <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
                                     <div class="info-box-content">
@@ -105,7 +105,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-4">
+                        <!-- <div class="col-lg-4">
                             <a href="/siatur/admin/pelanggan/pelanggan.php">
                                 <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
                                     <div class="info-box-content">
@@ -115,8 +115,8 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                     </div>
                                 </div>
                             </a>
-                        </div>
-                        <div class="col-lg-4">
+                        </div> -->
+                        <div class="col-lg-6">
                             <a href="/siatur/admin/pekerjaan/psb.php">
                                 <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
                                     <div class="info-box-content">
@@ -128,7 +128,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                 </div>
                             </a>
                         </div>
-                        <div class="col-lg-4">
+                        <!-- <div class="col-lg-4">
                             <a href="/siatur/admin/pekerjaan/perbaikan.php">
                                 <div class="info-box bg-gradient-cyan shadow-lg text-lg-center">
                                     <div class="info-box-content">
@@ -138,7 +138,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="row">
