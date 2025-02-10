@@ -1,3 +1,47 @@
+<?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+if (isset($_POST['btn_submit'])) {
+    $nama_pelanggan = $_POST['nama_pelanggan'];
+    $wa_pelanggan = $_POST['no_wa'];
+    $alamat = $_POST['alamat'];
+    $foto_rumah = $_FILES['foto_rumah']['name'];
+    $foto_ktp = $_FILES['foto_ktp']['name'];
+    $paket = $_POST['paket'];
+
+    $dir_foto = "/xampp/htdocs/siatur/storage/img/";
+    $tmp_fileRumah = $_FILES['foto_rumah']['tmp_name'];
+    $tmp_fileKtp = $_FILES['foto_ktp']['tmp_name'];
+    move_uploaded_file($tmp_fileRumah, $dir_foto.$foto_rumah);
+    move_uploaded_file($tmp_fileKtp, $dir_foto.$foto_ktp);
+
+    if (empty($nama_pelanggan) || empty($wa_pelanggan) || empty($alamat) || empty($foto_rumah) || empty($foto_ktp) || empty($paket)) {
+        echo "<script type= 'text/javascript'>
+                alert('Tolong isi data dengan benar!');
+                document.location.href = 'tambah-psb.php';
+            </script>";
+        die();
+    } else {
+        $query_tambahData = "INSERT INTO psb (id, nama_pelanggan, wa_pelanggan, alamat_pelanggan, rumah_pelanggan, ktp_pelanggan, paket_internet) 
+        VALUES ('', '$nama_pelanggan', '$wa_pelanggan', '$alamat','$foto_rumah', '$foto_ktp', '$paket')";
+        $result_tambahData = $conn->query($query_tambahData);
+
+        if ($result_tambahData) {
+            echo "<script type= 'text/javascript'>
+                alert('Data Berhasil disimpan!');
+                document.location.href = 'psb.php';
+            </script>";
+        } else {
+            echo "<script type= 'text/javascript'>
+                alert('Data Gagal disimpan!');
+                document.location.href = 'tambah-psb.php';
+            </script>";
+        }
+    }
+
+ }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +84,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Input Data Pemasangan Baru</h3>
                         </div>
-                        <form>
+                        <form action="tambah-psb.php" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nama">Nama Pelanggan</label>
@@ -59,7 +103,7 @@
                                     <label for="rumah">Foto Rumah</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_rumah">
+                                            <input type="file" class="custom-file-input" name="foto_rumah" accept="image/*>
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>
@@ -68,7 +112,7 @@
                                     <label for="ktp">Foto KTP</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_ktp">
+                                            <input type="file" class="custom-file-input" name="foto_ktp" accept="image/*>
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>
@@ -105,6 +149,12 @@
     <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script>
+    $(function () {
+        bsCustomFileInput.init();
+    });
+    </script>
 </body>
 
 </html>

@@ -1,10 +1,16 @@
+<?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$query_tampil = "SELECT * FROM psb";
+$result_tampil = $conn->query($query_tampil);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Barang Masuk</title>
+    <title>Pemasangan Baru</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -82,20 +88,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php foreach ($result_tampil as $psb) {?>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td><?= $psb['nama_pelanggan']?></td>
+                                                    <td><?= $psb['wa_pelanggan']?></td>
+                                                    <td><?= $psb['alamat_pelanggan']?></td>
+                                                    <td><img src="/siatur/storage/img/<?= $psb['rumah_pelanggan']?>" alt="<?= $psb['rumah_pelanggan']?>" style="width: 100px;"></td>
+                                                    <td><img src="/siatur/storage/img/<?= $psb['ktp_pelanggan']?>" alt="<?= $psb['ktp_pelanggan']?>" style="width: 100px;"></td>
+                                                    <td><?= $psb['paket_internet']?></td>
                                                     <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-psb.php">
+                                                        <a class="btn btn-info btn-sm" href="edit-psb.php?id=<?= $psb['id']?>">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-psb.php">
+                                                        <a class="btn btn-danger btn-sm" href="hapus-psb.php?id=<?= $psb['id']?>">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete
@@ -115,6 +122,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <?php }?>
                                             </tbody>
                                         </table>
                                     </div>
