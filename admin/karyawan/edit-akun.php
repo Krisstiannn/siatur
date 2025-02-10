@@ -1,10 +1,39 @@
+<?php 
+include "/xampp/htdocs/siatur/services/koneksi.php";
+
+$id = $_GET['id'];
+$query_tampilAkun = "SELECT * FROM users WHERE id = '$id'";
+$result_tampilAkun = $conn->query($query_tampilAkun)->fetch_assoc();
+
+if (isset($_POST['btn_submit'])) {
+    $username_karyawan = $_POST['username_karyawan'];
+    $password_karyawan = $_POST['password_karyawan'];
+    $peran = $_POST['peran'];
+
+    $query_editAkun = "UPDATE users SET username = '$username_karyawan' , password = '$password_karyawan' , peran = '$peran' WHERE id = '$id'";
+    $result_editAkun = $conn->query($query_editAkun);
+
+    if ($result_editAkun) {
+        echo "<script type= 'text/javascript'>
+                alert('Data Berhasil Disimpan!');
+                document.location.href = 'datakaryawan.php';
+            </script>";
+    } else {
+        echo "<script type= 'text/javascript'>
+                alert('Data Gagal Disimpan!');
+                document.location.href = 'edit-akun.php?id=$id';
+            </script>" ;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pemasangan Baru</title>
+    <title>Edit Karyawan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -19,8 +48,14 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
 
+
+        <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <!-- Navbar -->
+
+        <!-- Main Sidebar Container -->
         <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <!-- END Main Sidebar -->
 
         <!-- Main Content -->
         <div class="content-wrapper bg-gradient-white">
@@ -28,7 +63,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Pemasangan Baru</h1>
+                            <h1>Registrasi Akun Karyawan</h1>
                         </div>
                     </div>
                 </div>
@@ -38,49 +73,33 @@
                 <div class="content-fluid">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Input Data Pemasangan Baru</h3>
+                            <h3 class="card-title">Registrasi Akun Karayawan</h3>
                         </div>
-                        <form>
+                        <form action="edit-akun.php?id=<?= $result_tampilAkun['id']?>" method="POST">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="nama">Nama Pelanggan</label>
-                                    <input type="text" class="form-control" name="nama_pelanggan"
-                                        placeholder="Nama Pelanggan">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" name="username_karyawan"
+                                        placeholder="Username" value="<?= $result_tampilAkun['username']?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="whatsapp">No WA</label>
-                                    <input type="text" class="form-control" name="no_wa" placeholder="NO WA">
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" name="password_karyawan"
+                                        placeholder="Password" value="<?= $result_tampilAkun['password']?>">
                                 </div>
                                 <div class="form-group">
-                                    <label for="alamat">Alamat atau Titik Kordinat</label>
-                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat">
-                                </div>
-                                <div class="form-group">
-                                    <label for="rumah">Foto Rumah</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_rumah">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ktp">Foto KTP</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_ktp">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="alamat">Paket Internet</label>
-                                    <input type="text" class="form-control" name="paket" placeholder="Paket Internet">
+                                    <label for="peran">Peran</label>
+                                    <select class="custom-select" name="peran">
+                                        <option><?= $result_tampilAkun['peran']?></option>
+                                        <option>Admin</option>
+                                        <option>User</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
-                                <button type="submit" class="btn btn-danger" name="btn_cancel">Cancel</button>
+                                <a href="datakaryawan.php" type="submit" class="btn btn-danger"
+                                    name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -89,7 +108,9 @@
         </div>
         <!-- END Main Content -->
 
+        <!-- Main Footer -->
         <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <!-- End Footer -->
     </div>
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>

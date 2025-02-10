@@ -6,14 +6,6 @@
     </div>
 
     <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="border: none">
-            <div class="image">
-                <img src="/siatur/storage/oline.jpg" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block text-light">ADMIN</a>
-            </div>
-        </div>
         <nav class="mt-2 ">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
@@ -32,11 +24,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <form action="">
-                        <a href="/siatur/login.php" class="nav-link">
+                    <form action="/siatur/logout.php" method="POST">
+                        <button type="submit" class="btn" name="btn_logout">
                             <ion-icon class="far nav-icon" name="log-out-outline"></ion-icon>
                             <p class="text-light">Logout</p>
-                        </a>
+                        </button>
                     </form>
                 </li>
             </ul>

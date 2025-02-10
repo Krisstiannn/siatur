@@ -77,22 +77,18 @@
                                                     <th>Alamat atau Titik Kordinat</th>
                                                     <th>Foto Rumah</th>
                                                     <th>Foto KTP</th>
+                                                    <th>Paket Internet</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
                                                     <td>
                                                         <a class="btn btn-info btn-sm" href="edit-psb.php">
                                                             <i class="fas fa-pencil-alt">
@@ -111,43 +107,10 @@
                                                                 data-toggle="dropdown"> Order Ke Tim
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#">Dropdown link</a>
-                                                                <a class="dropdown-item" href="#">Dropdown link</a>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                            90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-psb.php">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-psb.php">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                        <div class="btn-block btn-group">
-                                                            <button type="button"
-                                                                class="btn btn-warning btn-xs dropdown-toggle dropdown-icon"
-                                                                data-toggle="dropdown"> Order Ke Tim
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#">Dropdown link</a>
-                                                                <a class="dropdown-item" href="#">Dropdown link</a>
+                                                                <button class="dropdown-item" href="#">Dropdown
+                                                                    link</button>
+                                                                <button class="dropdown-item" href="#">Dropdown
+                                                                    link</button>
                                                             </div>
                                                         </div>
                                                     </td>

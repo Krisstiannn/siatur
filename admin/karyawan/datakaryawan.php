@@ -2,7 +2,9 @@
 include "/xampp/htdocs/siatur/services/koneksi.php";
 
 $query_karyawan = "SELECT * FROM karyawan";
+$query_akunKaryawan = "SELECT * FROM users";
 $result_karyawan = $conn -> query($query_karyawan);
+$result_akunKaryawan = $conn->query($query_akunKaryawan);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,12 +100,103 @@ $result_karyawan = $conn -> query($query_karyawan);
                                                     <td><?= $karyawan['nama_karyawan']?></td>
                                                     <td><?= $karyawan['posisi_karyawan']?></td>
                                                     <td>
-                                                        <a class="btn btn-info btn-sm" href="edit-karyawan.php?id=<?=$karyawan["id"]?>">
+                                                        <a class="btn btn-info btn-sm"
+                                                            href="edit-karyawan.php?id=<?=$karyawan["id"]?>">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" href="hapus-karyawan.php?id=<?=$karyawan["id"]?>" onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini?');">
+                                                        <a class="btn btn-danger btn-sm"
+                                                            href="hapus-karyawan.php?id=<?=$karyawan["id"]?>"
+                                                            onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini?');">
+                                                            <i class="fas fa-trash">
+                                                            </i>
+                                                            Delete
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <?php }?>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Data Akun Karyawan</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- Left col -->
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header border-transparent">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <a href="tambah-akun.php" class="btn btn-sm btn-success ">Tambah
+                                                Data</a>
+                                        </div>
+
+                                        <div class="card-title float-right">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                                <input type="text" name="table_search" class="form-control float-right"
+                                                    placeholder="Search">
+
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered text-center">
+                                            <thead class="bg-gradient-cyan">
+                                                <tr>
+                                                    <th>Username</th>
+                                                    <th>Password</th>
+                                                    <th>Peran</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <?php foreach ($result_akunKaryawan as $akun) {?>
+                                            <tbody>
+                                                <tr>
+                                                    <td><?= $akun['username']?></td>
+                                                    <td><?= $akun['password']?></td>
+                                                    <td><?= $akun['peran']?></td>
+                                                    <td>
+                                                        <a class="btn btn-info btn-sm"
+                                                            href="edit-akun.php?id=<?=$akun["id"]?>">
+                                                            <i class="fas fa-pencil-alt">
+                                                            </i>
+                                                            Edit
+                                                        </a>
+                                                        <a class="btn btn-danger btn-sm"
+                                                            href="hapus-akun.php?id=<?=$akun["id"]?>"
+                                                            onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini?');">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete

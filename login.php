@@ -8,15 +8,15 @@ if(isset($_POST['btn_login'])) {
     $password = $_POST['password'];
 
     $query_users = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $query_namakaryawan = "SELECT * FROM karyawan";
+    $query_karyawan = "SELECT * FROM karyawan";
+    $result_karyawan = $conn->query($query_karyawan);
     $result_users = $conn->query($query_users);
-    $result_namaKaryawan = $conn->query($query_namakaryawan);
 
-    if($result_users && $result_namaKaryawan ->num_rows > 0) {
-        $data = $result_users->fetch_assoc();
-        $_SESSION['nama_karyawan'] = $data['nama_karyawan'];
-        $_SESSION["username"] = $data["password"];
-        $_SESSION["peran"] = $data["peran"];
+    if($result_users->num_rows > 0 && $result_karyawan->num_rows > 0) {
+        $data_login = $result_users->fetch_assoc();
+        $data_karyawan = $result_karyawan->fetch_assoc();
+        $_SESSION['nama_karyawan'] = $data_karyawan['nama_karyawan'];
+        $_SESSION["peran"] = $data_login["peran"];
             if ($_SESSION["peran"] === "admin") {
                 header("location: index.php");
                 $login_notifikasi = "ANDA BERHASIL LOGIN";
@@ -62,7 +62,7 @@ if(isset($_POST['btn_login'])) {
 
                 <form action="login.php" method="POST">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nomor Induk Pegawai" name="username">
+                        <input type="text" class="form-control" placeholder="Username" name="username">
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" placeholder="Password" name="password">
