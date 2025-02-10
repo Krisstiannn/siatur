@@ -2,8 +2,6 @@
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
 
-$nama_karyawan = $_SESSION['nama_karyawan'];
-echo $nama_karyawan;
 
 die();
 ?>

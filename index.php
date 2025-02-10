@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "./services/koneksi.php";
 date_default_timezone_set("Asia/Makassar");
 // $notifikasi_absen = "";
@@ -53,7 +54,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                 <div class="container-fluid text-black">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Selamat Datang, Admin</h1>
+                            <h1 class="m-0">Selamat Datang, <?= $_SESSION['nama_karyawan']?></h1>
                         </div>
                     </div>
                     <div class="row mb-3">

@@ -7,11 +7,8 @@
 
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="border: none">
-            <div class="image">
-                <img src="/siatur/storage/oline.jpg" alt="User Image">
-            </div>
             <div class="info">
-                <a href="#" class="d-block text-light">ADMIN</a>
+                <span class="d-block text-light" style="font-size: 20px; text-transform: uppercase;"><?php echo $_SESSION['peran'];?></span>
             </div>
         </div>
         <nav class="mt-2 ">
@@ -136,10 +133,12 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="/siatur/login.php" class="nav-link">
-                        <ion-icon class="far nav-icon" name="log-out-outline"></ion-icon>
-                        <p class="text-light">Logout</p>
-                    </a>
+                        <form action="/siatur/logout.php" method="POST">
+                            <button type="submit" class="btn" name="btn_logout">
+                                <ion-icon class="far nav-icon" name="log-out-outline"></ion-icon>
+                                <p class="text-light">Logout</p>
+                            </button>
+                        </form>
                 </li>
             </ul>
         </nav>

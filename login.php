@@ -8,11 +8,14 @@ if(isset($_POST['btn_login'])) {
     $password = $_POST['password'];
 
     $query_users = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    $query_namakaryawan = "SELECT * FROM karyawan";
     $result_users = $conn->query($query_users);
+    $result_namaKaryawan = $conn->query($query_namakaryawan);
 
-    if($result_users->num_rows > 0) {
+    if($result_users && $result_namaKaryawan ->num_rows > 0) {
         $data = $result_users->fetch_assoc();
-        $_SESSION['username'] = $data['nip_karyawan'];
+        $_SESSION['nama_karyawan'] = $data['nama_karyawan'];
+        $_SESSION["username"] = $data["password"];
         $_SESSION["peran"] = $data["peran"];
             if ($_SESSION["peran"] === "admin") {
                 header("location: index.php");
