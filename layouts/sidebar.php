@@ -129,8 +129,8 @@
                 </li>
                 <li class="nav-item">
                     <form action="/siatur/logout.php" method="POST">
+                        
                         <button type="submit" class="btn" name="btn_logout">
-                            <ion-icon class="far nav-icon" name="log-out-outline"></ion-icon>
                             <p class="text-light">Logout</p>
                         </button>
                     </form>

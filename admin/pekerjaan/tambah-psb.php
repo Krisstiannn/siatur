@@ -103,8 +103,8 @@ if (isset($_POST['btn_submit'])) {
                                     <label for="rumah">Foto Rumah</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_rumah" accept="image/*>
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                            <input type="file" class="custom-file-input" name="foto_rumah" accept="img/*">
+                                            <label class="custom-file-label" for="exampleInputFile"></label>
                                         </div>
                                     </div>
                                 </div>
@@ -112,8 +112,8 @@ if (isset($_POST['btn_submit'])) {
                                     <label for="ktp">Foto KTP</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_ktp" accept="image/*>
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                            <input type="file" class="custom-file-input" name="foto_ktp" accept="img/*">
+                                            <label class="custom-file-label" for="exampleInputFile"></label>
                                         </div>
                                     </div>
                                 </div>
@@ -141,6 +141,7 @@ if (isset($_POST['btn_submit'])) {
     <script src="/siatur/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="/siatur/dist/js/adminlte.js"></script>
     <script src="/siatur/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+    <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="/siatur/plugins/raphael/raphael.min.js"></script>
     <script src="/siatur/plugins/jquery-mapael/jquery.mapael.min.js"></script>
     <script src="/siatur/plugins/jquery-mapael/maps/usa_states.min.js"></script>
@@ -149,7 +150,6 @@ if (isset($_POST['btn_submit'])) {
     <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
     $(function () {
         bsCustomFileInput.init();

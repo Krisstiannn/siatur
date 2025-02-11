@@ -17,7 +17,7 @@ if (isset($_POST['btn_submit'])) {
         $gambar_barang = $result_tampilData['gambar_barang'];
     } else {
         $gambar_barang = $_FILES['gambar_barang'] ['name'];
-        unlink("/xampp/htdocs/siatur/storage/img/" . $result_gambar['gambar_barang']);
+        unlink("/xampp/htdocs/siatur/storage/img/" . $result_tampilData['gambar_barang']);
         move_uploaded_file($_FILES['gambar_barang']['tmp_name'], "/xampp/htdocs/siatur/storage/img/".$_FILES['gambar_barang']['name']);
     }
 

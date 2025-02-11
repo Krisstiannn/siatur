@@ -3,40 +3,43 @@ include "/xampp/htdocs/siatur/services/koneksi.php";
 
 $id = $_GET['id'];
 $query_tampilData = "SELECT * FROM psb WHERE id = '$id'";
-$result_tampiData = $conn->query($query_tampilData)->fetch_assoc();
+$result_tampilData = $conn->query($query_tampilData)->fetch_assoc();
 
 if (isset($_POST['btn_submit'])) {
-    $kode_barang = $_POST['kode_barang'];
-    $nama_barang = $_POST['nama_barang'];
-    $kondisi_barang = $_POST['kondisi_barang'];
-    $jumlah_barang = $_POST['jumlah_barang'];
-    $tanggal_masuk = $_POST['tanggal_masuk'];
+    $nama_pelanggan = $_POST['nama_pelanggan'];
+    $wa_pelanggan = $_POST['no_wa'];
+    $alamat = $_POST['alamat'];
+    $paket = $_POST['paket'];
 
-    if ($_FILES['gambar_barang']['name'] == "") {
-        $gambar_barang = $result_tampilData['gambar_barang'];
+    if ($_FILES['foto_rumah']['name'] == "" && $_FILES['foto_ktp']['name'] == "") {
+        $foto_rumah = $result_tampilData['foto_rumah'];
+        $foto_ktp = $result_tampilData['foto_ktp'];
     } else {
-        $gambar_barang = $_FILES['gambar_barang'] ['name'];
-        unlink("/xampp/htdocs/siatur/storage/img/" . $result_gambar['gambar_barang']);
-        move_uploaded_file($_FILES['gambar_barang']['tmp_name'], "/xampp/htdocs/siatur/storage/img/".$_FILES['gambar_barang']['name']);
+        $foto_rumah = $_FILES['foto_rumah'] ['name'];
+        $foto_ktp = $_FILES['foto_ktp'] ['name'];
+        unlink("/xampp/htdocs/siatur/storage/img/" . $result_tampilData['rumah_pelanggan']);
+        unlink("/xampp/htdocs/siatur/storage/img/" . $result_tampilData['ktp_pelanggan']);
+        move_uploaded_file($_FILES['foto_rumah']['tmp_name'], "/xampp/htdocs/siatur/storage/img/".$_FILES['foto_rumah']['name']);
+        move_uploaded_file($_FILES['foto_ktp']['tmp_name'], "/xampp/htdocs/siatur/storage/img/".$_FILES['foto_ktp']['name']);
     }
 
     // $dir_foto = "/xampp/htdocs/siatur/storage/img/";
     // $tmp_file = $_FILES['gambar_barang']['tmp_name'];
     // move_uploaded_file($tmp_file, $dir_foto.$gambar_barang);
 
-    $query_editData = "UPDATE inventaris SET kode_barang = '$kode_barang', nama_barang = '$nama_barang', kondisi_barang = '$kondisi_barang', jumlah_barang = '$jumlah_barang',
-    gambar_barang = '$gambar_barang', tanggal_masuk = '$tanggal_masuk' WHERE id = $id";
+    $query_editData = "UPDATE psb SET nama_pelanggan = '$nama_pelanggan', wa_pelanggan = '$wa_pelanggan', alamat_pelanggan = '$alamat', rumah_pelanggan = '$foto_rumah',
+    ktp_pelanggan = '$foto_ktp', paket_internet = '$paket' WHERE id = $id";
     $result_editData = $conn->query($query_editData);
 
     if ($result_editData) {
         echo "<script type= 'text/javascript'>
                 alert('Data Berhasil dirubah!');
-                document.location.href = 'inventaris.php';
+                document.location.href = 'psb.php';
             </script>";
     } else {
         echo "<script type= 'text/javascript'>
                 alert('Data Berhasil dirubah!');
-                document.location.href = 'edit-inventaris.php?id=$id';
+                document.location.href = 'edit-psb.php?id=$id';
             </script>";
     }
 }
@@ -83,27 +86,27 @@ if (isset($_POST['btn_submit'])) {
                         <div class="card-header">
                             <h3 class="card-title">Edit Data Pemasangan Baru</h3>
                         </div>
-                        <form>
+                        <form action="edit-psb.php?id=<?= $result_tampilData['id']?>" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nama">Nama Pelanggan</label>
                                     <input type="text" class="form-control" name="nama_pelanggan"
-                                        placeholder="Nama Pelanggan" value="<?= $result_tampiData ['nama_pelanggan']?>">
+                                        placeholder="Nama Pelanggan" value="<?= $result_tampilData ['nama_pelanggan']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="whatsapp">No WA</label>
-                                    <input type="text" class="form-control" name="no_wa" placeholder="NO WA" value="<?= $result_tampiData ['wa_pelanggan']?>">
+                                    <input type="text" class="form-control" name="no_wa" placeholder="NO WA" value="<?= $result_tampilData ['wa_pelanggan']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat atau Titik Kordinat</label>
-                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="<?= $result_tampiData ['alamat_pelanggan']?>">
+                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" value="<?= $result_tampilData ['alamat_pelanggan']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="rumah">Foto Rumah</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_rumah" accept="img/*" value="<?= $result_tampiData ['rumah_pelanggan']?>">
-                                            <label class="custom-file-label" for="exampleInputFile"><?= $result_tampiData ['rumah_pelanggan']?></label>
+                                            <input type="file" class="custom-file-input" name="foto_rumah" accept="img/*" value="<?= $result_tampilData ['rumah_pelanggan']?>">
+                                            <label class="custom-file-label" for="exampleInputFile"><?= $result_tampilData ['rumah_pelanggan']?></label>
                                         </div>
                                     </div>
                                 </div>
@@ -111,14 +114,14 @@ if (isset($_POST['btn_submit'])) {
                                     <label for="ktp">Foto KTP</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_ktp" accept="img/*" value="<?= $result_tampiData ['ktp_pelanggan']?>">
-                                            <label class="custom-file-label" for="exampleInputFile"><?= $result_tampiData ['ktp_pelanggan']?></label>
+                                            <input type="file" class="custom-file-input" name="foto_ktp" accept="img/*" value="<?= $result_tampilData ['ktp_pelanggan']?>">
+                                            <label class="custom-file-label" for="exampleInputFile"><?= $result_tampilData ['ktp_pelanggan']?></label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Paket Internet</label>
-                                    <input type="text" class="form-control" name="paket" placeholder="Paket Internet" value="<?= $result_tampiData ['paket_internet']?>">
+                                    <input type="text" class="form-control" name="paket" placeholder="Paket Internet" value="<?= $result_tampilData ['paket_internet']?>">
                                 </div>
                             </div>
                             <div class="card-footer">
