@@ -5,6 +5,7 @@ if (isset($_POST['btn_submit'])) {
     $nip_karyawan = $_POST['nip_karyawan'];
     $nama_karyawan = $_POST['nama_karyawan'];
     $jabatan_karyawan = $_POST['jabatan_karyawan'];
+    $peran = ($jabatan_karyawan == 'admin') ? 'admin' : 'user';
 
     if (empty($nip_karyawan) || empty($nama_karyawan) || empty($jabatan_karyawan)) {
         echo "<script type= 'text/javascript'>
@@ -26,7 +27,7 @@ if (isset($_POST['btn_submit'])) {
     } else {
         $query_tambahKaryawan = "INSERT INTO karyawan (id, nip_karyawan, nama_karyawan, posisi_karyawan) 
         VALUES ('','$nip_karyawan', '$nama_karyawan','$jabatan_karyawan')";
-        $query_tambahAkun = "INSERT INTO users (id, username, password, peran) VALUES ('', '$nip_karyawan', '$nama_karyawan', '$jabatan_karyawan')";
+        $query_tambahAkun = "INSERT INTO users (id, username, password, peran) VALUES ('', '$nip_karyawan', '$nama_karyawan', '$peran')";
         $result_tambahKaryawan = $conn->query($query_tambahKaryawan);
         $result_tambahAkun = $conn->query($query_tambahAkun);
 

@@ -7,15 +7,22 @@ if(isset($_POST['btn_login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $query_users = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $query_karyawan = "SELECT * FROM karyawan";
-    $result_karyawan = $conn->query($query_karyawan);
+    // $query_users = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+    // $query_karyawan = "SELECT * FROM karyawan";
+    // $result_karyawan = $conn->query($query_karyawan);
+    
+    $query_users = "SELECT users.username, users.password, users.peran, karyawan.nip_karyawan, karyawan.nama_karyawan, karyawan.id
+                FROM users 
+                JOIN karyawan ON users.username = karyawan.nip_karyawan
+                WHERE users.username = '$username' AND users.password = '$password'";
     $result_users = $conn->query($query_users);
 
-    if($result_users->num_rows > 0 && $result_karyawan->num_rows > 0) {
+    if($result_users->num_rows > 0) {
         $data_login = $result_users->fetch_assoc();
-        $data_karyawan = $result_karyawan->fetch_assoc();
-        $_SESSION['nama_karyawan'] = $data_karyawan['nama_karyawan'];
+        $_SESSION['id_karyawan'] = $data_login['id'];
+        $_SESSION['nip'] = $data_login ['nip_karyawan'];
+        $_SESSION['username'] = $data_login['username'];
+        $_SESSION['nama_karyawan'] = $data_login['nama_karyawan'];
         $_SESSION["peran"] = $data_login["peran"];
             if ($_SESSION["peran"] === "admin") {
                 header("location: index.php");

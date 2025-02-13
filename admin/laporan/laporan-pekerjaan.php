@@ -40,7 +40,9 @@ if (isset($_POST['btn_kirim'])) {
         href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
     <link rel="icon" href="/siatur/storage/nsp.jpg">
 </head>
@@ -77,11 +79,6 @@ if (isset($_POST['btn_kirim'])) {
                             <div class="card">
                                 <div class="card-header border-transparent">
                                     <div class="card-header">
-                                        <div class="card-title">
-                                            <a href="tambah-psb.php" class="btn btn-sm btn-success ">Tambah
-                                                Data</a>
-                                        </div>
-
                                         <div class="card-title float-right">
                                             <div class="input-group input-group-sm" style="width: 150px;">
                                                 <input type="text" name="table_search" class="form-control float-right"
@@ -101,11 +98,11 @@ if (isset($_POST['btn_kirim'])) {
                                         <table class="table table-bordered text-center">
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
+                                                    <th>No Working Order</th>
                                                     <th>Nama Pelanggan</th>
-                                                    <th>NO WA</th>
                                                     <th>Alamat atau Titik Kordinat</th>
-                                                    <th>Foto Rumah</th>
-                                                    <th>Foto KTP</th>
+                                                    <th>Status</th>
+                                                    <th>Keterangan</th>
                                                     <th>Paket Internet</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -170,17 +167,41 @@ if (isset($_POST['btn_kirim'])) {
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>
     <script src="/siatur/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/siatur/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="/siatur/dist/js/adminlte.js"></script>
-    <script src="/siatur/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="/siatur/plugins/raphael/raphael.min.js"></script>
-    <script src="/siatur/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="/siatur/plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <script src="/siatur/plugins/chart.js/Chart.min.js"></script>
+    <script src="/siatur/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/siatur/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/siatur/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/jszip/jszip.min.js"></script>
+    <script src="/siatur/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/siatur/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="/siatur/dist/js/adminlte.min.js"></script>
     <script src="/siatur/dist/js/demo.js"></script>
-    <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+    $(function() {
+        $('#example1').DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "pagging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+    </script>
 </body>
 
 </html>

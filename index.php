@@ -14,7 +14,8 @@ $jam = date('H:i:s');
 $query_jumlahData ="SELECT 
                             (SELECT COUNT(*) FROM karyawan) AS jumlah_dataKaryawan, 
                             (SELECT COUNT(*) FROM inventaris) AS jumlah_dataInventaris,
-                            (SELECT COUNT(*) FROM material) AS jumlah_dataMaterial";
+                            (SELECT COUNT(*) FROM material) AS jumlah_dataMaterial,
+                            (SELECT COUNT(*) FROM psb) AS jumlah_dataPsb";
 $result_jumlahData = $conn -> query($query_jumlahData);
 $jumlah_data = $result_jumlahData->fetch_assoc();
 
@@ -53,8 +54,9 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
             <div class="content-header">
                 <div class="container-fluid text-black">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Selamat Datang, <?= $_SESSION['peran']?></h1>
+                        <div class="col-sm-12">
+                            <h1 class="m-0">Selamat Datang <?= $_SESSION['nama_karyawan']?> , Anda Login Sebagai
+                                <?= $_SESSION['peran']?></h1>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -63,7 +65,10 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                         </div>
                         <form action="./admin/karyawan/absen.php" method="POST">
                             <button type="submit" class="btn btn-sm btn-info text-bold" name="btn_absen">Absen
-                                Sekarang</button>
+                                Masuk</button>
+
+                            <button type="submit" class="btn btn-sm btn-info text-bold" name="absen_keluar">Absen
+                                Keluar</button>
                         </form>
 
                     </div>
@@ -123,7 +128,7 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                                         <span class="info-box-text text-red text-bold"
                                             style="font-size: 20px">PEMASANGAN
                                             BARU</span>
-                                        <span style="font-size: 30px">15</span>
+                                        <span style="font-size: 30px"><?= $jumlah_data['jumlah_dataPsb']?></span>
                                     </div>
                                 </div>
                             </a>
@@ -141,97 +146,6 @@ $jumlah_data = $result_jumlahData->fetch_assoc();
                         </div> -->
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body p-0">
-                                    <div class="table-responsive text-center">
-                                        <table class="table m-0">
-                                            <thead class="bg-navy">
-                                                <tr>
-                                                    <th>Order ID</th>
-                                                    <th>Item</th>
-                                                    <th>Status</th>
-                                                    <th>Popularity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-dark">
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                            90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                            90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-info">Processing</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">
-                                                            90,80,-90,70,-61,83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                    <td>Samsung Smart TV</td>
-                                                    <td><span class="badge badge-warning">Pending</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f39c12" data-height="20">
-                                                            90,80,-90,70,61,-83,68</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                    <td>iPhone 6 Plus</td>
-                                                    <td><span class="badge badge-danger">Delivered</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#f56954" data-height="20">
-                                                            90,-80,90,70,-61,83,63</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer clearfix bg-dark">
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New
-                                        Order</a>
-                                    <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All
-                                        Orders</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
             <section class="content">

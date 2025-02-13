@@ -104,11 +104,11 @@
                         <li class="nav-item">
                             <a href="/siatur/admin/laporan/barang.php" class="nav-link">
                                 <i class="far nav-icon"></i>
-                                <p class="text-light">Laporan Barang</p>
+                                <p class="text-light">Laporan Penggunaan Barang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/siatur/admin/laporan/pekerjaan.php" class="nav-link">
+                            <a href="/siatur/admin/laporan/laporan-pekerjaan.php" class="nav-link">
                                 <i class="far nav-icon"></i>
                                 <p class="text-light">Laporan Perkerjaan</p>
                             </a>
@@ -116,7 +116,7 @@
                         <li class="nav-item">
                             <a href="/siatur/admin/laporan/karyawan.php" class="nav-link">
                                 <i class="far nav-icon"></i>
-                                <p class="text-light">Laporan Pegawai</p>
+                                <p class="text-light">Laporan Material dan Inventaris</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -129,7 +129,6 @@
                 </li>
                 <li class="nav-item">
                     <form action="/siatur/logout.php" method="POST">
-                        
                         <button type="submit" class="btn" name="btn_logout">
                             <p class="text-light">Logout</p>
                         </button>

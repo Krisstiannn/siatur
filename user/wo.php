@@ -1,10 +1,17 @@
 <?php 
-if (isset($_POST['btn_absen'])) {
-    echo "<script type= 'text/javascript'>
-                alert('Data Berhasil Disimpan!');
-                document.location.href = '/siatur/index.php';
-        </script>";
+include "/xampp/htdocs/siatur/services/koneksi.php";
+session_start();
+$id_karyawan = $_SESSION['id_karyawan'] ?? null;
+
+$query = "SELECT psb.nama_pelanggan, psb.alamat_pelanggan, psb.id, wo.id_karyawan
+FROM psb 
+JOIN wo ON wo.id_pekerjaan = psb.id;";
+$result = $conn->query($query);
+
+while ($row = $result->fetch_assoc()) {
+    var_dump($row);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +19,7 @@ if (isset($_POST['btn_absen'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Absen</title>
+    <title>Working Order</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -32,7 +39,7 @@ if (isset($_POST['btn_absen'])) {
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php"?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -42,7 +49,7 @@ if (isset($_POST['btn_absen'])) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Data Absen Karyawan</h1>
+                            <h1>Data Working Order</h1>
                         </div>
                     </div>
                 </div>
@@ -82,19 +89,15 @@ if (isset($_POST['btn_absen'])) {
                                                     <th>Nomor Working Order</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Alamat Rumah/Tikor</th>
-                                                    <th>Jenis Pekerjaan</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php foreach($result as $pekerjaan) {?>
                                                 <tr>
-                                                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                                    <td>Call of Duty IV</td>
-                                                    <td><span class="badge badge-success">Shipped</span></td>
-                                                    <td>
-                                                        <div class="sparkbar" data-color="#00a65a" data-height="20">
-                                                            90,80,90,-70,61,-83,63</div>
-                                                    </td>
+                                                    <td><?= $pekerjaan['id']?></td>
+                                                    <td><?= $pekerjaan['nama_pelanggan']?></td>
+                                                    <td><?= $pekerjaan['alamat_pelanggan']?></td>
                                                     <td>
                                                         <a class="btn btn-warning btn-sm" href="report-wo.php">
                                                             <i class="fas fa-pencil-alt">
@@ -103,6 +106,7 @@ if (isset($_POST['btn_absen'])) {
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                <?php }?>
                                             </tbody>
                                         </table>
                                     </div>

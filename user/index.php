@@ -36,16 +36,20 @@ session_start();
                 <div class="container-fluid text-black">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Selamat Datang, <?= $_SESSION['peran']?></h1>
+                            <h1 class="m-0">Selamat Datang <?= $_SESSION['nama_karyawan']?> , Anda Login Sebagai
+                                <?= $_SESSION['peran']?></h1>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-4">
                             <i class="m-2" style="font-size: 20px;">Silahkan Absen Terlebih Dahulu</i>
                         </div>
-                        <form action="./admin/karyawan/absen.php" method="POST">
+                        <form action="absen.php" method="POST">
                             <button type="submit" class="btn btn-sm btn-info text-bold" name="btn_absen">Absen
-                                Sekarang</button>
+                                Masuk</button>
+
+                            <button type="submit" class="btn btn-sm btn-info text-bold" name="absen_keluar">Absen
+                                Keluar</button>
                         </form>
 
                     </div>

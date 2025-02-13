@@ -17,21 +17,15 @@ if (isset($_POST['btn_absen'])) {
     $cek = $conn -> query($cek_absensi);
     
     if ($cek -> num_rows > 0) {
-        echo "<script type= 'text/javascript'>
-        alert('Anda Telah Absen Hari Ini!');
-        </script>";
+        header("location:absen.php?message=MAAF ANDA SUDAH ABSEN HARI INI");
     } else {
         $sql = "INSERT INTO  `absen` (`id`,`nip_karyawan`,`nama_karyawan`,`tanggal`,`jam_masuk`,`jam_keluar`) 
         VALUES (NULL,'$nip_karyawan', '$nama_karyawan', '$tanggal','$jam',NULL)";
         $result = $conn -> query($sql);
         if ($result === TRUE) {
-            echo "<script type= 'text/javascript'>
-                    alert('Absen BERHASIL Dilakukan!');
-                    </script>";
+            header("location:absen.php?message=ABSEN BERHASIL DILAKUKAN");
         } else {
-            echo "<script type= 'text/javascript'>
-                    alert('Absen GAGAL Di Lakukan!');
-                    </script>";
+            header("location:absen.php?message=ABSEN GAGAL DILAKUKAN");
         }
     }
 }
@@ -50,10 +44,11 @@ if (isset($_POST['absen_keluar'])) {
                     alert('Terima Kasih Sudah Berjuang Hari Ini :)');
                     </script>";
                 }
-            }
+            } 
         } 
 }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +76,7 @@ if (isset($_POST['absen_keluar'])) {
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php"?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->

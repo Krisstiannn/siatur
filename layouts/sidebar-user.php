@@ -9,7 +9,7 @@
         <nav class="mt-2 ">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="/siatur/index.php" class="nav-link">
+                    <a href="/siatur/user/index.php" class="nav-link">
                         <ion-icon name="clipboard-outline" class="far nav-icon"></ion-icon>
                         <p class="text-light">Dashboard</p>
                     </a>
@@ -23,10 +23,18 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <a href="../user/absen.php" class="nav-link">
+                        <ion-icon name="people-outline" class="far nav-icon"></ion-icon>
+                        <p class="text-light">
+                            Absen Pegawai
+                            <i class="right fas"></i>
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <form action="/siatur/logout.php" method="POST">
                         <button type="submit" class="btn" name="btn_logout">
-                            <ion-icon class="far nav-icon" name="log-out-outline"></ion-icon>
                             <p class="text-light">Logout</p>
                         </button>
                     </form>
