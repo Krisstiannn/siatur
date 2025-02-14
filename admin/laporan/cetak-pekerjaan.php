@@ -3,8 +3,9 @@ include "/xampp/htdocs/siatur/library/fpdf.php";;
 
 
 // Path gambar logo
-$logoPath = 'oline.jpg';
+$logoPath = 'netsun.jpg';
 
+// Ambil ukuran asli gambar
 list($logoWidth, $logoHeight) = getimagesize($logoPath);
 
 // Tentukan batas ukuran kop surat
@@ -48,6 +49,13 @@ $pdf->Ln(10);
 // Judul Laporan
 $pdf->SetFont('Arial', 'B', 14);
 $pdf->Cell(190, 10, 'Laporan Karyawan', 0, 1, 'C');
+
+// Periode Tanggal
+$startDate = '01-01-2024'; // Ganti dengan tanggal awal
+$endDate = '31-01-2024';   // Ganti dengan tanggal akhir
+$pdf->SetFont('Arial', 'I', 12);
+$pdf->Cell(190, 7, "Periode: $startDate s.d. $endDate", 0, 1, 'C');
+
 $pdf->Ln(5);
 
 // Header Tabel
@@ -70,7 +78,22 @@ foreach ($data as $row) {
     $pdf->Cell(80, 10, $row[2], 1, 1, 'C');
 }
 
+// Spasi setelah tabel
+$pdf->Ln(15);
+
+// Posisi Tanda Tangan di Kanan Bawah
+$pdf->SetFont('Arial', '', 12);
+$pdf->Cell(120); // Pindah ke kanan
+$pdf->Cell(70, 7, 'Jakarta, ' . date('d-m-Y'), 0, 1, 'C'); // Tanggal otomatis
+$pdf->Ln(20); // Ruang untuk tanda tangan
+
+$pdf->Cell(120);
+$pdf->Cell(70, 7, '______________________', 0, 1, 'C'); // Garis tanda tangan
+$pdf->Cell(120);
+$pdf->Cell(70, 7, 'Nama Pejabat', 0, 1, 'C'); // Nama pejabat yang menandatangani
+$pdf->Cell(120);
+$pdf->Cell(70, 7, 'Jabatan Pejabat', 0, 1, 'C'); // Jabatan pejabat
+
 // Output PDF
 $pdf->Output();
-?>
 ?>

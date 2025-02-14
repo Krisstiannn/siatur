@@ -1,35 +1,27 @@
 <?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
 
-$query_tampil = "SELECT * FROM psb";
-$result_tampil = $conn->query($query_tampil);
-$query_tampilKaryawan = "SELECT * FROM karyawan";
-$result_tampilkaryawan = $conn->query($query_tampilKaryawan);
+// Tahun yang ingin ditampilkan
+$tahun = 2024;
 
-if (isset($_POST['btn_kirim'])) {
-    $id_pekerjaan = $_POST['id_pekerjaan'];
-    $id_karyawan = $_POST['id_karyawan'];
+// Query untuk mendapatkan laporan absensi per bulan dalam tahun tertentu
+$query = "
+    SELECT 
+        k.id,
+        k.nama_karyawan,
+        MONTH(a.tanggal) AS bulan,
+        COUNT(a.id) AS jumlah_absen
+    FROM karyawan k
+    LEFT JOIN absensi a ON k.id = a.id
+    WHERE YEAR(a.tanggal_absen) = $tahun
+    GROUP BY k.id, MONTH(a.tanggal)
+    ORDER BY k.id, bulan
+";
 
-    // Validasi apakah id_karyawan dan id_pekerjaan benar-benar ada
-    $cek_karyawan = $conn->query("SELECT * FROM karyawan WHERE id = '$id_karyawan'");
-    $cek_pekerjaan = $conn->query("SELECT * FROM psb WHERE id = '$id_pekerjaan'");
-
-    if ($cek_karyawan->num_rows > 0 && $cek_pekerjaan->num_rows > 0) {
-        // Insert ke tabel assign atau wo
-        $query_insert = "INSERT INTO wo (id_karyawan, id_pekerjaan) VALUES ('$id_karyawan', '$id_pekerjaan')";
-        if ($conn->query($query_insert)) {
-            echo "<script>alert('Pekerjaan berhasil dikirim ke karyawan!'); window.location.href='psb.php';</script>";
-        } else {
-            echo "<script>alert('Gagal mengirim pekerjaan!'); window.history.back();</script>";
-        }
-    } else {
-        echo "<script>alert('Data tidak valid!'); window.history.back();</script>";
-    }
-}
+$result = $conn->query($query);
 
 if (isset($_POST{'cetak'})) {
 include "/xampp/htdocs/siatur/library/fpdf.php";;
-
 
 // Path gambar logo
 $logoPath = 'netsun.jpg';
@@ -50,7 +42,7 @@ $scale = min($scaleHeight, $scaleWidth); // Pilih skala terkecil agar sesuai bat
 $newLogoWidth = $logoWidth * $scale;
 $newLogoHeight = $logoHeight * $scale;
 
-$pdf = new FPDF('L', 'mm', 'A4'); // Orientasi Landscape
+$pdf = new FPDF('P', 'mm', 'A4'); // Orientasi Landscape
 $pdf->AddPage();
 
 $pdf->Image($logoPath, 10, 10, $newLogoWidth, $newLogoHeight);
@@ -76,36 +68,35 @@ $pdf->Ln(5);
 
 // Judul Laporan
 $pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(275, 10, 'Laporan Karyawan', 0, 1, 'C');
+$pdf->Cell(190, 10, 'Laporan Data Karyawan', 0, 1, 'C');
 
 // Periode Tanggal
 $startDate = '01-01-2024';
 $endDate = '31-01-2024';
 $pdf->SetFont('Arial', 'I', 12);
-$pdf->Cell(275, 7, "Periode: $startDate s.d. $endDate", 0, 1, 'C');
+$pdf->Cell(190, 7, "Periode: $startDate s.d. $endDate", 0, 1, 'C');
 
 $pdf->Ln(5);
 
-// **Atur Lebar Kolom (Total = 275mm)**
-$widths = [15, 30, 30, 20, 20, 20, 15, 20, 20, 20, 15, 15, 15, 20];
+// **Atur Lebar Kolom (Total = 190mm)**
+$widths = [20, 50, 40, 40, 40]; // Lebar masing-masing kolom
 
-// Header Tabel
+// **Header Tabel**
 $pdf->SetFont('Arial', 'B', 10);
-$header = [
-    'ID', 'Nama', 'Jabatan', 'Dept', 'Golongan', 'Status', 'JK', 'Gaji', 
-    'Bonus', 'Potongan', 'Lembur', 'Cuti', 'Absensi', 'Total'
-];
+$header = ['ID', 'NIP Karyawan', 'Nama Karyawan', 'Jabatan', 'Total Absen'];
 
 foreach ($header as $i => $col) {
     $pdf->Cell($widths[$i], 10, $col, 1, 0, 'C');
 }
 $pdf->Ln();
 
-// **Data Contoh (Bisa diambil dari database)**
+// **Data Contoh (Bisa diganti dengan data dari database)**
 $data = [
-    [1, 'Budi', 'Manager', 'HRD', 'A', 'Tetap', 'L', '10,000,000', '1,000,000', '500,000', '2,000,000', '0', '2', '8,500,000'],
-    [2, 'Siti', 'HRD', 'HRD', 'B', 'Kontrak', 'P', '8,000,000', '800,000', '300,000', '1,500,000', '1', '3', '6,500,000'],
-    [3, 'Joko', 'IT Support', 'IT', 'C', 'Tetap', 'L', '7,000,000', '700,000', '200,000', '1,000,000', '2', '1', '6,300,000']
+    [1, 'Budi Santoso', 'Manager', 'HRD', '10,000,000'],
+    [2, 'Siti Aminah', 'Staff', 'Keuangan', '7,500,000'],
+    [3, 'Joko Susanto', 'IT Support', 'IT', '6,000,000'],
+    [4, 'Rina Dewi', 'Marketing', 'Pemasaran', '8,500,000'],
+    [5, 'Andi Saputra', 'Supervisor', 'Produksi', '9,000,000']
 ];
 
 $pdf->SetFont('Arial', '', 10);
@@ -121,18 +112,18 @@ $pdf->Ln(15);
 
 // **Posisi Tanda Tangan di Kanan Bawah**
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(180);
+$pdf->Cell(120);
 $pdf->Cell(70, 7, 'Jakarta, ' . date('d-m-Y'), 0, 1, 'C'); // Tanggal otomatis
 $pdf->Ln(20);
 
-$pdf->Cell(180);
+$pdf->Cell(120);
 $pdf->Cell(70, 7, '______________________', 0, 1, 'C');
-$pdf->Cell(180);
+$pdf->Cell(120);
 $pdf->Cell(70, 7, 'Nama Pejabat', 0, 1, 'C');
-$pdf->Cell(180);
+$pdf->Cell(120);
 $pdf->Cell(70, 7, 'Jabatan Pejabat', 0, 1, 'C');
 
-// Output PDF
+// **Output PDF**
 $pdf->Output();
 }
 ?>
@@ -214,13 +205,11 @@ $pdf->Output();
                                         <table id="example1" class="table table-bordered text-center">
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
-                                                    <th>No Working Order</th>
-                                                    <th>Nama Pelanggan</th>
-                                                    <th>Alamat atau Titik Kordinat</th>
-                                                    <th>Status</th>
-                                                    <th>Keterangan</th>
-                                                    <th>Paket Internet</th>
-                                                    <th>Action</th>
+                                                    <th>No</th>
+                                                    <th>NIP Karyawan</th>
+                                                    <th>Nama Karyawan</th>
+                                                    <th>Jabatan</th>
+                                                    <th>Jumlah Absen</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

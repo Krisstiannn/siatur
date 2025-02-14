@@ -120,7 +120,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/siatur/admin/laporan/absen-karyawan.php" class="nav-link">
+                            <a href="/siatur/admin/laporan/laporan-absen.php" class="nav-link">
                                 <i class="far nav-icon"></i>
                                 <p class="text-light">Laporan Absen Pegawai</p>
                             </a>
