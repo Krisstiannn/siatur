@@ -79,6 +79,11 @@ if (isset($_POST['btn_kirim'])) {
                             <div class="card">
                                 <div class="card-header border-transparent">
                                     <div class="card-header">
+                                        <div class="card-title">
+                                            <a href="cetak-pekerjaan.php" class="btn btn-sm btn-success ">Tambah
+                                                Data</a>
+                                        </div>
+
                                         <div class="card-title float-right">
                                             <div class="input-group input-group-sm" style="width: 150px;">
                                                 <input type="text" name="table_search" class="form-control float-right"
@@ -95,7 +100,7 @@ if (isset($_POST['btn_kirim'])) {
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered text-center">
+                                        <table id="example1" class="table table-bordered text-center">
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
                                                     <th>No Working Order</th>
@@ -183,25 +188,6 @@ if (isset($_POST['btn_kirim'])) {
     <script src="/siatur/dist/js/demo.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script>
-    $(function() {
-        $('#example1').DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "pagging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-    </script>
 </body>
 
 </html>
