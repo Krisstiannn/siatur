@@ -8,51 +8,55 @@ $nama_karyawan = $_SESSION['nama_karyawan'];
 $tanggal = date('Y-m-d');
 $jam = date('H:i:s');
 
-$query_tampilData = "SELECT * FROM absen WHERE nip_karyawan = '$nip_karyawan'";
-$tampil_data = $conn -> query($query_tampilData);
+$query_id_karyawan = "SELECT id FROM karyawan WHERE nip_karyawan = '$nip_karyawan'";
+$result_id = $conn->query($query_id_karyawan);
 
-if (isset($_POST['btn_absen'])) {
+$query_tampilData = "SELECT * FROM absen";
+$tampil_data = $conn->query($query_tampilData);
+
+if(isset($_POST['btn_absen'])) {
+    if ($result_id->num_rows > 0) {
+        $row = $result_id->fetch_assoc();
+        $id_karyawan = $row['id'];
     
-    $cek_absensi = "SELECT tanggal FROM absen WHERE nip_karyawan = '$nip_karyawan' AND tanggal = '$tanggal'";
-    $cek = $conn -> query($cek_absensi);
-    
-    if ($cek -> num_rows > 0) {
-        echo "<script type= 'text/javascript'>
-        alert('Anda Telah Absen Hari Ini!');
-        </script>";
-    } else {
-        $sql = "INSERT INTO  `absen` (`id`,`nip_karyawan`,`nama_karyawan`,`tanggal`,`jam_masuk`,`jam_keluar`) 
-        VALUES (NULL,'$nip_karyawan', '$nama_karyawan', '$tanggal','$jam',NULL)";
-        $result = $conn -> query($sql);
+        $sql = "INSERT INTO `absen` (`id`, `id_karyawan`, `nip_karyawan`, `nama_karyawan`, `tanggal`, `jam_masuk`, `jam_keluar`) 
+                VALUES (NULL, '$id_karyawan', '$nip_karyawan', '$nama_karyawan', '$tanggal', '$jam', NULL)";
+        
+        $result = $conn->query($sql);
+        
         if ($result === TRUE) {
-            echo "<script type= 'text/javascript'>
-                    alert('Absen BERHASIL Dilakukan!');
-                    </script>";
+            echo "<script type='text/javascript'>alert('Absen BERHASIL Dilakukan!');</script>";
         } else {
-            echo "<script type= 'text/javascript'>
-                    alert('Absen GAGAL Di Lakukan!');
-                    </script>";
+            echo "<script type='text/javascript'>alert('Absen GAGAL Di Lakukan!');</script>";
         }
+    } else {
+        echo "<script type='text/javascript'>alert('Data Karyawan Tidak Ditemukan!');</script>";
     }
 }
 
 if (isset($_POST['absen_keluar'])) {
-    if ($tampil_data->num_rows>0) {
-        $data = $tampil_data->fetch_assoc(); 
-        if (empty($data['jam_keluar']) && !empty($data['jam_masuk']) && $tanggal ==  $data['tanggal']) {
-            if (isset($_POST['absen_keluar'])) {
-                $update = "UPDATE absen SET jam_keluar = '$jam' WHERE nip_karyawan = '$nip_karyawan'
-                AND tanggal = '$tanggal'";
-            
-                $jam_keluar = $conn -> query($update);
-                if ($jam_keluar == TRUE) {
-                    echo "<script type= 'text/javascript'>
-                    alert('Terima Kasih Sudah Berjuang Hari Ini :)');
-                    </script>";
-                }
+    $query_tampilabsen = "SELECT id, jam_keluar FROM absen 
+                WHERE nip_karyawan = '$nip_karyawan' 
+                AND tanggal = '$tanggal' 
+                ORDER BY id DESC LIMIT 1";
+
+    $tampil_absen = $conn->query($query_tampilabsen);
+    if ($tampil_absen->num_rows > 0) {
+        $absen = $tampil_absen->fetch_assoc();
+
+        if (empty($absen['jam_keluar'])) {
+            $update = "UPDATE absen SET jam_keluar = '$jam' WHERE id = '{$absen['id']}'";
+            if ($conn->query($update) === TRUE) {
+                echo "<script>alert('Terima Kasih Sudah Berjuang Hari Ini :)');</script>";
+            } else {
+                echo "<script>alert('Gagal memperbarui jam keluar.');</script>";
             }
-        } 
-}
+        } else {
+            echo "<script>alert('Anda sudah absen keluar hari ini!');</script>";
+        }
+    } else {
+        echo "<script>alert('Anda belum absen masuk hari ini!');</script>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -133,7 +137,6 @@ if (isset($_POST['absen_keluar'])) {
                                                     <th>Tanggal</th>
                                                     <th>Absen Masuk</th>
                                                     <th>Absen Pulang</th>
-                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -141,21 +144,9 @@ if (isset($_POST['absen_keluar'])) {
                                                 <tr>
                                                     <td><?= $absen['nip_karyawan']?></td>
                                                     <td><?= $absen['nama_karyawan']?></td>
-                                                    <td><?= $absen['tanggal']?></td>
+                                                    <td><?= date('d-m-Y', strtotime($absen['tanggal'])) ?></td>
                                                     <td><?= $absen['jam_masuk']?></td>
                                                     <td><?= $absen['jam_keluar']?></td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
                                                 </tr>
                                                 <?php }?>
                                             </tbody>

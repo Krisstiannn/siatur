@@ -11,8 +11,6 @@ if (isset($_POST['btn_submit'])) {
     $jumlah_awal = $_POST['jumlah_awal'];
     $jumlah_sisa = $_POST['jumlah_sisa'];
     $tanggal_masuk = $_POST['tanggal_masuk'];
-    $tanggal_habis = $_POST['tanggal_habis'];
-
     if ($_FILES['gambar_barang']['name'] == "") {
         $gambar_barang = $result_tampilData['gambar_barang'];
     } else {
@@ -27,7 +25,7 @@ if (isset($_POST['btn_submit'])) {
     // move_uploaded_file($tmp_file, $dir_foto.$gambar_barang);
 
     $query_editData = "UPDATE material SET kode_barang = '$kode_barang', gambar_barang = '$gambar_barang', nama_barang = '$nama_barang', 
-                       jumlah_awal = '$jumlah_awal', jumlah_sisa = '$jumlah_sisa', tanggal_masuk = '$tanggal_masuk', tanggal_habis = '$tanggal_habis'
+                       jumlah_awal = '$jumlah_awal', jumlah_sisa = '$jumlah_sisa', tanggal_masuk = '$tanggal_masuk'
                        WHERE id = '$id'";
     $result_editData = $conn->query($query_editData);
 
@@ -93,19 +91,22 @@ if (isset($_POST['btn_submit'])) {
                         <div class="card-header">
                             <h3 class="card-title">Edit Data Barang</h3>
                         </div>
-                        <form method="POST" action="edit-material.php?id=<?= $result_tampilData ['id']?>" enctype="multipart/form-data">
+                        <form method="POST" action="edit-material.php?id=<?= $result_tampilData ['id']?>"
+                            enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="kode">Kode Barang</label>
-                                    <input type="text" class="form-control" name="kode_barang" placeholder="Kode Barang" value="<?= $result_tampilData ['kode_barang']?>">
+                                    <input type="text" class="form-control" name="kode_barang" placeholder="Kode Barang"
+                                        value="<?= $result_tampilData ['kode_barang']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="gambar">Gambar Barang</label>
                                     <div class="input-group">
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" name="gambar_barang"
-                                                accept="image/*" value="<?= $result_tampilData ['gambar_barang']?>" >
-                                            <label class="custom-file-label" for="foto"><?= $result_tampilData ['gambar_barang']?></label>
+                                                accept="image/*" value="<?= $result_tampilData ['gambar_barang']?>">
+                                            <label class="custom-file-label"
+                                                for="foto"><?= $result_tampilData ['gambar_barang']?></label>
                                         </div>
                                         <!-- <div class="input-group-append">
                                             <span class="input-group-text">Upload</span>
@@ -115,32 +116,31 @@ if (isset($_POST['btn_submit'])) {
                                 <div class="form-group">
                                     <label for="nama">Nama Barang</label>
                                     <input type="text" class="form-control" name="nama_barang"
-                                        placeholder="Masukkan Nama Barang" value="<?= $result_tampilData ['nama_barang']?>">
+                                        placeholder="Masukkan Nama Barang"
+                                        value="<?= $result_tampilData ['nama_barang']?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah Awal Barang</label>
                                     <input type="text" class="form-control" name="jumlah_awal"
-                                        placeholder="Jumlah Awal Barang" value="<?= $result_tampilData ['jumlah_awal']?>">
-                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan barang</i>
+                                        placeholder="Jumlah Awal Barang"
+                                        value="<?= $result_tampilData ['jumlah_awal']?>">
+                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan
+                                        barang</i>
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah Sisa Barang</label>
                                     <input type="text" class="form-control" name="jumlah_sisa"
-                                        placeholder="Jumlah Sisa Barang" value="<?= $result_tampilData ['jumlah_sisa']?>">
-                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan barang</i>
+                                        placeholder="Jumlah Sisa Barang"
+                                        value="<?= $result_tampilData ['jumlah_sisa']?>">
+                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan
+                                        barang</i>
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Masuk Barang</label>
                                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                         <input type="date" class="form-control datetimepicker-input"
-                                            data-target="#reservationdate" name="tanggal_masuk" value="<?= $result_tampilData ['tanggal_masuk']?>"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tanggal Habis Barang</label>
-                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                        <input type="date" class="form-control datetimepicker-input"
-                                            data-target="#reservationdate" name="tanggal_habis" value="<?= $result_tampilData ['tanggal_habis']?>" />
+                                            data-target="#reservationdate" name="tanggal_masuk"
+                                            value="<?= $result_tampilData ['tanggal_masuk']?>" />
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ if (isset($_POST['btn_submit'])) {
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
-    $(function () {
+    $(function() {
         bsCustomFileInput.init();
     });
     </script>

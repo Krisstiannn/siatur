@@ -102,27 +102,27 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/siatur/admin/laporan/barang.php" class="nav-link">
+                            <a href="/siatur/admin/laporan/laporan-barang.php" class="nav-link">
                                 <i class="far nav-icon"></i>
-                                <p class="text-light">Laporan Penggunaan Barang</p>
+                                <p class="text-light">Penggunaan Barang</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/siatur/admin/laporan/laporan-pekerjaan.php" class="nav-link">
                                 <i class="far nav-icon"></i>
-                                <p class="text-light">Laporan Perkerjaan</p>
+                                <p class="text-light">Perkerjaan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/siatur/admin/laporan/karyawan.php" class="nav-link">
+                            <a href="/siatur/admin/laporan/barang-masuk.php" class="nav-link">
                                 <i class="far nav-icon"></i>
-                                <p class="text-light">Laporan Material dan Inventaris</p>
+                                <p class="text-light">Barang Masuk</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="/siatur/admin/laporan/laporan-absen.php" class="nav-link">
                                 <i class="far nav-icon"></i>
-                                <p class="text-light">Laporan Absen Pegawai</p>
+                                <p class="text-light">Absen Pegawai</p>
                             </a>
                         </li>
                     </ul>

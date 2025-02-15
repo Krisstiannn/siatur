@@ -8,7 +8,6 @@ if (isset($_POST['btn_submit'])) {
     $jumlah_awal = $_POST['jumlah_awal'];
     $jumlah_sisa = $_POST['jumlah_sisa'];
     $tanggal_masuk = $_POST['tanggal_masuk'];
-    $tanggal_habis = $_POST['tanggal_habis'];
 
     $dir_foto = "/xampp/htdocs/siatur/storage/img/";
     $tmp_file = $_FILES['gambar_barang']['tmp_name'];
@@ -21,8 +20,8 @@ if (isset($_POST['btn_submit'])) {
             </script>";
         die();
     } else {
-        $query_tambahData = "INSERT INTO material (id, kode_barang, gambar_barang, nama_barang, jumlah_awal, jumlah_sisa, tanggal_masuk, tanggal_habis) 
-        VALUES ('','$kode_barang', '$gambar_barang', '$nama_barang', '$jumlah_awal', '$jumlah_sisa', '$tanggal_masuk', '$tanggal_habis')";
+        $query_tambahData = "INSERT INTO material (id, kode_barang, gambar_barang, nama_barang, jumlah_awal, jumlah_sisa, tanggal_masuk) 
+        VALUES ('','$kode_barang', '$gambar_barang', '$nama_barang', '$jumlah_awal', '$jumlah_sisa', '$tanggal_masuk')";
         $result_tambahData = $conn->query($query_tambahData);
 
         if ($result_tambahData) {
@@ -90,7 +89,8 @@ if (isset($_POST['btn_submit'])) {
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="kode">Kode Barang</label>
-                                    <input type="text" class="form-control" name="kode_barang" placeholder="Kode Barang">
+                                    <input type="text" class="form-control" name="kode_barang"
+                                        placeholder="Kode Barang">
                                 </div>
                                 <div class="form-group">
                                     <label for="gambar">Gambar Barang</label>
@@ -114,26 +114,21 @@ if (isset($_POST['btn_submit'])) {
                                     <label for="jumlah">Jumlah Awal Barang</label>
                                     <input type="text" class="form-control" name="jumlah_awal"
                                         placeholder="Jumlah Awal Barang">
-                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan barang</i>
+                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan
+                                        barang</i>
                                 </div>
                                 <div class="form-group">
                                     <label for="jumlah">Jumlah Sisa Barang</label>
                                     <input type="text" class="form-control" name="jumlah_sisa"
                                         placeholder="Jumlah Sisa Barang">
-                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan barang</i>
+                                    <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan
+                                        barang</i>
                                 </div>
                                 <div class="form-group">
                                     <label>Tanggal Masuk Barang</label>
                                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
                                         <input type="date" class="form-control datetimepicker-input"
                                             data-target="#reservationdate" name="tanggal_masuk" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tanggal Habis Barang</label>
-                                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                        <input type="date" class="form-control datetimepicker-input"
-                                            data-target="#reservationdate" name="tanggal_habis" />
                                     </div>
                                 </div>
                             </div>
@@ -168,7 +163,7 @@ if (isset($_POST['btn_submit'])) {
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
-    $(function () {
+    $(function() {
         bsCustomFileInput.init();
     });
     </script>

@@ -147,7 +147,7 @@ if (isset($_POST['btn_kirim'])) {
                                                                 <?php } ?>
                                                             </select>
                                                             <button type="submit" name="btn_kirim"
-                                                                class="btn btn-warning">Kirim</button>
+                                                                class="btn btn-warning btn-sm">Kirim</button>
                                                         </form>
                                                     </td>
                                                 </tr>

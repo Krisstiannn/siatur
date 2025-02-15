@@ -3,6 +3,36 @@ include "/xampp/htdocs/siatur/services/koneksi.php";
 
 $query_tampilData = "SELECT * FROM material";
 $result_tampilData = $conn->query($query_tampilData);
+
+$sql = "
+    SELECT barang, SUM(jumlah) AS total_digunakan 
+    FROM (
+        SELECT barang1 AS barang, jumlah1 AS jumlah FROM report
+        UNION ALL
+        SELECT barang2, jumlah2 FROM report
+        UNION ALL
+        SELECT barang3, jumlah3 FROM report
+    ) AS combined_report
+    WHERE barang IS NOT NULL
+    GROUP BY barang
+";
+
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()) {
+    $nama_barang = $row['barang'];
+    $jumlah_digunakan = $row['total_digunakan'];
+    
+    // Update jumlah_sisa di tabel barang
+    $update_sql = "UPDATE material SET jumlah_sisa = jumlah_awal - ? WHERE nama_barang = ?";
+    $stmt = $conn->prepare($update_sql);
+    $stmt->bind_param("is", $jumlah_digunakan, $nama_barang);
+    $stmt->execute();
+    $stmt->close();
+}
+
+$conn->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -90,7 +120,6 @@ $result_tampilData = $conn->query($query_tampilData);
                                                     <th>Jumlah Awal Barang</th>
                                                     <th>Jumlah Sisa Barang</th>
                                                     <th>Tanggal Masuk Barang</th>
-                                                    <th>Tanggal Habis Barang</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -98,19 +127,23 @@ $result_tampilData = $conn->query($query_tampilData);
                                             <tbody>
                                                 <tr>
                                                     <td><?= $material['kode_barang']?></td>
-                                                    <td><img src="/siatur/storage/img/<?= $material['gambar_barang']?>" alt="<?= $material['gambar_barang']?>" style="width: 150px;"></td>
+                                                    <td><img src="/siatur/storage/img/<?= $material['gambar_barang']?>"
+                                                            alt="<?= $material['gambar_barang']?>"
+                                                            style="width: 150px;"></td>
                                                     <td><?= $material['nama_barang']?></td>
                                                     <td><?= $material['jumlah_awal']?></td>
                                                     <td><?= $material['jumlah_sisa']?></td>
-                                                    <td><?= $material['tanggal_masuk']?></td>
-                                                    <td><?= $material['tanggal_habis']?></td>
+                                                    <td><?= date('d-m-Y', strtotime($material['tanggal_masuk'])) ?>
+                                                    </td>
                                                     <td>
-                                                        <a class="btn btn-info btn-xs" href="edit-material.php?id=<?= $material['id']?>">
+                                                        <a class="btn btn-info btn-xs"
+                                                            href="edit-material.php?id=<?= $material['id']?>">
                                                             <i class="fas fa-pencil-alt">
                                                             </i>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-xs" href="hapus-material.php?id=<?= $material['id']?>">
+                                                        <a class="btn btn-danger btn-xs"
+                                                            href="hapus-material.php?id=<?= $material['id']?>">
                                                             <i class="fas fa-trash">
                                                             </i>
                                                             Delete

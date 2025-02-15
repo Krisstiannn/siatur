@@ -1,129 +1,93 @@
 <?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
+include "/xampp/htdocs/siatur/library/fpdf.php";
+session_start();
 
-// Tahun yang ingin ditampilkan
-$tahun = 2024;
+$bulan = isset($_POST['bulan']) ? $_POST['bulan'] : date('Y-m');;
+$bulan_angka = date('m', strtotime($bulan . "-01"));
+$tahun = date('Y', strtotime($bulan . "-01"));
 
-// Query untuk mendapatkan laporan absensi per bulan dalam tahun tertentu
-$query = "
-    SELECT 
-        k.id,
-        k.nama_karyawan,
-        MONTH(a.tanggal) AS bulan,
-        COUNT(a.id) AS jumlah_absen
-    FROM karyawan k
-    LEFT JOIN absensi a ON k.id = a.id
-    WHERE YEAR(a.tanggal_absen) = $tahun
-    GROUP BY k.id, MONTH(a.tanggal)
-    ORDER BY k.id, bulan
-";
+    $nama_bulan = [
+        '01' => 'Januari', '02' => 'Februari', '03' => 'Maret', '04' => 'April',
+        '05' => 'Mei', '06' => 'Juni', '07' => 'Juli', '08' => 'Agustus',
+        '09' => 'September', '10' => 'Oktober', '11' => 'November', '12' => 'Desember'
+    ];
+    $bulan_tulisan = $nama_bulan[$bulan_angka] . " " . $tahun;
+    
+    $query_tampil = "SELECT k.nip_karyawan, k.nama_karyawan, k.posisi_karyawan, COUNT(a.id) AS total_absen 
+                FROM karyawan k 
+                JOIN absen a ON k.nip_karyawan = a.nip_karyawan 
+                WHERE DATE_FORMAT(a.tanggal, '%Y-%m') = '$bulan'
+                GROUP BY k.nip_karyawan, k.nama_karyawan, k.posisi_karyawan";
+    $result = $conn->query($query_tampil);
 
-$result = $conn->query($query);
 
-if (isset($_POST{'cetak'})) {
-include "/xampp/htdocs/siatur/library/fpdf.php";;
-
-// Path gambar logo
+if (isset($_POST['cetak'])) {
+    
 $logoPath = 'netsun.jpg';
-
-// Ambil ukuran asli gambar
 list($logoWidth, $logoHeight) = getimagesize($logoPath);
 
-// Tentukan batas ukuran kop surat
-$maxLogoHeight = 25;  // Tinggi maksimum
-$maxLogoWidth = 50;   // Lebar maksimum agar tidak terlalu kecil atau besar
-
-// Skala berdasarkan tinggi
+$maxLogoHeight = 25;  
+$maxLogoWidth = 50;  
 $scaleHeight = $maxLogoHeight / $logoHeight;
 $scaleWidth = $maxLogoWidth / $logoWidth;
-$scale = min($scaleHeight, $scaleWidth); // Pilih skala terkecil agar sesuai batas
-
-// Hitung ukuran baru
+$scale = min($scaleHeight, $scaleWidth); 
 $newLogoWidth = $logoWidth * $scale;
 $newLogoHeight = $logoHeight * $scale;
-
-$pdf = new FPDF('P', 'mm', 'A4'); // Orientasi Landscape
+$pdf = new FPDF('P', 'mm', 'A4');
 $pdf->AddPage();
-
 $pdf->Image($logoPath, 10, 10, $newLogoWidth, $newLogoHeight);
 
-// Nama Instansi
 $pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(60); // Geser posisi agar sejajar dengan logo
+$pdf->Cell(60); 
 $pdf->Cell(0, 7, 'PT. Net Sun Power (NSP)', 0, 1, 'L');
-
-// Nomor Telepon
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(60);
 $pdf->Cell(0, 7, 'Telp: 085654807560', 0, 1, 'L');
-
-// Alamat
 $pdf->Cell(60);
 $pdf->Cell(0, 7, 'Jl. Handil Bakti, Semangat Dalam Komp Mitra Bakti Jalur 1 Blok D no 24', 0, 1, 'L');
-
-// Garis bawah kop surat
 $pdf->Ln(5);
 $pdf->Cell(275, 0, '', 'B', 1, 'C');
 $pdf->Ln(5);
 
-// Judul Laporan
+
 $pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(190, 10, 'Laporan Data Karyawan', 0, 1, 'C');
-
-// Periode Tanggal
-$startDate = '01-01-2024';
-$endDate = '31-01-2024';
+$pdf->Cell(190, 10, 'Laporan Absensi Karyawan', 0, 1, 'C');
 $pdf->SetFont('Arial', 'I', 12);
-$pdf->Cell(190, 7, "Periode: $startDate s.d. $endDate", 0, 1, 'C');
-
+$pdf->Cell(190, 10, "Bulan: $bulan_tulisan", 0, 1, 'C');
 $pdf->Ln(5);
 
-// **Atur Lebar Kolom (Total = 190mm)**
-$widths = [20, 50, 40, 40, 40]; // Lebar masing-masing kolom
-
-// **Header Tabel**
 $pdf->SetFont('Arial', 'B', 10);
-$header = ['ID', 'NIP Karyawan', 'Nama Karyawan', 'Jabatan', 'Total Absen'];
+$pdf->Cell(40, 10, 'NIP', 1, 0, 'C');
+$pdf->Cell(60, 10, 'Nama Karyawan', 1, 0, 'C');
+$pdf->Cell(50, 10, 'Jabatan', 1, 0, 'C');
+$pdf->Cell(40, 10, 'Total Absen', 1, 1, 'C');
 
-foreach ($header as $i => $col) {
-    $pdf->Cell($widths[$i], 10, $col, 1, 0, 'C');
-}
-$pdf->Ln();
 
-// **Data Contoh (Bisa diganti dengan data dari database)**
-$data = [
-    [1, 'Budi Santoso', 'Manager', 'HRD', '10,000,000'],
-    [2, 'Siti Aminah', 'Staff', 'Keuangan', '7,500,000'],
-    [3, 'Joko Susanto', 'IT Support', 'IT', '6,000,000'],
-    [4, 'Rina Dewi', 'Marketing', 'Pemasaran', '8,500,000'],
-    [5, 'Andi Saputra', 'Supervisor', 'Produksi', '9,000,000']
-];
 
 $pdf->SetFont('Arial', '', 10);
-foreach ($data as $row) {
-    foreach ($row as $i => $col) {
-        $pdf->Cell($widths[$i], 10, $col, 1, 0, 'C');
-    }
-    $pdf->Ln();
+while ($row = $result->fetch_assoc()) {
+    $pdf->Cell(40, 10, $row['nip_karyawan'], 1, 0, 'C');
+    $pdf->Cell(60, 10, $row['nama_karyawan'], 1, 0, 'C');
+    $pdf->Cell(50, 10, $row['posisi_karyawan'], 1, 0, 'C');
+    $pdf->Cell(40, 10, $row['total_absen'], 1, 1, 'C'); 
 }
 
-// **Spasi setelah tabel**
+
 $pdf->Ln(15);
 
-// **Posisi Tanda Tangan di Kanan Bawah**
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(120);
-$pdf->Cell(70, 7, 'Jakarta, ' . date('d-m-Y'), 0, 1, 'C'); // Tanggal otomatis
+$pdf->Cell(70, 7, 'Banjarmasin, ' . date('d-m-Y'), 0, 1, 'C'); 
 $pdf->Ln(20);
 
 $pdf->Cell(120);
 $pdf->Cell(70, 7, '______________________', 0, 1, 'C');
 $pdf->Cell(120);
-$pdf->Cell(70, 7, 'Nama Pejabat', 0, 1, 'C');
+$pdf->Cell(70, 7, $_SESSION['nama_karyawan'], 0, 1, 'C');
 $pdf->Cell(120);
-$pdf->Cell(70, 7, 'Jabatan Pejabat', 0, 1, 'C');
 
-// **Output PDF**
+
 $pdf->Output();
 }
 ?>
@@ -133,7 +97,7 @@ $pdf->Output();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pemasangan Baru</title>
+    <title>Laporan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -159,7 +123,7 @@ $pdf->Output();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Data Pemasangan Baru</h1>
+                            <h1>Laporan Absen Karyawan</h1>
                         </div>
                     </div>
                 </div>
@@ -181,8 +145,10 @@ $pdf->Output();
                                     <div class="card-header">
                                         <form action="" method="POST">
                                             <div class="card-title">
-                                                <button name="cetak" class="btn btn-sm btn-success ">Tambah
-                                                    Data</button>
+
+                                                <label for="bulan">Pilih Bulan:</label>
+                                                <input type="month" name="bulan" required>
+                                                <button name="cetak" class="btn btn-sm btn-success ">Cetak</button>
                                             </div>
                                         </form>
 
@@ -205,7 +171,6 @@ $pdf->Output();
                                         <table id="example1" class="table table-bordered text-center">
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
-                                                    <th>No</th>
                                                     <th>NIP Karyawan</th>
                                                     <th>Nama Karyawan</th>
                                                     <th>Jabatan</th>
@@ -213,47 +178,14 @@ $pdf->Output();
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($result_tampil as $psb) {?>
+                                                <?php while ($row = $result->fetch_assoc()): ?>
                                                 <tr>
-                                                    <td><?= $psb['nama_pelanggan']?></td>
-                                                    <td><?= $psb['wa_pelanggan']?></td>
-                                                    <td><?= $psb['alamat_pelanggan']?></td>
-                                                    <td><img src="/siatur/storage/img/<?= $psb['rumah_pelanggan']?>"
-                                                            alt="<?= $psb['rumah_pelanggan']?>" style="width: 100px;">
-                                                    </td>
-                                                    <td><img src="/siatur/storage/img/<?= $psb['ktp_pelanggan']?>"
-                                                            alt="<?= $psb['ktp_pelanggan']?>" style="width: 100px;">
-                                                    </td>
-                                                    <td><?= $psb['paket_internet']?></td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm"
-                                                            href="edit-psb.php?id=<?= $psb['id']?>">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm"
-                                                            href="hapus-psb.php?id=<?= $psb['id']?>">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-
-                                                        <form action="psb.php" method="POST">
-                                                            <input type="hidden" name="id_pekerjaan"
-                                                                value="<?= $psb['id'] ?>">
-                                                            <select name="id_karyawan">
-                                                                <?php foreach ($result_tampilkaryawan as $karyawan) { ?>
-                                                                <option value="<?= $karyawan['id'] ?>">
-                                                                    <?= $karyawan['nama_karyawan'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                            <button type="submit" name="btn_kirim"
-                                                                class="btn btn-warning">Kirim</button>
-                                                        </form>
-                                                    </td>
+                                                    <td><?= $row['nip_karyawan'] ?></td>
+                                                    <td><?= $row['nama_karyawan'] ?></td>
+                                                    <td><?= $row['posisi_karyawan'] ?></td>
+                                                    <td><?= $row['total_absen'] ?></td>
                                                 </tr>
-                                                <?php }?>
+                                                <?php endwhile; ?>
                                             </tbody>
                                         </table>
                                     </div>
