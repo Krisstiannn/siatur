@@ -10,18 +10,21 @@ if (isset($_POST['btn_kirim'])) {
     $id_pekerjaan = $_POST['id_pekerjaan'];
     $id_karyawan = $_POST['id_karyawan'];
 
-    // Validasi apakah id_karyawan dan id_pekerjaan benar-benar ada
+    
     $cek_karyawan = $conn->query("SELECT * FROM karyawan WHERE id = '$id_karyawan'");
     $cek_pekerjaan = $conn->query("SELECT * FROM psb WHERE id = '$id_pekerjaan'");
+    $cek = $conn->query("SELECT * FROM wo WHERE id_pekerjaan = '$id_pekerjaan'")->fetch_assoc();
 
-    if ($cek_karyawan->num_rows > 0 && $cek_pekerjaan->num_rows > 0) {
-        // Insert ke tabel assign atau wo
+    if ($cek>0) {
+            echo "<script>alert('Pekerjaan Sudah Di Kirimkan Ke Karyawan!'); window.location.href='psb.php';</script>";
+            die();
+    } else if ($cek_karyawan->num_rows > 0 && $cek_pekerjaan->num_rows > 0) {
         $query_insert = "INSERT INTO wo (id_karyawan, id_pekerjaan) VALUES ('$id_karyawan', '$id_pekerjaan')";
-        if ($conn->query($query_insert)) {
-            echo "<script>alert('Pekerjaan berhasil dikirim ke karyawan!'); window.location.href='psb.php';</script>";
-        } else {
-            echo "<script>alert('Gagal mengirim pekerjaan!'); window.history.back();</script>";
-        }
+            if ($conn->query($query_insert)) {
+                echo "<script>alert('Pekerjaan berhasil dikirim ke karyawan!'); window.location.href='psb.php';</script>";
+            } else {
+                echo "<script>alert('Gagal mengirim pekerjaan!'); window.history.back();</script>";
+            }
     } else {
         echo "<script>alert('Data tidak valid!'); window.history.back();</script>";
     }

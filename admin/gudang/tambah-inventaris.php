@@ -103,9 +103,6 @@ if (isset($_POST['btn_submit'])) {
                                                 accept="image/*">
                                             <label class="custom-file-label" for="foto"></label>
                                         </div>
-                                        <!-- <div class="input-group-append">
-                                            <span class="input-group-text">Upload</span>
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -135,7 +132,8 @@ if (isset($_POST['btn_submit'])) {
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
-                                <a href="inventaris.php" type="submit" class="btn btn-danger" name="btn_cancel">Cancel</a>
+                                <a href="inventaris.php" type="submit" class="btn btn-danger"
+                                    name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -171,7 +169,7 @@ if (isset($_POST['btn_submit'])) {
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
-    $(function () {
+    $(function() {
         bsCustomFileInput.init();
     });
     </script>

@@ -2,24 +2,26 @@
 include "/xampp/htdocs/siatur/services/koneksi.php";
 include "/xampp/htdocs/siatur/library/fpdf.php";
 session_start();
-
-$start_date = date('Y-m-d', strtotime($_POST['start_date'] ?? date('d-m-Y')));
-$end_date = date('Y-m-d', strtotime($_POST['end_date'] ?? date('d-m-Y')));
-
-$query = "
-    SELECT kode_barang, nama_barang AS nama_barang, jumlah_barang, tanggal_masuk 
-    FROM inventaris 
-    WHERE tanggal_masuk BETWEEN '$start_date' AND '$end_date'
-    UNION ALL
-    SELECT kode_barang, nama_barang AS nama_barang, jumlah_awal AS jumlah_barang, tanggal_masuk 
-    FROM material 
-    WHERE tanggal_masuk BETWEEN '$start_date' AND '$end_date'
-    ORDER BY tanggal_masuk ASC
-";
-
+$keterangan = "";
+$query = "SELECT karyawan.nip_karyawan, karyawan.nama_karyawan, 
+            COUNT(report.id) AS jumlah_pekerjaan
+            FROM karyawan
+            LEFT JOIN wo ON karyawan.id = wo.id_karyawan
+            LEFT JOIN report ON wo.id_pekerjaan = report.id
+            GROUP BY karyawan.id;";
+$jumlah = $conn->query($query)->fetch_assoc();
 $result = $conn->query($query);
 
+if($jumlah['jumlah_pekerjaan'] >= '20') {
+    $keterangan = "GOOD PERFORM";
+} else if ($jumlah['jumlah_pekerjaan'] == '10') {
+    $keterangan = "STABIL";
+} else  {
+    $keterangan = "BAD PERFORM";
+}
+
 if(isset($_POST['cetak'])) {
+
     $logoPath = 'netsun.jpg';
     list($logoWidth, $logoHeight) = getimagesize($logoPath);
     
@@ -46,25 +48,27 @@ if(isset($_POST['cetak'])) {
     $pdf->Cell(275, 0, '', 'B', 1, 'C');
     $pdf->Ln(5);
     
+    
     $pdf->SetFont('Arial', 'B', 14);
-    $pdf->Cell(190, 10, 'Laporan Barang Masuk', 0, 1, 'C');
+    $pdf->Cell(190, 10, 'Laporan Performa Karyawan', 0, 1, 'C');
     $pdf->SetFont('Arial', 'I', 12);
-    $pdf->Cell(190, 10, "Periode: $start_date - $end_date", 0, 1, 'C');
+    //$pdf->Cell(190, 10, "Bulan: $bulan_tulisan", 0, 1, 'C');
     $pdf->Ln(5);
     
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell(40, 10, 'Kode Barang', 1, 0, 'C');
-    $pdf->Cell(60, 10, 'Nama Barang', 1, 0, 'C');
-    $pdf->Cell(50, 10, 'Jumlah Barang', 1, 0, 'C');
-    $pdf->Cell(40, 10, 'Tanggal Masuk', 1, 1, 'C');
+    $pdf->Cell(40, 10, 'NIP Karyawan', 1, 0, 'C');
+    $pdf->Cell(60, 10, 'Nama Karyawan', 1, 0, 'C');
+    $pdf->Cell(50, 10, 'Total Pekerjaan', 1, 0, 'C');
+    $pdf->Cell(40, 10, 'Keterangan', 1, 1, 'C');
+    
     
     
     $pdf->SetFont('Arial', '', 10);
     while ($row = $result->fetch_assoc()) {
-        $pdf->Cell(40, 10, $row['kode_barang'], 1, 0, 'C');
-        $pdf->Cell(60, 10, $row['nama_barang'], 1, 0, 'C');
-        $pdf->Cell(50, 10, $row['jumlah_barang'], 1, 0, 'C');
-        $pdf->Cell(40, 10, date('d-m-Y', strtotime($row['tanggal_masuk'])), 1, 1, 'C'); 
+        $pdf->Cell(40, 10, $row['nip_karyawan'], 1, 0, 'C');
+        $pdf->Cell(60, 10, $row['nama_karyawan'], 1, 0, 'C');
+        $pdf->Cell(50, 10, $row['jumlah_pekerjaan'], 1, 0, 'C');
+        $pdf->Cell(40, 10, $keterangan , 1, 1, 'C'); 
     }
     
     
@@ -83,8 +87,8 @@ if(isset($_POST['cetak'])) {
     
     
     $pdf->Output();
-
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,29 +96,24 @@ if(isset($_POST['cetak'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gudang | Inventaris</title>
-    <<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-            rel="stylesheet">
-        <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
-        <link rel="stylesheet" href="/siatur/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-        <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
-        <link rel="icon" href="/siatur/storage/nsp.jpg">
+    <title>Laporan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/siatur/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="/siatur/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="/siatur/dist/css/adminlte.min.css">
+    <link rel="icon" href="/siatur/storage/nsp.jpg">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-
-
-        <!-- Navbar -->
         <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
-        <!-- Navbar -->
-
-        <!-- Main Sidebar Container -->
         <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
-        <!-- END Main Sidebar -->
 
         <!-- Main Content -->
         <div class="content-wrapper bg-gradient-white">
@@ -123,7 +122,7 @@ if(isset($_POST['cetak'])) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Data Inventaris</h1>
+                            <h1>Laporan Performa Karyawan</h1>
                         </div>
                     </div>
                 </div>
@@ -132,6 +131,7 @@ if(isset($_POST['cetak'])) {
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        <!-- Left col -->
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
@@ -144,17 +144,7 @@ if(isset($_POST['cetak'])) {
                                     <div class="card-header">
                                         <form action="" method="POST">
                                             <div class="card-title">
-
-                                                <label for="start_date">Dari Tanggal:</label>
-                                                <input type="date" name="start_date" value="<?= $start_date ?>"
-                                                    required>
-
-                                                <label for="end_date">Sampai Tanggal:</label>
-                                                <input type="date" name="end_date" value="<?= $end_date ?>" required>
-
-                                                <button type="submit" class="btn btn-sm btn-warning"
-                                                    name="filter">Tampilkan</button>
-                                                <button name="cetak" class="btn btn-sm btn-success">Cetak</button>
+                                                <button name="cetak" class="btn btn-sm btn-success ">Cetak</button>
                                             </div>
                                         </form>
 
@@ -163,31 +153,36 @@ if(isset($_POST['cetak'])) {
                                                 <input type="text" name="table_search" class="form-control float-right"
                                                     placeholder="Search">
 
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-default">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body p-0">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered text-center">
+                                        <table id="example1" class="table table-bordered text-center">
                                             <thead class="bg-gradient-cyan">
                                                 <tr>
-                                                    <th>Kode Barang</th>
-                                                    <th>Nama Barang</th>
-                                                    <th>Jumlah Barang</th>
-                                                    <th>Tanggal Masuk Barang</th>
+                                                    <th>NIP Karyawan</th>
+                                                    <th>Nama Karyawan</th>
+                                                    <th>Total Pekerjaan</th>
+                                                    <th>Keterangan</th>
                                                 </tr>
                                             </thead>
-                                            <?php foreach ($result as $laporan) {?>
                                             <tbody>
+                                                <?php while ($row = $result->fetch_assoc()): ?>
                                                 <tr>
-                                                    <td><?= $laporan['kode_barang']?></td>
-                                                    <td><?= $laporan['nama_barang']?></td>
-                                                    <td><?= $laporan['jumlah_barang']?></td>
-                                                    <td><?= date('d-m-Y', strtotime($laporan['tanggal_masuk']))?></td>
+                                                    <td><?= $row['nip_karyawan'] ?></td>
+                                                    <td><?= $row['nama_karyawan'] ?></td>
+                                                    <td><?= $row['jumlah_pekerjaan'] ?></td>
+                                                    <td><?= $keterangan ?></td>
                                                 </tr>
+                                                <?php endwhile; ?>
                                             </tbody>
-                                            <?php }?>
                                         </table>
                                     </div>
                                 </div>
@@ -200,22 +195,25 @@ if(isset($_POST['cetak'])) {
         </div>
         <!-- END Main Content -->
 
-        <!-- Main Footer -->
         <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
-        <!-- End Footer -->
     </div>
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>
     <script src="/siatur/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/siatur/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="/siatur/dist/js/adminlte.js"></script>
-    <script src="/siatur/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
-    <script src="/siatur/plugins/raphael/raphael.min.js"></script>
-    <script src="/siatur/plugins/jquery-mapael/jquery.mapael.min.js"></script>
-    <script src="/siatur/plugins/jquery-mapael/maps/usa_states.min.js"></script>
-    <script src="/siatur/plugins/chart.js/Chart.min.js"></script>
+    <script src="/siatur/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/siatur/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/siatur/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/siatur/plugins/jszip/jszip.min.js"></script>
+    <script src="/siatur/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/siatur/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/siatur/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="/siatur/dist/js/adminlte.min.js"></script>
     <script src="/siatur/dist/js/demo.js"></script>
-    <script src="/siatur/dist/js/pages/dashboard2.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

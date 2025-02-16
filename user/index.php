@@ -1,5 +1,9 @@
 <?php
+include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+$id_karyawan = $_SESSION['id_karyawan'] ?? null;
+$query_jumlah = "SELECT COUNT(*) AS total_pekerjaan FROM wo WHERE id_karyawan = '$id_karyawan'";
+$result_tampilJumlah = $conn->query($query_jumlah)->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +68,8 @@ session_start();
                                     <div class="info-box-content">
                                         <span class="info-box-text text-red text-bold" style="font-size: 20px">Working
                                             Order</span>
-                                        <span style="font-size: 30px">10</span>
+                                        <span
+                                            style="font-size: 30px"><?= $result_tampilJumlah['total_pekerjaan']?></span>
                                     </div>
                                 </div>
                             </a>

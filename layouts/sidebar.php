@@ -125,6 +125,12 @@
                                 <p class="text-light">Absen Pegawai</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/siatur/admin/laporan/laporan-performa.php" class="nav-link">
+                                <i class="far nav-icon"></i>
+                                <p class="text-light">Performa Pegawai</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

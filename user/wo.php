@@ -1,17 +1,14 @@
 <?php 
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+
 $id_karyawan = $_SESSION['id_karyawan'] ?? null;
 
 $query = "SELECT psb.nama_pelanggan, psb.alamat_pelanggan, psb.id, wo.id_karyawan
-FROM psb 
-JOIN wo ON wo.id_pekerjaan = psb.id;";
+            FROM psb 
+            JOIN wo ON wo.id_pekerjaan = psb.id 
+            WHERE wo.id_karyawan = '$id_karyawan'";
 $result = $conn->query($query);
-
-while ($row = $result->fetch_assoc()) {
-    var_dump($row);
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,24 +86,52 @@ while ($row = $result->fetch_assoc()) {
                                                     <th>Nomor Working Order</th>
                                                     <th>Nama Pelanggan</th>
                                                     <th>Alamat Rumah/Tikor</th>
+                                                    <th>Status Pekerjaan</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($result as $pekerjaan) {?>
+                                                <?php foreach($result as $pekerjaan) { 
+                                                        $id_pekerjaan = $pekerjaan['id'];
+
+                                                        // Ambil semua status pekerjaan berdasarkan no_wo
+                                                        $query_status = "SELECT status FROM report WHERE no_wo = '$id_pekerjaan'";
+                                                        $result_status = $conn->query($query_status);
+
+                                                        $total = 0;
+                                                        $selesai = 0;
+                                                        $kendala = 0;
+
+                                                        while ($row_status = $result_status->fetch_assoc()) {
+                                                            $total++;
+                                                            if ($row_status['status'] === 'selesai') {
+                                                                $selesai++;
+                                                            } elseif ($row_status['status'] === 'kendala') {
+                                                                $kendala++;
+                                                            }
+                                                        }
+
+                                                        if ($kendala > 0) {
+                                                            $status = '<span class="badge bg-danger">KENDALA</span>';
+                                                        } elseif ($total > 0 && $selesai === $total) {
+                                                            $status = '<span class="badge bg-success">SELESAI</span>';
+                                                        } else {
+                                                            $status = '<span class="badge bg-warning">ON GOING PROGRESS</span>';
+                                                        }
+                                                    ?>
                                                 <tr>
                                                     <td><?= $pekerjaan['id']?></td>
                                                     <td><?= $pekerjaan['nama_pelanggan']?></td>
                                                     <td><?= $pekerjaan['alamat_pelanggan']?></td>
+                                                    <td><?= $status?></td>
                                                     <td>
-                                                        <a class="btn btn-warning btn-sm" href="report-wo.php">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Laporkan
+                                                        <a class="btn btn-warning btn-sm"
+                                                            href="report-wo.php?id=<?= $pekerjaan['id']?>">
+                                                            <i class="fas fa-pencil-alt"></i> Laporkan
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                <?php }?>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>

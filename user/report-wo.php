@@ -1,11 +1,14 @@
 <?php 
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+
+$id = $_GET['id'];
 $id_karyawan = $_SESSION['id_karyawan'] ?? null;
 
 $query = "SELECT psb.nama_pelanggan, psb.alamat_pelanggan, psb.id, wo.id_karyawan
 FROM psb 
-JOIN wo ON wo.id_pekerjaan = psb.id;";
+JOIN wo ON wo.id_pekerjaan = psb.id
+WHERE psb.id = '$id';";
 $result = $conn->query($query)->fetch_assoc();
 
 $query_material = "SELECT * FROM material";
@@ -28,12 +31,12 @@ if (isset($_POST['btn_submit'])) {
     $foto_modem = $_FILES['foto_modem']['name'];
 
     $dir_foto = "/xampp/htdocs/siatur/storage/img/";
-    $tmp_file = $_FILES['foto_odp']['tmp_name'];
-    $tmp_file = $_FILES['foto_redaman']['tmp_name'];
-    $tmp_file = $_FILES['foto_modem']['tmp_name'];
-    move_uploaded_file($tmp_file, $dir_foto.$foto_odp);
-    move_uploaded_file($tmp_file, $dir_foto.$foto_redaman);
-    move_uploaded_file($tmp_file, $dir_foto.$foto_modem);
+    $tmp_odp = $_FILES['foto_odp']['tmp_name'];
+    $tmp_redaman = $_FILES['foto_redaman']['tmp_name'];
+    $tmp_modem = $_FILES['foto_modem']['tmp_name'];
+    move_uploaded_file($tmp_odp, $dir_foto.$foto_odp);
+    move_uploaded_file($tmp_redaman, $dir_foto.$foto_redaman);
+    move_uploaded_file($tmp_modem, $dir_foto.$foto_modem);
 
     $query_tambahData = "INSERT INTO report (id, no_wo, nama_pelanggan, alamat_pelanggan, status, keterangan, barang1, barang2, barang3, jumlah1, jumlah2, jumlah3, foto_odp, foto_redaman, foto_modem) 
         VALUES ('', '$no_wo', '$nama_pelanggan', '$alamat_pelanggan', '$status','$keterangan', '$barang1', '$barang2', '$barang3', '$jumlah1', '$jumlah2', '$jumlah3', '$foto_odp', '$foto_redaman', '$foto_modem')";
@@ -94,7 +97,7 @@ if (isset($_POST['btn_submit'])) {
                         <div class="card-header">
                             <h3 class="card-title">Report Pemasangan Baru</h3>
                         </div>
-                        <form action="report-wo.php" method="POST" enctype="multipart/form-data">
+                        <form action="report-wo.php?id=<?= $result['id']?>" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="whatsapp">No Working Order</label>
