@@ -126,7 +126,7 @@ if (isset($_POST['cetak'])) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Laporan Absen Karyawan</h1>
+                            <h1>Laporan Penggunaan Material</h1>
                         </div>
                     </div>
                 </div>
