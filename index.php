@@ -2,12 +2,6 @@
 session_start();
 include "./services/koneksi.php";
 date_default_timezone_set("Asia/Makassar");
-// $notifikasi_absen = "";
-// if (isset($_POST['btn_absen'])) {
-//     $notifikasi_absen ="absen telah terisi";
-// } else {
-    
-// }
 $tanggal = date('Y-m-d');
 $jam = date('H:i:s');
 

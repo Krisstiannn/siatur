@@ -1,3 +1,15 @@
+<?php
+if (isset($_POST['btn_logout'])) {
+    session_start();
+    session_destroy();
+    echo "<script type= 'text/javascript'>
+    alert('Anda Telah Keluar!');
+    document.location.href = '/siatur/login.php';
+    </script>";
+    exit();
+}
+?>
+
 <aside class="main-sidebar sidebar-dark-primary bg-blue shadow-lg elevation-5">
     <div class="brand-link bg-blue" style="border: none">
         <img src=" /siatur/storage/nsp.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -60,7 +72,7 @@
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="nav-item ">
+                <li class="nav-item ">
                     <a href="/siatur/admin/pelanggan/pelanggan.php" class="nav-link">
                         <ion-icon name="people-circle-outline" class="far nav-icon"></ion-icon>
                         <p class="text-light">
@@ -68,7 +80,7 @@
                             <i class="right fas"></i>
                         </p>
                     </a>
-                </li> -->
+                </li>
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <ion-icon name="code-working-outline" class="far nav-icon"></ion-icon>
@@ -134,7 +146,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <form action="/siatur/logout.php" method="POST">
+                    <form action="" method="POST">
                         <button type="submit" class="btn" name="btn_logout">
                             <p class="text-light">Logout</p>
                         </button>

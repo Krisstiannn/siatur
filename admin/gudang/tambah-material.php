@@ -117,13 +117,13 @@ if (isset($_POST['btn_submit'])) {
                                     <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan
                                         barang</i>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="jumlah">Jumlah Sisa Barang</label>
                                     <input type="text" class="form-control" name="jumlah_sisa"
                                         placeholder="Jumlah Sisa Barang">
                                     <i for="jumlah" class="text-red" style="font-size: 11px;">*sertakan satuan
                                         barang</i>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label>Tanggal Masuk Barang</label>
                                     <div class="input-group date" id="reservationdate" data-target-input="nearest">

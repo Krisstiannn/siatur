@@ -19,15 +19,17 @@ if(isset($_POST['btn_absen'])) {
         $row = $result_id->fetch_assoc();
         $id_karyawan = $row['id'];
     
-        $sql = "INSERT INTO `absen` (`id`, `id_karyawan`, `nip_karyawan`, `nama_karyawan`, `tanggal`, `jam_masuk`, `jam_keluar`) 
-                VALUES (NULL, '$id_karyawan', '$nip_karyawan', '$nama_karyawan', '$tanggal', '$jam', NULL)";
+        $sql = "INSERT INTO absen (id, id_karyawan, nip_karyawan, nama_karyawan, tanggal, jam_masuk) 
+                VALUES (NULL, '$id_karyawan', '$nip_karyawan', '$nama_karyawan', '$tanggal', '$jam')";
         
         $result = $conn->query($sql);
         
         if ($result === TRUE) {
             echo "<script type='text/javascript'>alert('Absen BERHASIL Dilakukan!');</script>";
+            header("Location: ".$_SERVER['PHP_SELF']);
         } else {
             echo "<script type='text/javascript'>alert('Absen GAGAL Di Lakukan!');</script>";
+            header("Location: ".$_SERVER['PHP_SELF']);
         }
     } else {
         echo "<script type='text/javascript'>alert('Data Karyawan Tidak Ditemukan!');</script>";
@@ -45,14 +47,22 @@ if (isset($_POST['absen_keluar'])) {
         $absen = $tampil_absen->fetch_assoc();
 
         if (empty($absen['jam_keluar'])) {
-            $update = "UPDATE absen SET jam_keluar = '$jam' WHERE id = '{$absen['id']}'";
+            $update = "UPDATE absen 
+            SET jam_keluar = '$jam' 
+            WHERE nip_karyawan = '$nip_karyawan' 
+            AND tanggal = '$tanggal' 
+            AND jam_keluar IS NULL 
+            ORDER BY id ASC LIMIT 1";
             if ($conn->query($update) === TRUE) {
                 echo "<script>alert('Terima Kasih Sudah Berjuang Hari Ini :)');</script>";
+                header("Location: ".$_SERVER['PHP_SELF']);
             } else {
                 echo "<script>alert('Gagal memperbarui jam keluar.');</script>";
+                header("Location: ".$_SERVER['PHP_SELF']);
             }
         } else {
             echo "<script>alert('Anda sudah absen keluar hari ini!');</script>";
+            header("Location: ".$_SERVER['PHP_SELF']);
         }
     } else {
         echo "<script>alert('Anda belum absen masuk hari ini!');</script>";

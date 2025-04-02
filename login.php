@@ -26,14 +26,11 @@ if(isset($_POST['btn_login'])) {
         $_SESSION["peran"] = $data_login["peran"];
             if ($_SESSION["peran"] === "admin") {
                 header("location: index.php");
-                $login_notifikasi = "ANDA BERHASIL LOGIN";
-            } else {
+            } else if ($_SESSION["peran"] === "user") {
                 header("location: ./user/index.php");
-                $login_notifikasi ="ANDA BERHASIL LOGIN";
             }
-        
     } else {
-        $login_notifikasi = "USERNAME ATAU PASSWORD SALAH!!!";
+        $notifikasi_login = "USERNAME ATAU PASSWORD SALAH!!!";
     }
 }
 ?>
@@ -65,7 +62,7 @@ if(isset($_POST['btn_login'])) {
             <div class="card-body">
                 <p class="login-box-msg">Silahkan Login Terlebih Dahulu!</p>
 
-                <span class="text-center text-red mb-5"><?= $notifikasi_login ?></span>
+                <span class="text-center login-box-msg text-red mb-10"><?= $notifikasi_login ?></span>
 
                 <form action="login.php" method="POST">
                     <div class="input-group mb-3">
