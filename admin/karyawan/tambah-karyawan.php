@@ -1,5 +1,10 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
+session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 if (isset($_POST['btn_submit'])) {
     $nip_karyawan = $_POST['nip_karyawan'];
@@ -17,8 +22,8 @@ if (isset($_POST['btn_submit'])) {
 
     $query_nipKaryawan = "SELECT * FROM karyawan";
     $result_nipKaryawan = $conn->query($query_nipKaryawan)->fetch_assoc();
-    
-    if($result_nipKaryawan['nip_karyawan'] === $nip_karyawan) {
+
+    if ($result_nipKaryawan['nip_karyawan'] === $nip_karyawan) {
         echo "<script type= 'text/javascript'>
             alert('NIP Karyawan Sudah Ada!');
             document.location.href = 'tambah-karyawan.php';
@@ -43,8 +48,6 @@ if (isset($_POST['btn_submit'])) {
             </script>";
         }
     }
-
-
 }
 ?>
 
@@ -71,11 +74,11 @@ if (isset($_POST['btn_submit'])) {
 
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -132,7 +135,7 @@ if (isset($_POST['btn_submit'])) {
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

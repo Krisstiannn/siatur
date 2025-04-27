@@ -1,5 +1,10 @@
 <?php
+session_start();
 include "/xampp/htdocs/siatur/services/koneksi.php";
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 $query_tampilData = "SELECT * FROM material";
 $result_tampilData = $conn->query($query_tampilData);
@@ -22,7 +27,7 @@ $result = $conn->query($sql);
 while ($row = $result->fetch_assoc()) {
     $nama_barang = $row['barang'];
     $jumlah_digunakan = $row['total_digunakan'];
-    
+
     // Update jumlah_sisa di tabel barang
     $update_sql = "UPDATE material SET jumlah_sisa = jumlah_awal - ? WHERE nama_barang = ?";
     $stmt = $conn->prepare($update_sql);
@@ -56,11 +61,11 @@ $conn->close();
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -123,35 +128,35 @@ $conn->close();
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <?php foreach ($result_tampilData as $material) {?>
-                                            <tbody>
-                                                <tr>
-                                                    <td><?= $material['kode_barang']?></td>
-                                                    <td><img src="/siatur/storage/img/<?= $material['gambar_barang']?>"
-                                                            alt="<?= $material['gambar_barang']?>"
-                                                            style="width: 150px;"></td>
-                                                    <td><?= $material['nama_barang']?></td>
-                                                    <td><?= $material['jumlah_awal']?></td>
-                                                    <td><?= $material['jumlah_sisa']?></td>
-                                                    <td><?= date('d-m-Y', strtotime($material['tanggal_masuk'])) ?>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-xs"
-                                                            href="edit-material.php?id=<?= $material['id']?>">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-xs"
-                                                            href="hapus-material.php?id=<?= $material['id']?>">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <?php }?>
+                                            <?php foreach ($result_tampilData as $material) { ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?= $material['kode_barang'] ?></td>
+                                                        <td><img src="/siatur/storage/img/<?= $material['gambar_barang'] ?>"
+                                                                alt="<?= $material['gambar_barang'] ?>"
+                                                                style="width: 150px;"></td>
+                                                        <td><?= $material['nama_barang'] ?></td>
+                                                        <td><?= $material['jumlah_awal'] ?></td>
+                                                        <td><?= $material['jumlah_sisa'] ?></td>
+                                                        <td><?= date('d-m-Y', strtotime($material['tanggal_masuk'])) ?>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-xs"
+                                                                href="edit-material.php?id=<?= $material['id'] ?>">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-danger btn-xs"
+                                                                href="hapus-material.php?id=<?= $material['id'] ?>">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>
@@ -165,7 +170,7 @@ $conn->close();
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

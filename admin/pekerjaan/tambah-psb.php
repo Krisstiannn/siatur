@@ -1,5 +1,10 @@
 <?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
+session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 if (isset($_POST['btn_submit'])) {
     $nama_pelanggan = $_POST['nama_pelanggan'];
@@ -12,8 +17,8 @@ if (isset($_POST['btn_submit'])) {
     $dir_foto = "/xampp/htdocs/siatur/storage/img/";
     $tmp_fileRumah = $_FILES['foto_rumah']['tmp_name'];
     $tmp_fileKtp = $_FILES['foto_ktp']['tmp_name'];
-    move_uploaded_file($tmp_fileRumah, $dir_foto.$foto_rumah);
-    move_uploaded_file($tmp_fileKtp, $dir_foto.$foto_ktp);
+    move_uploaded_file($tmp_fileRumah, $dir_foto . $foto_rumah);
+    move_uploaded_file($tmp_fileKtp, $dir_foto . $foto_ktp);
 
     if (empty($nama_pelanggan) || empty($wa_pelanggan) || empty($alamat) || empty($foto_rumah) || empty($foto_ktp) || empty($paket)) {
         echo "<script type= 'text/javascript'>
@@ -38,8 +43,7 @@ if (isset($_POST['btn_submit'])) {
             </script>";
         }
     }
-
- }
+}
 
 ?>
 <!DOCTYPE html>
@@ -63,8 +67,8 @@ if (isset($_POST['btn_submit'])) {
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
 
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
 
         <!-- Main Content -->
         <div class="content-wrapper bg-gradient-white">
@@ -103,7 +107,8 @@ if (isset($_POST['btn_submit'])) {
                                     <label for="rumah">Foto Rumah</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="foto_rumah" accept="img/*">
+                                            <input type="file" class="custom-file-input" name="foto_rumah"
+                                                accept="img/*">
                                             <label class="custom-file-label" for="exampleInputFile"></label>
                                         </div>
                                     </div>
@@ -133,7 +138,7 @@ if (isset($_POST['btn_submit'])) {
         </div>
         <!-- END Main Content -->
 
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
     </div>
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>
@@ -151,9 +156,9 @@ if (isset($_POST['btn_submit'])) {
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
-    $(function () {
-        bsCustomFileInput.init();
-    });
+        $(function() {
+            bsCustomFileInput.init();
+        });
     </script>
 </body>
 

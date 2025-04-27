@@ -1,5 +1,10 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
+session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 $id = $_GET['id'];
 $query_tampilKaryawan = "SELECT * FROM karyawan WHERE id = '$id'";
@@ -11,7 +16,7 @@ if (isset($_POST['btn_submit'])) {
 
     $query_editKaryawan = "UPDATE karyawan SET nama_karyawan = '$nama_karyawan' , posisi_karyawan = '$posisi_karyawan' WHERE id = '$id'";
     $result_editKaryawan = $conn->query($query_editKaryawan);
-    
+
     if ($result_editKaryawan) {
         echo "<script type= 'text/javascript'>
                 alert('Data Berhasil Disimpan!');
@@ -21,7 +26,7 @@ if (isset($_POST['btn_submit'])) {
         echo "<script type= 'text/javascript'>
                 alert('Data Gagal Disimpan!');
                 document.location.href = 'edit-karyawan.php?id=$id';
-            </script>" ;
+            </script>";
     }
 }
 ?>
@@ -49,11 +54,11 @@ if (isset($_POST['btn_submit'])) {
 
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -74,24 +79,24 @@ if (isset($_POST['btn_submit'])) {
                         <div class="card-header">
                             <h3 class="card-title">Edit Data Karayawan</h3>
                         </div>
-                        <form action="edit-karyawan.php?id=<?= $result_tampilKaryawan['id']?>" method="POST">
+                        <form action="edit-karyawan.php?id=<?= $result_tampilKaryawan['id'] ?>" method="POST">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nip">Nomor Induk Pegawai</label>
                                     <input type="text" class="form-control" name="nip_karyawan"
                                         placeholder="Nomor Induk Pegawai"
-                                        value="<?= $result_tampilKaryawan['nip_karyawan']?>" disabled>
+                                        value="<?= $result_tampilKaryawan['nip_karyawan'] ?>" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Karyawan</label>
                                     <input type="text" class="form-control" name="nama_karyawan"
                                         placeholder="Nama Karyawan"
-                                        value="<?= $result_tampilKaryawan['nama_karyawan']?>">
+                                        value="<?= $result_tampilKaryawan['nama_karyawan'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="jabatan">Jabatan Karyawan</label>
                                     <select class="custom-select" name="jabatan_karyawan">
-                                        <option><?= $result_tampilKaryawan['posisi_karyawan']?></option>
+                                        <option><?= $result_tampilKaryawan['posisi_karyawan'] ?></option>
                                         <option>Admin</option>
                                         <option>IT</option>
                                         <option>Teknisi</option>
@@ -101,7 +106,8 @@ if (isset($_POST['btn_submit'])) {
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success" name="btn_submit">Submit</button>
-                                <a href="datakaryawan.php" type="submit" class="btn btn-danger" name="btn_cancel">Cancel</a>
+                                <a href="datakaryawan.php" type="submit" class="btn btn-danger"
+                                    name="btn_cancel">Cancel</a>
                             </div>
                         </form>
                     </div>
@@ -111,7 +117,7 @@ if (isset($_POST['btn_submit'])) {
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

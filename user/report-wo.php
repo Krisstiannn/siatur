@@ -1,6 +1,10 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 $id = $_GET['id'];
 $id_karyawan = $_SESSION['id_karyawan'] ?? null;
@@ -34,25 +38,25 @@ if (isset($_POST['btn_submit'])) {
     $tmp_odp = $_FILES['foto_odp']['tmp_name'];
     $tmp_redaman = $_FILES['foto_redaman']['tmp_name'];
     $tmp_modem = $_FILES['foto_modem']['tmp_name'];
-    move_uploaded_file($tmp_odp, $dir_foto.$foto_odp);
-    move_uploaded_file($tmp_redaman, $dir_foto.$foto_redaman);
-    move_uploaded_file($tmp_modem, $dir_foto.$foto_modem);
+    move_uploaded_file($tmp_odp, $dir_foto . $foto_odp);
+    move_uploaded_file($tmp_redaman, $dir_foto . $foto_redaman);
+    move_uploaded_file($tmp_modem, $dir_foto . $foto_modem);
 
     $query_tambahData = "INSERT INTO report (id, no_wo, nama_pelanggan, alamat_pelanggan, status, keterangan, barang1, barang2, barang3, jumlah1, jumlah2, jumlah3, foto_odp, foto_redaman, foto_modem) 
         VALUES ('', '$no_wo', '$nama_pelanggan', '$alamat_pelanggan', '$status','$keterangan', '$barang1', '$barang2', '$barang3', '$jumlah1', '$jumlah2', '$jumlah3', '$foto_odp', '$foto_redaman', '$foto_modem')";
-        $result_tambahData = $conn->query($query_tambahData);
+    $result_tambahData = $conn->query($query_tambahData);
 
-        if ($result_tambahData) {
-            echo "<script type= 'text/javascript'>
+    if ($result_tambahData) {
+        echo "<script type= 'text/javascript'>
                 alert('Data Berhasil disimpan!');
                 document.location.href = 'wo.php';
             </script>";
-        } else {
-            echo "<script type= 'text/javascript'>
+    } else {
+        echo "<script type= 'text/javascript'>
                 alert('Data Gagal disimpan!');
                 document.location.href = 'report-wo.php';
             </script>";
-        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -76,8 +80,8 @@ if (isset($_POST['btn_submit'])) {
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
 
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php" ?>
 
         <!-- Main Content -->
         <div class="content-wrapper bg-gradient-white">
@@ -97,22 +101,22 @@ if (isset($_POST['btn_submit'])) {
                         <div class="card-header">
                             <h3 class="card-title">Report Pemasangan Baru</h3>
                         </div>
-                        <form action="report-wo.php?id=<?= $result['id']?>" method="POST" enctype="multipart/form-data">
+                        <form action="report-wo.php?id=<?= $result['id'] ?>" method="POST" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="whatsapp">No Working Order</label>
                                     <input type="text" class="form-control" name="no_wo" placeholder="NO WO"
-                                        value="<?= $result['id']?>">
+                                        value="<?= $result['id'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama Pelanggan</label>
                                     <input type="text" class="form-control" name="nama_pelanggan"
-                                        placeholder="Nama Pelanggan" value="<?= $result['nama_pelanggan']?>">
+                                        placeholder="Nama Pelanggan" value="<?= $result['nama_pelanggan'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat atau Titik Kordinat</label>
                                     <input type="text" class="form-control" name="alamat" placeholder="Alamat"
-                                        value="<?= $result['alamat_pelanggan']?>">
+                                        value="<?= $result['alamat_pelanggan'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="jabatan">Status Pengerjaan</label>
@@ -130,9 +134,9 @@ if (isset($_POST['btn_submit'])) {
                                     <div class="form-group col-lg-6">
                                         <label for="nama_barang">Material Yang digunakan</label>
                                         <select class="custom-select" name="barang1">
-                                            <?php foreach($result_material as $material) {?>
-                                            <option><?= $material ['nama_barang']?></option>
-                                            <?php }?>
+                                            <?php foreach ($result_material as $material) { ?>
+                                                <option><?= $material['nama_barang'] ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-6">
@@ -144,9 +148,9 @@ if (isset($_POST['btn_submit'])) {
                                     <div class="form-group col-lg-6">
                                         <label for="nama_barang">Material Yang digunakan</label>
                                         <select class="custom-select" name="barang2">
-                                            <?php foreach($result_material as $material) {?>
-                                            <option><?= $material ['nama_barang']?></option>
-                                            <?php }?>
+                                            <?php foreach ($result_material as $material) { ?>
+                                                <option><?= $material['nama_barang'] ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-6">
@@ -158,9 +162,9 @@ if (isset($_POST['btn_submit'])) {
                                     <div class="form-group col-lg-6">
                                         <label for="nama_barang">Material Yang digunakan</label>
                                         <select class="custom-select" name="barang3">
-                                            <?php foreach($result_material as $material) {?>
-                                            <option><?= $material ['nama_barang']?></option>
-                                            <?php }?>
+                                            <?php foreach ($result_material as $material) { ?>
+                                                <option><?= $material['nama_barang'] ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-6">
@@ -207,7 +211,7 @@ if (isset($_POST['btn_submit'])) {
         </div>
         <!-- END Main Content -->
 
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
     </div>
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>
@@ -225,9 +229,9 @@ if (isset($_POST['btn_submit'])) {
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
-    $(function() {
-        bsCustomFileInput.init();
-    });
+        $(function() {
+            bsCustomFileInput.init();
+        });
     </script>
 </body>
 

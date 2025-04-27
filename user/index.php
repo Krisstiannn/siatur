@@ -1,6 +1,11 @@
 <?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
+
 $id_karyawan = $_SESSION['id_karyawan'] ?? null;
 $query_jumlah = "SELECT COUNT(*) AS total_pekerjaan FROM wo WHERE id_karyawan = '$id_karyawan'";
 $result_tampilJumlah = $conn->query($query_jumlah)->fetch_assoc();
@@ -27,11 +32,11 @@ $result_tampilJumlah = $conn->query($query_jumlah)->fetch_assoc();
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -40,8 +45,8 @@ $result_tampilJumlah = $conn->query($query_jumlah)->fetch_assoc();
                 <div class="container-fluid text-black">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Selamat Datang <?= $_SESSION['nama_karyawan']?> , Anda Login Sebagai
-                                <?= $_SESSION['peran']?></h1>
+                            <h1 class="m-0">Selamat Datang <?= $_SESSION['nama_karyawan'] ?> , Anda Login Sebagai
+                                <?= $_SESSION['peran'] ?></h1>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -69,7 +74,7 @@ $result_tampilJumlah = $conn->query($query_jumlah)->fetch_assoc();
                                         <span class="info-box-text text-red text-bold" style="font-size: 20px">Working
                                             Order</span>
                                         <span
-                                            style="font-size: 30px"><?= $result_tampilJumlah['total_pekerjaan']?></span>
+                                            style="font-size: 30px"><?= $result_tampilJumlah['total_pekerjaan'] ?></span>
                                     </div>
                                 </div>
                             </a>
@@ -85,7 +90,7 @@ $result_tampilJumlah = $conn->query($query_jumlah)->fetch_assoc();
         </aside>
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
     <!-- ./wrapper -->

@@ -1,6 +1,10 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 date_default_timezone_set('Asia/Makassar');
 $nip_karyawan = $_SESSION['nip'];
@@ -14,22 +18,22 @@ $result_id = $conn->query($query_id_karyawan);
 $query_tampilData = "SELECT * FROM absen";
 $tampil_data = $conn->query($query_tampilData);
 
-if(isset($_POST['btn_absen'])) {
+if (isset($_POST['btn_absen'])) {
     if ($result_id->num_rows > 0) {
         $row = $result_id->fetch_assoc();
         $id_karyawan = $row['id'];
-    
+
         $sql = "INSERT INTO absen (id, id_karyawan, nip_karyawan, nama_karyawan, tanggal, jam_masuk) 
                 VALUES (NULL, '$id_karyawan', '$nip_karyawan', '$nama_karyawan', '$tanggal', '$jam')";
-        
+
         $result = $conn->query($sql);
-        
+
         if ($result === TRUE) {
             echo "<script type='text/javascript'>alert('Absen BERHASIL Dilakukan!');</script>";
-            header("Location: ".$_SERVER['PHP_SELF']);
+            header("Location: " . $_SERVER['PHP_SELF']);
         } else {
             echo "<script type='text/javascript'>alert('Absen GAGAL Di Lakukan!');</script>";
-            header("Location: ".$_SERVER['PHP_SELF']);
+            header("Location: " . $_SERVER['PHP_SELF']);
         }
     } else {
         echo "<script type='text/javascript'>alert('Data Karyawan Tidak Ditemukan!');</script>";
@@ -55,14 +59,14 @@ if (isset($_POST['absen_keluar'])) {
             ORDER BY id ASC LIMIT 1";
             if ($conn->query($update) === TRUE) {
                 echo "<script>alert('Terima Kasih Sudah Berjuang Hari Ini :)');</script>";
-                header("Location: ".$_SERVER['PHP_SELF']);
+                header("Location: " . $_SERVER['PHP_SELF']);
             } else {
                 echo "<script>alert('Gagal memperbarui jam keluar.');</script>";
-                header("Location: ".$_SERVER['PHP_SELF']);
+                header("Location: " . $_SERVER['PHP_SELF']);
             }
         } else {
             echo "<script>alert('Anda sudah absen keluar hari ini!');</script>";
-            header("Location: ".$_SERVER['PHP_SELF']);
+            header("Location: " . $_SERVER['PHP_SELF']);
         }
     } else {
         echo "<script>alert('Anda belum absen masuk hari ini!');</script>";
@@ -91,11 +95,11 @@ if (isset($_POST['absen_keluar'])) {
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -150,15 +154,15 @@ if (isset($_POST['absen_keluar'])) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($tampil_data as $absen) {?>
-                                                <tr>
-                                                    <td><?= $absen['nip_karyawan']?></td>
-                                                    <td><?= $absen['nama_karyawan']?></td>
-                                                    <td><?= date('d-m-Y', strtotime($absen['tanggal'])) ?></td>
-                                                    <td><?= $absen['jam_masuk']?></td>
-                                                    <td><?= $absen['jam_keluar']?></td>
-                                                </tr>
-                                                <?php }?>
+                                                <?php foreach ($tampil_data as $absen) { ?>
+                                                    <tr>
+                                                        <td><?= $absen['nip_karyawan'] ?></td>
+                                                        <td><?= $absen['nama_karyawan'] ?></td>
+                                                        <td><?= date('d-m-Y', strtotime($absen['tanggal'])) ?></td>
+                                                        <td><?= $absen['jam_masuk'] ?></td>
+                                                        <td><?= $absen['jam_keluar'] ?></td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -176,7 +180,7 @@ if (isset($_POST['absen_keluar'])) {
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

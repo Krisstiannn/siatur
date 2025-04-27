@@ -1,7 +1,12 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
 include "/xampp/htdocs/siatur/library/fpdf.php";
 session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
+
 $keterangan = "";
 $query = "SELECT karyawan.nip_karyawan, karyawan.nama_karyawan, 
             COUNT(report.id) AS jumlah_pekerjaan
@@ -12,32 +17,32 @@ $query = "SELECT karyawan.nip_karyawan, karyawan.nama_karyawan,
 $jumlah = $conn->query($query)->fetch_assoc();
 $result = $conn->query($query);
 
-if($jumlah['jumlah_pekerjaan'] >= '20') {
+if ($jumlah['jumlah_pekerjaan'] >= '20') {
     $keterangan = "GOOD PERFORM";
 } else if ($jumlah['jumlah_pekerjaan'] == '10') {
     $keterangan = "STABIL";
-} else  {
+} else {
     $keterangan = "BAD PERFORM";
 }
 
-if(isset($_POST['cetak'])) {
+if (isset($_POST['cetak'])) {
 
     $logoPath = 'netsun.jpg';
     list($logoWidth, $logoHeight) = getimagesize($logoPath);
-    
-    $maxLogoHeight = 25;  
-    $maxLogoWidth = 50;  
+
+    $maxLogoHeight = 25;
+    $maxLogoWidth = 50;
     $scaleHeight = $maxLogoHeight / $logoHeight;
     $scaleWidth = $maxLogoWidth / $logoWidth;
-    $scale = min($scaleHeight, $scaleWidth); 
+    $scale = min($scaleHeight, $scaleWidth);
     $newLogoWidth = $logoWidth * $scale;
     $newLogoHeight = $logoHeight * $scale;
     $pdf = new FPDF('P', 'mm', 'A4');
     $pdf->AddPage();
     $pdf->Image($logoPath, 10, 10, $newLogoWidth, $newLogoHeight);
-    
+
     $pdf->SetFont('Arial', 'B', 14);
-    $pdf->Cell(60); 
+    $pdf->Cell(60);
     $pdf->Cell(0, 7, 'PT. Net Sun Power (NSP)', 0, 1, 'L');
     $pdf->SetFont('Arial', '', 12);
     $pdf->Cell(60);
@@ -47,45 +52,45 @@ if(isset($_POST['cetak'])) {
     $pdf->Ln(5);
     $pdf->Cell(275, 0, '', 'B', 1, 'C');
     $pdf->Ln(5);
-    
-    
+
+
     $pdf->SetFont('Arial', 'B', 14);
     $pdf->Cell(190, 10, 'Laporan Performa Karyawan', 0, 1, 'C');
     $pdf->SetFont('Arial', 'I', 12);
     //$pdf->Cell(190, 10, "Bulan: $bulan_tulisan", 0, 1, 'C');
     $pdf->Ln(5);
-    
+
     $pdf->SetFont('Arial', 'B', 10);
     $pdf->Cell(40, 10, 'NIP Karyawan', 1, 0, 'C');
     $pdf->Cell(60, 10, 'Nama Karyawan', 1, 0, 'C');
     $pdf->Cell(50, 10, 'Total Pekerjaan', 1, 0, 'C');
     $pdf->Cell(40, 10, 'Keterangan', 1, 1, 'C');
-    
-    
-    
+
+
+
     $pdf->SetFont('Arial', '', 10);
     while ($row = $result->fetch_assoc()) {
         $pdf->Cell(40, 10, $row['nip_karyawan'], 1, 0, 'C');
         $pdf->Cell(60, 10, $row['nama_karyawan'], 1, 0, 'C');
         $pdf->Cell(50, 10, $row['jumlah_pekerjaan'], 1, 0, 'C');
-        $pdf->Cell(40, 10, $keterangan , 1, 1, 'C'); 
+        $pdf->Cell(40, 10, $keterangan, 1, 1, 'C');
     }
-    
-    
+
+
     $pdf->Ln(15);
-    
+
     $pdf->SetFont('Arial', '', 12);
     $pdf->Cell(120);
-    $pdf->Cell(70, 7, 'Banjarmasin, ' . date('d-m-Y'), 0, 1, 'C'); 
+    $pdf->Cell(70, 7, 'Banjarmasin, ' . date('d-m-Y'), 0, 1, 'C');
     $pdf->Ln(20);
-    
+
     $pdf->Cell(120);
     $pdf->Cell(70, 7, '______________________', 0, 1, 'C');
     $pdf->Cell(120);
     $pdf->Cell(70, 7, $_SESSION['nama_karyawan'], 0, 1, 'C');
     $pdf->Cell(120);
-    
-    
+
+
     $pdf->Output();
 }
 
@@ -112,8 +117,8 @@ if(isset($_POST['cetak'])) {
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
 
         <!-- Main Content -->
         <div class="content-wrapper bg-gradient-white">
@@ -175,12 +180,12 @@ if(isset($_POST['cetak'])) {
                                             </thead>
                                             <tbody>
                                                 <?php while ($row = $result->fetch_assoc()): ?>
-                                                <tr>
-                                                    <td><?= $row['nip_karyawan'] ?></td>
-                                                    <td><?= $row['nama_karyawan'] ?></td>
-                                                    <td><?= $row['jumlah_pekerjaan'] ?></td>
-                                                    <td><?= $keterangan ?></td>
-                                                </tr>
+                                                    <tr>
+                                                        <td><?= $row['nip_karyawan'] ?></td>
+                                                        <td><?= $row['nama_karyawan'] ?></td>
+                                                        <td><?= $row['jumlah_pekerjaan'] ?></td>
+                                                        <td><?= $keterangan ?></td>
+                                                    </tr>
                                                 <?php endwhile; ?>
                                             </tbody>
                                         </table>
@@ -195,7 +200,7 @@ if(isset($_POST['cetak'])) {
         </div>
         <!-- END Main Content -->
 
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
     </div>
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>

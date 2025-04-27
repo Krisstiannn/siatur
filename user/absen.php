@@ -1,6 +1,10 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 date_default_timezone_set('Asia/Makassar');
 $nip_karyawan = $_SESSION['nip'];
@@ -9,19 +13,19 @@ $tanggal = date('Y-m-d');
 $jam = date('H:i:s');
 
 $query_tampilData = "SELECT * FROM absen WHERE nip_karyawan = '$nip_karyawan'";
-$tampil_data = $conn -> query($query_tampilData);
+$tampil_data = $conn->query($query_tampilData);
 
 if (isset($_POST['btn_absen'])) {
-    
+
     $cek_absensi = "SELECT tanggal FROM absen WHERE nip_karyawan = '$nip_karyawan' AND tanggal = '$tanggal'";
-    $cek = $conn -> query($cek_absensi);
-    
-    if ($cek -> num_rows > 0) {
+    $cek = $conn->query($cek_absensi);
+
+    if ($cek->num_rows > 0) {
         header("location:absen.php?message=MAAF ANDA SUDAH ABSEN HARI INI");
     } else {
         $sql = "INSERT INTO  `absen` (`id`,`nip_karyawan`,`nama_karyawan`,`tanggal`,`jam_masuk`,`jam_keluar`) 
         VALUES (NULL,'$nip_karyawan', '$nama_karyawan', '$tanggal','$jam',NULL)";
-        $result = $conn -> query($sql);
+        $result = $conn->query($sql);
         if ($result === TRUE) {
             header("location:absen.php?message=ABSEN BERHASIL DILAKUKAN");
         } else {
@@ -31,22 +35,22 @@ if (isset($_POST['btn_absen'])) {
 }
 
 if (isset($_POST['absen_keluar'])) {
-    if ($tampil_data->num_rows>0) {
-        $data = $tampil_data->fetch_assoc(); 
+    if ($tampil_data->num_rows > 0) {
+        $data = $tampil_data->fetch_assoc();
         if (empty($data['jam_keluar']) && !empty($data['jam_masuk']) && $tanggal ==  $data['tanggal']) {
             if (isset($_POST['absen_keluar'])) {
                 $update = "UPDATE absen SET jam_keluar = '$jam' WHERE nip_karyawan = '$nip_karyawan'
                 AND tanggal = '$tanggal'";
-            
-                $jam_keluar = $conn -> query($update);
+
+                $jam_keluar = $conn->query($update);
                 if ($jam_keluar == TRUE) {
                     echo "<script type= 'text/javascript'>
                     alert('Terima Kasih Sudah Berjuang Hari Ini :)');
                     </script>";
                 }
-            } 
-        } 
-}
+            }
+        }
+    }
 }
 
 ?>
@@ -72,11 +76,11 @@ if (isset($_POST['absen_keluar'])) {
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar-user.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -132,27 +136,27 @@ if (isset($_POST['absen_keluar'])) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($tampil_data as $absen) {?>
-                                                <tr>
-                                                    <td><?= $absen['nip_karyawan']?></td>
-                                                    <td><?= $absen['nama_karyawan']?></td>
-                                                    <td><?= $absen['tanggal']?></td>
-                                                    <td><?= $absen['jam_masuk']?></td>
-                                                    <td><?= $absen['jam_keluar']?></td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm" href="">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm" href="">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                <?php }?>
+                                                <?php foreach ($tampil_data as $absen) { ?>
+                                                    <tr>
+                                                        <td><?= $absen['nip_karyawan'] ?></td>
+                                                        <td><?= $absen['nama_karyawan'] ?></td>
+                                                        <td><?= $absen['tanggal'] ?></td>
+                                                        <td><?= $absen['jam_masuk'] ?></td>
+                                                        <td><?= $absen['jam_keluar'] ?></td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm" href="">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-danger btn-sm" href="">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -170,7 +174,7 @@ if (isset($_POST['absen_keluar'])) {
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

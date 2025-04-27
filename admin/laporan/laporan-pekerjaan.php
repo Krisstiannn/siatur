@@ -1,81 +1,87 @@
 <?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
 session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
+
 $query_tampil = "SELECT * FROM report";
 $result_tampil = $conn->query($query_tampil);
 
-if (isset($_POST{'cetak'})) {
-include "/xampp/htdocs/siatur/library/fpdf.php";;
+if (isset($_POST{
+'cetak'})) {
+    include "/xampp/htdocs/siatur/library/fpdf.php";;
 
-$logoPath = 'netsun.jpg';
+    $logoPath = 'netsun.jpg';
 
-list($logoWidth, $logoHeight) = getimagesize($logoPath);
-$maxLogoHeight = 25; 
-$maxLogoWidth = 50;  
-$scaleHeight = $maxLogoHeight / $logoHeight;
-$scaleWidth = $maxLogoWidth / $logoWidth;
-$scale = min($scaleHeight, $scaleWidth);
-$newLogoWidth = $logoWidth * $scale;
-$newLogoHeight = $logoHeight * $scale;
+    list($logoWidth, $logoHeight) = getimagesize($logoPath);
+    $maxLogoHeight = 25;
+    $maxLogoWidth = 50;
+    $scaleHeight = $maxLogoHeight / $logoHeight;
+    $scaleWidth = $maxLogoWidth / $logoWidth;
+    $scale = min($scaleHeight, $scaleWidth);
+    $newLogoWidth = $logoWidth * $scale;
+    $newLogoHeight = $logoHeight * $scale;
 
-$pdf = new FPDF('L', 'mm', 'A4'); 
-$pdf->AddPage();
+    $pdf = new FPDF('L', 'mm', 'A4');
+    $pdf->AddPage();
 
-$pdf->Image($logoPath, 10, 10, $newLogoWidth, $newLogoHeight);
+    $pdf->Image($logoPath, 10, 10, $newLogoWidth, $newLogoHeight);
 
 
-$pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(60);
-$pdf->Cell(0, 7, 'PT. Net Sun Power (NSP)', 0, 1, 'L');
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(60);
-$pdf->Cell(0, 7, 'Telp: 085654807560', 0, 1, 'L');
-$pdf->Cell(60);
-$pdf->Cell(0, 7, 'Jl. Handil Bakti, Semangat Dalam Komp Mitra Bakti Jalur 1 Blok D no 24', 0, 1, 'L');
-$pdf->Ln(5);
-$pdf->Cell(275, 0, '', 'B', 1, 'C');
-$pdf->Ln(5);
-$pdf->SetFont('Arial', 'B', 14);
-$pdf->Cell(275, 10, 'Laporan Karyawan', 0, 1, 'C');
+    $pdf->SetFont('Arial', 'B', 14);
+    $pdf->Cell(60);
+    $pdf->Cell(0, 7, 'PT. Net Sun Power (NSP)', 0, 1, 'L');
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->Cell(60);
+    $pdf->Cell(0, 7, 'Telp: 085654807560', 0, 1, 'L');
+    $pdf->Cell(60);
+    $pdf->Cell(0, 7, 'Jl. Handil Bakti, Semangat Dalam Komp Mitra Bakti Jalur 1 Blok D no 24', 0, 1, 'L');
+    $pdf->Ln(5);
+    $pdf->Cell(275, 0, '', 'B', 1, 'C');
+    $pdf->Ln(5);
+    $pdf->SetFont('Arial', 'B', 14);
+    $pdf->Cell(275, 10, 'Laporan Karyawan', 0, 1, 'C');
 
-$pdf->SetFont('Arial', 'B', 10);
-$pdf->Cell(40, 10, 'Nama Pelanggan', 1, 0, 'C');
-$pdf->Cell(50, 10, 'Alamat Pelanggan', 1, 0, 'C');
-$pdf->Cell(30, 10, 'Status', 1, 0, 'C');
-$pdf->Cell(40, 10, 'Keterangan', 1, 0, 'C');
-$pdf->Cell(25, 10, 'Material', 1, 0, 'C');
-$pdf->Cell(15, 10, 'Jumlah', 1, 0, 'C');
-$pdf->Cell(25, 10, 'Material', 1, 0, 'C');
-$pdf->Cell(15, 10, 'Jumlah', 1, 0, 'C');
-$pdf->Cell(25, 10, 'Material', 1, 0, 'C');
-$pdf->Cell(15, 10, 'Jumlah', 1, 1, 'C');
+    $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(40, 10, 'Nama Pelanggan', 1, 0, 'C');
+    $pdf->Cell(50, 10, 'Alamat Pelanggan', 1, 0, 'C');
+    $pdf->Cell(30, 10, 'Status', 1, 0, 'C');
+    $pdf->Cell(40, 10, 'Keterangan', 1, 0, 'C');
+    $pdf->Cell(25, 10, 'Material', 1, 0, 'C');
+    $pdf->Cell(15, 10, 'Jumlah', 1, 0, 'C');
+    $pdf->Cell(25, 10, 'Material', 1, 0, 'C');
+    $pdf->Cell(15, 10, 'Jumlah', 1, 0, 'C');
+    $pdf->Cell(25, 10, 'Material', 1, 0, 'C');
+    $pdf->Cell(15, 10, 'Jumlah', 1, 1, 'C');
 
-$pdf->SetFont('Arial', '', 10);
-foreach ($result_tampil as $report) {
-$pdf->Cell(40, 10, $report['nama_pelanggan'], 1, 0, 'C');
-$pdf->Cell(50, 10, $report['alamat_pelanggan'], 1, 0, 'C');
-$pdf->Cell(30, 10, $report['status'], 1, 0, 'C');
-$pdf->Cell(40, 10, $report['keterangan'], 1, 0, 'C');
-$pdf->Cell(25, 10, $report['barang1'], 1, 0, 'C');
-$pdf->Cell(15, 10, $report['jumlah1'], 1, 0, 'C');
-$pdf->Cell(25, 10, $report['barang2'], 1, 0, 'C');
-$pdf->Cell(15, 10, $report['jumlah2'], 1, 0, 'C');
-$pdf->Cell(25, 10, $report['barang3'], 1, 0, 'C');
-$pdf->Cell(15, 10, $report['jumlah3'], 1, 1, 'C');
-}
-$pdf->Ln(15);
+    $pdf->SetFont('Arial', '', 10);
+    foreach ($result_tampil as $report) {
+        $pdf->Cell(40, 10, $report['nama_pelanggan'], 1, 0, 'C');
+        $pdf->Cell(50, 10, $report['alamat_pelanggan'], 1, 0, 'C');
+        $pdf->Cell(30, 10, $report['status'], 1, 0, 'C');
+        $pdf->Cell(40, 10, $report['keterangan'], 1, 0, 'C');
+        $pdf->Cell(25, 10, $report['barang1'], 1, 0, 'C');
+        $pdf->Cell(15, 10, $report['jumlah1'], 1, 0, 'C');
+        $pdf->Cell(25, 10, $report['barang2'], 1, 0, 'C');
+        $pdf->Cell(15, 10, $report['jumlah2'], 1, 0, 'C');
+        $pdf->Cell(25, 10, $report['barang3'], 1, 0, 'C');
+        $pdf->Cell(15, 10, $report['jumlah3'], 1, 1, 'C');
+    }
+    $pdf->Ln(15);
 
-$pdf->SetFont('Arial', '', 12);
-$pdf->Cell(180);
-$pdf->Cell(70, 7, 'Jakarta, ' . date('d-m-Y'), 0, 1, 'C');
-$pdf->Ln(20);
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->Cell(180);
+    $pdf->Cell(70, 7, 'Jakarta, ' . date('d-m-Y'), 0, 1, 'C');
+    $pdf->Ln(20);
 
-$pdf->Cell(180);
-$pdf->Cell(70, 7, '______________________', 0, 1, 'C');
-$pdf->Cell(180);
-$pdf->Cell(70, 7, $_SESSION['nama_karyawan'], 0, 1, 'C');
+    $pdf->Cell(180);
+    $pdf->Cell(70, 7, '______________________', 0, 1, 'C');
+    $pdf->Cell(180);
+    $pdf->Cell(70, 7, $_SESSION['nama_karyawan'], 0, 1, 'C');
 
-$pdf->Output();
+    $pdf->Output();
 }
 ?>
 <!DOCTYPE html>
@@ -100,8 +106,8 @@ $pdf->Output();
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
 
         <!-- Main Content -->
         <div class="content-wrapper bg-gradient-white">
@@ -163,15 +169,15 @@ $pdf->Output();
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($result_tampil as $report) {?>
-                                                <tr>
-                                                    <td><?= $report['no_wo']?></td>
-                                                    <td><?= $report['nama_pelanggan']?></td>
-                                                    <td><?= $report['alamat_pelanggan']?></td>
-                                                    <td><?= $report['status']?></td>
-                                                    <td><?= $report['keterangan']?></td>
-                                                </tr>
-                                                <?php }?>
+                                                <?php foreach ($result_tampil as $report) { ?>
+                                                    <tr>
+                                                        <td><?= $report['no_wo'] ?></td>
+                                                        <td><?= $report['nama_pelanggan'] ?></td>
+                                                        <td><?= $report['alamat_pelanggan'] ?></td>
+                                                        <td><?= $report['status'] ?></td>
+                                                        <td><?= $report['keterangan'] ?></td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -185,7 +191,7 @@ $pdf->Output();
         </div>
         <!-- END Main Content -->
 
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
     </div>
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>

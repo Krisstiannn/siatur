@@ -1,5 +1,10 @@
-<?php 
+<?php
+session_start();
 include "/xampp/htdocs/siatur/services/koneksi.php";
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 $query_tampilData = "SELECT * FROM inventaris";
 $result_tampilData = $conn->query($query_tampilData);
@@ -27,11 +32,11 @@ $result_tampilData = $conn->query($query_tampilData);
 
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -93,37 +98,37 @@ $result_tampilData = $conn->query($query_tampilData);
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <?php foreach ($result_tampilData as $inventaris) {?>
-                                            <tbody>
-                                                <tr>
-                                                    <td><?= $inventaris['kode_barang']?></td>
-                                                    <td>
-                                                        <img src="/siatur/storage/img/<?= $inventaris['gambar_barang']?>"
-                                                            alt="<?= $inventaris['gambar_barang']?>"
-                                                            style="width: 100px;">
-                                                    </td>
-                                                    <td><?= $inventaris['nama_barang']?></td>
-                                                    <td><?= $inventaris['kondisi_barang']?></td>
-                                                    <td><?= $inventaris['jumlah_barang']?></td>
-                                                    <td><?= date('d-m-Y', strtotime($inventaris['tanggal_masuk'])) ?>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm"
-                                                            href="edit-inventaris.php?id=<?= $inventaris['id']?>">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm"
-                                                            href="hapus-inventaris.php?id=<?= $inventaris['id']?>">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <?php }?>
+                                            <?php foreach ($result_tampilData as $inventaris) { ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?= $inventaris['kode_barang'] ?></td>
+                                                        <td>
+                                                            <img src="/siatur/storage/img/<?= $inventaris['gambar_barang'] ?>"
+                                                                alt="<?= $inventaris['gambar_barang'] ?>"
+                                                                style="width: 100px;">
+                                                        </td>
+                                                        <td><?= $inventaris['nama_barang'] ?></td>
+                                                        <td><?= $inventaris['kondisi_barang'] ?></td>
+                                                        <td><?= $inventaris['jumlah_barang'] ?></td>
+                                                        <td><?= date('d-m-Y', strtotime($inventaris['tanggal_masuk'])) ?>
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm"
+                                                                href="edit-inventaris.php?id=<?= $inventaris['id'] ?>">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-danger btn-sm"
+                                                                href="hapus-inventaris.php?id=<?= $inventaris['id'] ?>">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>
@@ -137,7 +142,7 @@ $result_tampilData = $conn->query($query_tampilData);
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

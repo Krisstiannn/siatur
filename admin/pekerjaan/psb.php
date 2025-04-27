@@ -1,5 +1,10 @@
 <?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
+session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 $query_tampil = "SELECT * FROM psb";
 $result_tampil = $conn->query($query_tampil);
@@ -10,21 +15,21 @@ if (isset($_POST['btn_kirim'])) {
     $id_pekerjaan = $_POST['id_pekerjaan'];
     $id_karyawan = $_POST['id_karyawan'];
 
-    
+
     $cek_karyawan = $conn->query("SELECT * FROM karyawan WHERE id = '$id_karyawan'");
     $cek_pekerjaan = $conn->query("SELECT * FROM psb WHERE id = '$id_pekerjaan'");
     $cek = $conn->query("SELECT * FROM wo WHERE id_pekerjaan = '$id_pekerjaan'")->fetch_assoc();
 
-    if ($cek>0) {
-            echo "<script>alert('Pekerjaan Sudah Di Kirimkan Ke Karyawan!'); window.location.href='psb.php';</script>";
-            die();
+    if ($cek > 0) {
+        echo "<script>alert('Pekerjaan Sudah Di Kirimkan Ke Karyawan!'); window.location.href='psb.php';</script>";
+        die();
     } else if ($cek_karyawan->num_rows > 0 && $cek_pekerjaan->num_rows > 0) {
         $query_insert = "INSERT INTO wo (id_karyawan, id_pekerjaan) VALUES ('$id_karyawan', '$id_pekerjaan')";
-            if ($conn->query($query_insert)) {
-                echo "<script>alert('Pekerjaan berhasil dikirim ke karyawan!'); window.location.href='psb.php';</script>";
-            } else {
-                echo "<script>alert('Gagal mengirim pekerjaan!'); window.history.back();</script>";
-            }
+        if ($conn->query($query_insert)) {
+            echo "<script>alert('Pekerjaan berhasil dikirim ke karyawan!'); window.location.href='psb.php';</script>";
+        } else {
+            echo "<script>alert('Gagal mengirim pekerjaan!'); window.history.back();</script>";
+        }
     } else {
         echo "<script>alert('Data tidak valid!'); window.history.back();</script>";
     }
@@ -50,8 +55,8 @@ if (isset($_POST['btn_kirim'])) {
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
 
         <!-- Main Content -->
         <div class="content-wrapper bg-gradient-white">
@@ -114,47 +119,47 @@ if (isset($_POST['btn_kirim'])) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($result_tampil as $psb) {?>
-                                                <tr>
-                                                    <td><?= $psb['nama_pelanggan']?></td>
-                                                    <td><?= $psb['wa_pelanggan']?></td>
-                                                    <td><?= $psb['alamat_pelanggan']?></td>
-                                                    <td><img src="/siatur/storage/img/<?= $psb['rumah_pelanggan']?>"
-                                                            alt="<?= $psb['rumah_pelanggan']?>" style="width: 100px;">
-                                                    </td>
-                                                    <td><img src="/siatur/storage/img/<?= $psb['ktp_pelanggan']?>"
-                                                            alt="<?= $psb['ktp_pelanggan']?>" style="width: 100px;">
-                                                    </td>
-                                                    <td><?= $psb['paket_internet']?></td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm"
-                                                            href="edit-psb.php?id=<?= $psb['id']?>">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm"
-                                                            href="hapus-psb.php?id=<?= $psb['id']?>">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
+                                                <?php foreach ($result_tampil as $psb) { ?>
+                                                    <tr>
+                                                        <td><?= $psb['nama_pelanggan'] ?></td>
+                                                        <td><?= $psb['wa_pelanggan'] ?></td>
+                                                        <td><?= $psb['alamat_pelanggan'] ?></td>
+                                                        <td><img src="/siatur/storage/img/<?= $psb['rumah_pelanggan'] ?>"
+                                                                alt="<?= $psb['rumah_pelanggan'] ?>" style="width: 100px;">
+                                                        </td>
+                                                        <td><img src="/siatur/storage/img/<?= $psb['ktp_pelanggan'] ?>"
+                                                                alt="<?= $psb['ktp_pelanggan'] ?>" style="width: 100px;">
+                                                        </td>
+                                                        <td><?= $psb['paket_internet'] ?></td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm"
+                                                                href="edit-psb.php?id=<?= $psb['id'] ?>">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-danger btn-sm"
+                                                                href="hapus-psb.php?id=<?= $psb['id'] ?>">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                                Delete
+                                                            </a>
 
-                                                        <form action="psb.php" method="POST">
-                                                            <input type="hidden" name="id_pekerjaan"
-                                                                value="<?= $psb['id'] ?>">
-                                                            <select name="id_karyawan">
-                                                                <?php foreach ($result_tampilkaryawan as $karyawan) { ?>
-                                                                <option value="<?= $karyawan['id'] ?>">
-                                                                    <?= $karyawan['nama_karyawan'] ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                            <button type="submit" name="btn_kirim"
-                                                                class="btn btn-warning btn-sm">Kirim</button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                                <?php }?>
+                                                            <form action="psb.php" method="POST">
+                                                                <input type="hidden" name="id_pekerjaan"
+                                                                    value="<?= $psb['id'] ?>">
+                                                                <select name="id_karyawan">
+                                                                    <?php foreach ($result_tampilkaryawan as $karyawan) { ?>
+                                                                        <option value="<?= $karyawan['id'] ?>">
+                                                                            <?= $karyawan['nama_karyawan'] ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                                <button type="submit" name="btn_kirim"
+                                                                    class="btn btn-warning btn-sm">Kirim</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -168,7 +173,7 @@ if (isset($_POST['btn_kirim'])) {
         </div>
         <!-- END Main Content -->
 
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
     </div>
 
     <script src="/siatur/plugins/jquery/jquery.min.js"></script>

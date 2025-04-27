@@ -1,9 +1,14 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
+session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 $query_karyawan = "SELECT * FROM karyawan";
 $query_akunKaryawan = "SELECT * FROM users";
-$result_karyawan = $conn -> query($query_karyawan);
+$result_karyawan = $conn->query($query_karyawan);
 $result_akunKaryawan = $conn->query($query_akunKaryawan);
 ?>
 <!DOCTYPE html>
@@ -29,11 +34,11 @@ $result_akunKaryawan = $conn->query($query_akunKaryawan);
 
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -93,30 +98,30 @@ $result_akunKaryawan = $conn->query($query_akunKaryawan);
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <?php foreach ($result_karyawan as $karyawan) {?>
-                                            <tbody>
-                                                <tr>
-                                                    <td><?= $karyawan['nip_karyawan']?></td>
-                                                    <td><?= $karyawan['nama_karyawan']?></td>
-                                                    <td><?= $karyawan['posisi_karyawan']?></td>
-                                                    <td>
-                                                        <a class="btn btn-info btn-sm"
-                                                            href="edit-karyawan.php?id=<?=$karyawan["id"]?>">
-                                                            <i class="fas fa-pencil-alt">
-                                                            </i>
-                                                            Edit
-                                                        </a>
-                                                        <a class="btn btn-danger btn-sm"
-                                                            href="hapus-karyawan.php?id=<?=$karyawan["id"]?>"
-                                                            onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini?');">
-                                                            <i class="fas fa-trash">
-                                                            </i>
-                                                            Delete
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                            <?php }?>
+                                            <?php foreach ($result_karyawan as $karyawan) { ?>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?= $karyawan['nip_karyawan'] ?></td>
+                                                        <td><?= $karyawan['nama_karyawan'] ?></td>
+                                                        <td><?= $karyawan['posisi_karyawan'] ?></td>
+                                                        <td>
+                                                            <a class="btn btn-info btn-sm"
+                                                                href="edit-karyawan.php?id=<?= $karyawan["id"] ?>">
+                                                                <i class="fas fa-pencil-alt">
+                                                                </i>
+                                                                Edit
+                                                            </a>
+                                                            <a class="btn btn-danger btn-sm"
+                                                                href="hapus-karyawan.php?id=<?= $karyawan["id"] ?>"
+                                                                onClick="javascript: return confirm('Apakah yakin ingin menghapus data ini?');">
+                                                                <i class="fas fa-trash">
+                                                                </i>
+                                                                Delete
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            <?php } ?>
                                         </table>
                                     </div>
                                 </div>
@@ -130,7 +135,7 @@ $result_akunKaryawan = $conn->query($query_akunKaryawan);
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

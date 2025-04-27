@@ -1,5 +1,10 @@
-<?php 
+<?php
 include "/xampp/htdocs/siatur/services/koneksi.php";
+session_start();
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 $id = $_GET['id'];
 $query_tampilAkun = "SELECT * FROM users WHERE id = '$id'";
@@ -22,7 +27,7 @@ if (isset($_POST['btn_submit'])) {
         echo "<script type= 'text/javascript'>
                 alert('Data Gagal Disimpan!');
                 document.location.href = 'edit-akun.php?id=$id';
-            </script>" ;
+            </script>";
     }
 }
 ?>
@@ -50,11 +55,11 @@ if (isset($_POST['btn_submit'])) {
 
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -75,22 +80,22 @@ if (isset($_POST['btn_submit'])) {
                         <div class="card-header">
                             <h3 class="card-title">Registrasi Akun Karayawan</h3>
                         </div>
-                        <form action="edit-akun.php?id=<?= $result_tampilAkun['id']?>" method="POST">
+                        <form action="edit-akun.php?id=<?= $result_tampilAkun['id'] ?>" method="POST">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <input type="text" class="form-control" name="username_karyawan"
-                                        placeholder="Username" value="<?= $result_tampilAkun['username']?>">
+                                        placeholder="Username" value="<?= $result_tampilAkun['username'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="text" class="form-control" name="password_karyawan"
-                                        placeholder="Password" value="<?= $result_tampilAkun['password']?>">
+                                        placeholder="Password" value="<?= $result_tampilAkun['password'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="peran">Peran</label>
                                     <select class="custom-select" name="peran">
-                                        <option><?= $result_tampilAkun['peran']?></option>
+                                        <option><?= $result_tampilAkun['peran'] ?></option>
                                         <option>Admin</option>
                                         <option>User</option>
                                     </select>
@@ -109,7 +114,7 @@ if (isset($_POST['btn_submit'])) {
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 

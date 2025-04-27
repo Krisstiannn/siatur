@@ -1,5 +1,10 @@
 <?php
+session_start();
 include "/xampp/htdocs/siatur/services/koneksi.php";
+
+if (!isset($_SESSION['isLogin']) || $_SESSION['isLogin'] != true) {
+    header("Location: /xampp/htdocs/siatur/login.php");
+}
 
 if (isset($_POST['btn_submit'])) {
     $kode_barang = $_POST['kode_barang'];
@@ -11,7 +16,7 @@ if (isset($_POST['btn_submit'])) {
 
     $dir_foto = "/xampp/htdocs/siatur/storage/img/";
     $tmp_file = $_FILES['gambar_barang']['tmp_name'];
-    move_uploaded_file($tmp_file,$dir_foto.$gambar_barang);
+    move_uploaded_file($tmp_file, $dir_foto . $gambar_barang);
 
     if (empty($kode_barang) || empty($gambar_barang) || empty($nama_barang)) {
         echo "<script type= 'text/javascript'>
@@ -60,11 +65,11 @@ if (isset($_POST['btn_submit'])) {
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php include "/xampp/htdocs/siatur/layouts/header.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/header.php" ?>
         <!-- Navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/sidebar.php" ?>
         <!-- END Main Sidebar -->
 
         <!-- Main Content -->
@@ -144,7 +149,7 @@ if (isset($_POST['btn_submit'])) {
         <!-- END Main Content -->
 
         <!-- Main Footer -->
-        <?php include "/xampp/htdocs/siatur/layouts/footer.php"?>
+        <?php include "/xampp/htdocs/siatur/layouts/footer.php" ?>
         <!-- End Footer -->
     </div>
 
@@ -163,9 +168,9 @@ if (isset($_POST['btn_submit'])) {
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="/siatur/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script>
-    $(function() {
-        bsCustomFileInput.init();
-    });
+        $(function() {
+            bsCustomFileInput.init();
+        });
     </script>
 </body>
 
