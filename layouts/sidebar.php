@@ -72,7 +72,7 @@ if (isset($_POST['btn_logout'])) {
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item ">
+                <!-- <li class="nav-item ">
                     <a href="/siatur/admin/pelanggan/pelanggan.php" class="nav-link">
                         <ion-icon name="people-circle-outline" class="far nav-icon"></ion-icon>
                         <p class="text-light">
@@ -80,7 +80,7 @@ if (isset($_POST['btn_logout'])) {
                             <i class="right fas"></i>
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <ion-icon name="code-working-outline" class="far nav-icon"></ion-icon>
